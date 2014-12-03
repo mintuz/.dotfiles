@@ -1,0 +1,10 @@
+[credential]
+	helper = osxkeychain
+[merge]
+	tool = vimdiff
+[alias]
+    newbranch = "!f() { git checkout -b $1 origin/master; git branch --set-upstream $1 origin/master; }; f"
+[branch]
+	autosetuprebase = always
+[push]
+	default = current
