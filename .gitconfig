@@ -1,5 +1,7 @@
 [credential]
 	helper = osxkeychain
+[user]
+	name = Adam Bulmer
 [merge]
 	tool = vimdiff
 [alias]
