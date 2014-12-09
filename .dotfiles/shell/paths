@@ -1,3 +1,11 @@
 # User configuration
 export PATH="/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Use Brew PHP
+export PATH="$(brew --prefix homebrew/php/php54)/bin:$PATH"
+
+# Go Language
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH="$HOME/Golang/"
