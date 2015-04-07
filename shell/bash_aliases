@@ -1,0 +1,54 @@
+# ref: http://ss64.com/osx/ls.html
+# Long form no user group, color
+alias l="ls -oG"
+
+# Order by last modified, long form no user group, color
+alias lt="ls -toG"
+
+# List all except . and ..., color, mark file types, long form no user group, file size
+alias la="ls -AGFoh"
+
+# List all except . and ..., color, mark file types, long form no use group, order by last modified, file size
+alias lat="ls -AGFoth"
+
+# Concatenate and print content of files (add line numbers)
+alias catn="cat -n"
+
+# IP addresses
+alias ip1="ipconfig getifaddr en0"
+alias ip2="ipconfig getifaddr en1"
+
+# Copy my public key to the pasteboard
+alias pubkey="more ~/.ssh/$1.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
+
+# Flush DNS cache
+alias flushdns="dscacheutil -flushcache"
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias clearlogs="sudo rm -rfv /private/var/log/asl/*.asl"
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; clearlogs"
+
+# Dev helpers
+alias killnode="killall node"
+
+deletebranches() {
+	git branch -D `git branch | grep -E $1`
+}
+
+gitpatch() {
+	
+	#Inspired by http://blog.neutrino.es/2012/git-copy-a-file-or-directory-from-another-repository-preserving-history/
+	#Copy a file or directory out of a git repository, preserving history!
+	#Creates DESTINATIONPATH with patches that can be applied with git am
+	 
+	#Usage: gitpatch /some/repo/interesting/thing /destination/patch/path
+	 
+	DESTINATIONPATH=$2
+	SOURCE=$1 #first arg to script, either file or dir
+	 
+	pushd $SOURCE
+		git format-patch -o $DESTINATIONPATH $(git log $SOURCE|grep ^commit|tail -1|awk '{print $2}')..HEAD $SOURCE
+	popd
+
+}

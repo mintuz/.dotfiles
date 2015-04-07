@@ -1,0 +1,6 @@
+git-release-notes() { git log $1...$2 --oneline | sed -e 's/^/\* /' | tail -n +2 | pbcopy; }
+
+git-del-tag() {
+  git tag -d $1
+  git push origin :refs/tags/$1
+}

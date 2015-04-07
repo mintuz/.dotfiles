@@ -1,0 +1,4 @@
+# User configuration
+export PATH="/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/bin:$PATH"
