@@ -1,0 +1,43 @@
+{
+  "name": "nuclide-remote-projects",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Manages remote projects",
+  "nuclide": {
+    "config": {
+      "shutdownServerAfterDisconnection": {
+        "title": "Shutdown Server After Disconnect",
+        "type": "boolean",
+        "description": "Shutdown nuclide server after all remote projects are disconnected",
+        "default": true
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "providedServices": {
+    "atom.directory-provider": {
+      "versions": {
+        "0.1.0": "createRemoteDirectoryProvider"
+      }
+    },
+    "atom.directory-searcher": {
+      "versions": {
+        "0.1.0": "createRemoteDirectorySearcher"
+      }
+    },
+    "nuclide-home.homeFragments": {
+      "versions": {
+        "0.0.0": "getHomeFragments"
+      }
+    }
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "1.0.0": "consumeStatusBar"
+      }
+    }
+  }
+}

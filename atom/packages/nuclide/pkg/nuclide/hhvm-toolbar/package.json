@@ -1,0 +1,18 @@
+{
+  "name": "nuclide-hhvm-toolbar",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "consumedServices": {
+    "tool-bar": {
+      "versions": {
+        "^0.1.0": "consumeToolBar"
+      }
+    }
+  },
+  "description": "Provides a toolbar in Nuclide to build projects with HHVM"
+}

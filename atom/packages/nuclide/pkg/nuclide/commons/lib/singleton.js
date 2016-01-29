@@ -1,0 +1,52 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.get = get;
+exports.clear = clear;
+exports.reset = reset;
+
+/*
+ * Copyright (c) 2015-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the LICENSE file in
+ * the root directory of this source tree.
+ */
+
+var GLOBAL_MAP_NAME = '__NUCLIDE_SINGLETONS__';
+
+function getMap() {
+  var map = global[GLOBAL_MAP_NAME];
+  if (!map) {
+    map = global[GLOBAL_MAP_NAME] = new Map();
+  }
+  return map;
+}
+
+/**
+ * Creates a per-global singleton value.
+ * constructor will be called exactly once, future invocations will
+ * return the result of the constructor call.
+ */
+
+function get(field, constructor) {
+  var map = getMap();
+  if (!map.has(field)) {
+    map.set(field, constructor());
+  }
+  // Cast through `any` because `map.get` can return null/undefined. We know that `field` exists
+  // because we have just checked it above. However, we cannot just call `get` and then check it
+  // against null because T may be a nullable type, in which case this would break subtly. So, we
+  // circumvent the type system here to maintain the desired runtime behavior.
+  return map.get(field);
+}
+
+function clear(field) {
+  getMap()['delete'](field);
+}
+
+function reset(field, constructor) {
+  clear(field);
+  return get(field, constructor);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpbmdsZXRvbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7QUFZQSxJQUFNLGVBQWUsR0FBRyx3QkFBd0IsQ0FBQzs7QUFFakQsU0FBUyxNQUFNLEdBQXFCO0FBQ2xDLE1BQUksR0FBRyxHQUFHLE1BQU0sQ0FBQyxlQUFlLENBQUMsQ0FBQztBQUNsQyxNQUFJLENBQUMsR0FBRyxFQUFFO0FBQ1IsT0FBRyxHQUFHLE1BQU0sQ0FBQyxlQUFlLENBQUMsR0FBRyxJQUFJLEdBQUcsRUFBRSxDQUFDO0dBQzNDO0FBQ0QsU0FBTyxHQUFHLENBQUM7Q0FDWjs7Ozs7Ozs7QUFPTSxTQUFTLEdBQUcsQ0FBSSxLQUFhLEVBQUUsV0FBb0IsRUFBSztBQUM3RCxNQUFNLEdBQUcsR0FBRyxNQUFNLEVBQUUsQ0FBQztBQUNyQixNQUFJLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsRUFBRTtBQUNuQixPQUFHLENBQUMsR0FBRyxDQUFDLEtBQUssRUFBRSxXQUFXLEVBQUUsQ0FBQyxDQUFDO0dBQy9COzs7OztBQUtELFNBQVEsR0FBRyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBTztDQUM5Qjs7QUFFTSxTQUFTLEtBQUssQ0FBQyxLQUFhLEVBQVE7QUFDekMsUUFBTSxFQUFFLFVBQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztDQUN4Qjs7QUFFTSxTQUFTLEtBQUssQ0FBSSxLQUFhLEVBQUUsV0FBb0IsRUFBSztBQUMvRCxPQUFLLENBQUMsS0FBSyxDQUFDLENBQUM7QUFDYixTQUFPLEdBQUcsQ0FBQyxLQUFLLEVBQUUsV0FBVyxDQUFDLENBQUM7Q0FDaEMiLCJmaWxlIjoic2luZ2xldG9uLmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBiYWJlbCc7XG4vKiBAZmxvdyAqL1xuXG4vKlxuICogQ29weXJpZ2h0IChjKSAyMDE1LXByZXNlbnQsIEZhY2Vib29rLCBJbmMuXG4gKiBBbGwgcmlnaHRzIHJlc2VydmVkLlxuICpcbiAqIFRoaXMgc291cmNlIGNvZGUgaXMgbGljZW5zZWQgdW5kZXIgdGhlIGxpY2Vuc2UgZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBpblxuICogdGhlIHJvb3QgZGlyZWN0b3J5IG9mIHRoaXMgc291cmNlIHRyZWUuXG4gKi9cblxuXG5jb25zdCBHTE9CQUxfTUFQX05BTUUgPSAnX19OVUNMSURFX1NJTkdMRVRPTlNfXyc7XG5cbmZ1bmN0aW9uIGdldE1hcCgpOiBNYXA8c3RyaW5nLCBhbnk+IHtcbiAgbGV0IG1hcCA9IGdsb2JhbFtHTE9CQUxfTUFQX05BTUVdO1xuICBpZiAoIW1hcCkge1xuICAgIG1hcCA9IGdsb2JhbFtHTE9CQUxfTUFQX05BTUVdID0gbmV3IE1hcCgpO1xuICB9XG4gIHJldHVybiBtYXA7XG59XG5cbi8qKlxuICogQ3JlYXRlcyBhIHBlci1nbG9iYWwgc2luZ2xldG9uIHZhbHVlLlxuICogY29uc3RydWN0b3Igd2lsbCBiZSBjYWxsZWQgZXhhY3RseSBvbmNlLCBmdXR1cmUgaW52b2NhdGlvbnMgd2lsbFxuICogcmV0dXJuIHRoZSByZXN1bHQgb2YgdGhlIGNvbnN0cnVjdG9yIGNhbGwuXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBnZXQ8VD4oZmllbGQ6IHN0cmluZywgY29uc3RydWN0b3I6ICgpID0+IFQpOiBUIHtcbiAgY29uc3QgbWFwID0gZ2V0TWFwKCk7XG4gIGlmICghbWFwLmhhcyhmaWVsZCkpIHtcbiAgICBtYXAuc2V0KGZpZWxkLCBjb25zdHJ1Y3RvcigpKTtcbiAgfVxuICAvLyBDYXN0IHRocm91Z2ggYGFueWAgYmVjYXVzZSBgbWFwLmdldGAgY2FuIHJldHVybiBudWxsL3VuZGVmaW5lZC4gV2Uga25vdyB0aGF0IGBmaWVsZGAgZXhpc3RzXG4gIC8vIGJlY2F1c2Ugd2UgaGF2ZSBqdXN0IGNoZWNrZWQgaXQgYWJvdmUuIEhvd2V2ZXIsIHdlIGNhbm5vdCBqdXN0IGNhbGwgYGdldGAgYW5kIHRoZW4gY2hlY2sgaXRcbiAgLy8gYWdhaW5zdCBudWxsIGJlY2F1c2UgVCBtYXkgYmUgYSBudWxsYWJsZSB0eXBlLCBpbiB3aGljaCBjYXNlIHRoaXMgd291bGQgYnJlYWsgc3VidGx5LiBTbywgd2VcbiAgLy8gY2lyY3VtdmVudCB0aGUgdHlwZSBzeXN0ZW0gaGVyZSB0byBtYWludGFpbiB0aGUgZGVzaXJlZCBydW50aW1lIGJlaGF2aW9yLlxuICByZXR1cm4gKG1hcC5nZXQoZmllbGQpOiBhbnkpO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gY2xlYXIoZmllbGQ6IHN0cmluZyk6IHZvaWQge1xuICBnZXRNYXAoKS5kZWxldGUoZmllbGQpO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gcmVzZXQ8VD4oZmllbGQ6IHN0cmluZywgY29uc3RydWN0b3I6ICgpID0+IFQpOiBUIHtcbiAgY2xlYXIoZmllbGQpO1xuICByZXR1cm4gZ2V0KGZpZWxkLCBjb25zdHJ1Y3Rvcik7XG59XG4iXX0=

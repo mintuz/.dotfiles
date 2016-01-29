@@ -1,0 +1,11 @@
+{
+  "name": "nuclide-diagnostics-base",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Core data structures for nuclide-diagnostics",
+  "nuclide": {
+    "packageType": "Node",
+    "testRunner": "apm"
+  }
+}

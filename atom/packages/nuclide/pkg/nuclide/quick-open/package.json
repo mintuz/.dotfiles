@@ -1,0 +1,33 @@
+{
+  "name": "nuclide-quick-open",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Provides quick open functionality in Nuclide",
+  "nuclide": {
+    "config": {
+      "useSelection": {
+        "title": "Pre-fill Search with Selection",
+        "type": "boolean",
+        "default": true,
+        "description": "Use current selection to pre-fill search input"
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "consumedServices": {
+    "nuclide-quick-open-register-provider": {
+      "versions": {
+        "0.0.0": "registerProvider"
+      }
+    }
+  },
+  "providedServices": {
+    "nuclide-home.homeFragments": {
+      "versions": {
+        "0.0.0": "getHomeFragments"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "nuclide-arcanist",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Displays arcanist linter messages in Nuclide",
+  "nuclide": {
+    "config": {
+      "blacklistedLinters": {
+        "title": "Blacklisted Linters",
+        "type": "array",
+        "description": "Comma-separated list of linter names that should not be displayed",
+        "default": [],
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "activationCommands": {},
+  "providedServices": {
+    "nuclide-diagnostics-provider": {
+      "versions": {
+        "0.1.0": "provideDiagnostics"
+      }
+    },
+    "nuclide-busy-signal": {
+      "versions": {
+        "0.1.0": "provideBusySignal"
+      }
+    }
+  }
+}

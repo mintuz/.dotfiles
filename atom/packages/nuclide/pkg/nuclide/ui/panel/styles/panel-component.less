@@ -1,0 +1,73 @@
+@import "ui-variables";
+
+.nuclide-ui-panel-component {
+  cursor: default;
+  -webkit-user-select: none;
+  white-space: nowrap;
+
+  display: flex;
+  align-items: stretch;
+
+  &.left {
+    flex-direction: row-reverse;
+    height: 100%;
+  }
+
+  &.bottom {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &.right {
+    flex-direction: row;
+    height: 100%;
+  }
+}
+
+.nuclide-ui-panel-component-scroller {
+  display: flex;
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.nuclide-ui-panel-component-resize-handle {
+  width: auto;
+  height: auto;
+  flex: 0 0 auto;
+
+  &.left {
+    width: 4px;
+    cursor: col-resize;
+  }
+
+  &.bottom {
+    height: 4px;
+    cursor: row-resize;
+  }
+
+  &.right{
+    width: 4px;
+    cursor: col-resize;
+  }
+}
+
+.nuclide-ui-panel-component-cursor-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+
+  &.left {
+    cursor: col-resize;
+  }
+
+  &.bottom {
+    cursor: row-resize;
+  }
+
+  &.right {
+    cursor: col-resize;
+  }
+}

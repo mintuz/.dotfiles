@@ -1,0 +1,18 @@
+{
+  "name": "nuclide-objc",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Provides support for Objective-C in Nuclide",
+  "nuclide": {
+    "config": {
+      "enableAutomaticSquareBracketInsertion": {
+        "title": "Enable Automatic Square Bracket Insertion",
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  }
+}

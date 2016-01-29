@@ -1,0 +1,211 @@
+@import 'ui-variables';
+@import 'syntax-variables';
+
+@revisionBubbleDiameter: 10px;
+
+.nuclide-diff-view-component {
+  -webkit-user-select: none;
+  height: 100%;
+  width: 100%;
+  /* Let the `<atom-pane-container>` fill the height since it already has `flex: 1` applied. */
+  display: flex;
+
+  .nuclide-diff-view-tree {
+    -webkit-user-select: none;
+    white-space: nowrap;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: auto;
+
+    // Fill vertical and horizontal space if tree is smaller than panel.
+    min-width: 100%;
+    min-height: 100%;
+
+    // Allow block to extend past parent's width, for autoresizing purposes.
+    display: inline-block;
+  }
+
+  .diff-timeline {
+    width: 100%;
+    color: @text-color;
+
+    .revision-timeline-wrap {
+      height: 100%;
+      overflow: auto;
+    }
+
+    .revision-selector  {
+      // TODO Use a standard Atom font-family https://github.com/atom/atom/issues/8800
+      font-family: Menlo, Consolas, monospace;
+      font-size: 12px;
+      width: 100%;
+      white-space: nowrap;
+      display: flex;
+    }
+
+    .revisions {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .revision {
+      cursor: pointer;
+      margin: auto 1em;
+      position: relative;
+      z-index: 0;
+    }
+
+    .revision:hover .revision-label {
+      color: @text-color-info;
+    }
+
+    .revision:hover .revision-bubble {
+      background-color: @text-color-info;
+      box-shadow: 0 0 0 2px @text-color-info;
+    }
+
+    .revision-bubble {
+      background-color: @text-color-info;
+      border-radius: @revisionBubbleDiameter;
+      display: inline-block;
+      height: @revisionBubbleDiameter;
+      width: @revisionBubbleDiameter;
+      position: absolute;
+    }
+
+    .revision-bubble::after {
+      content: " ";
+      display: block;
+      width: 1px;
+      background-color: @text-color-info;
+      height: 2em;
+      margin-left: 5px;
+      margin-top: 5px;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .selected-revision-inrange .revision-bubble {
+      background-color: @text-color-info;
+    }
+
+    .selected-revision-inrange .revision-bubble::after {
+      content: " ";
+      width: 10px;
+      height: 2.2em;
+      background: @text-color-info;
+      display: block;
+      margin-top: 5px;
+      margin-left: 0;
+    }
+
+    .selected-revision-last .revision-bubble::after {
+      display: none;
+    }
+
+    .revision-label {
+      margin-bottom: 10px;
+      margin-left: 20px;
+      display: inline-block;
+    }
+
+    .selected-revision-start,
+    .selected-revision-end {
+      font-weight: bold;
+    }
+
+    .selected-revision-inrange, .selected-revision-end {
+      .revision-label {
+        color: @text-color-info;
+      }
+    }
+
+    .selected-revision-start .revision-bubble,
+    .selected-revision-end .revision-bubble {
+       box-shadow: 0 0 0 4px fade(@text-color-info, 25%);
+    }
+  }
+}
+
+.diff-view-count {
+  color: @text-color;
+  font-size: 0.8em;
+  min-width: 2em;
+  position: absolute;
+  right: 0;
+  top: 13px;
+  text-shadow: 0 0px 2px @base-border-color;
+  text-align: center;
+}
+
+.tool-bar-btn.icon-git-branch {
+  position: relative;
+
+  &.positive-count {
+    color: @text-color-warning;
+    &:hover {
+      color: @text-color-warning;
+    }
+    .diff-view-count {
+      color: @text-color-warning;
+    }
+  }
+}
+
+// Default colors for themes that do not specify any.
+@success-color: #0c0;
+@success-color: @text-color-success;
+
+@error-color: #c00;
+@error-color: @text-color-error;
+
+@backgroundLuma: luma(@syntax-background-color);
+@lumaThreshold: 50%;
+@blendAmount: 40%;
+
+atom-text-editor, atom-text-editor::shadow {
+
+  // `screen` works well for dark themes,
+  // `multiply` works well for light themes
+
+  .diff-view-insert .region {
+    @success-color-faded: fade(@success-color, @blendAmount);
+    & when (@backgroundLuma <= @lumaThreshold) {
+      background-color: screen(@syntax-background-color, @success-color-faded);
+    }
+    & when (@backgroundLuma > @lumaThreshold) {
+      background-color: multiply(@syntax-background-color, @success-color-faded);
+    }
+  }
+
+  .diff-view-delete .region {
+    @error-color-faded: fade(@error-color, @blendAmount);
+    & when (@backgroundLuma <= @lumaThreshold) {
+      background-color: screen(@syntax-background-color, @error-color-faded);
+    }
+    & when (@backgroundLuma > @lumaThreshold) {
+      background-color: multiply(@syntax-background-color, @error-color-faded);
+    }
+  }
+}
+
+.nuclide-diff-view-navigation-bar {
+  height: 100%;
+  width: 100%;
+}
+
+.nuclide-diff-view-navigation-target {
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
+  &.added {
+    background-color: @background-color-success;
+  }
+  &.removed {
+    background-color: @background-color-error;
+  }
+  &.modified {
+    background-color: @background-color-warning;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "nuclide-busy-signal",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Provides a UI for packages to indicate that they are busy working on a request.",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "activationCommands": {},
+  "consumedServices": {
+    "nuclide-busy-signal": {
+      "versions": {
+        "0.1.0": "consumeBusySignalProvider"
+      }
+    },
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  }
+}

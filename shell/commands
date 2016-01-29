@@ -1,6 +1,47 @@
-git-release-notes() { git log $1...$2 --oneline | sed -e 's/^/\* /' | tail -n +2 | pbcopy; }
+git-release-notes() {
+  git log $1...$2 --oneline | sed -e 's/^/\* /' | tail -n +2 | pbcopy;
+}
 
 git-del-tag() {
   git tag -d $1
   git push origin :refs/tags/$1
+}
+
+git-latest-worked-on() {
+  git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/
+}
+
+git-delete-branches() {
+  git branch -D `git branch | grep -E $1`
+}
+
+git-patch() {
+
+  #Inspired by http://blog.neutrino.es/2012/git-copy-a-file-or-directory-from-another-repository-preserving-history/
+
+  #Copy a file or directory out of a git repository, preserving history!
+  #Creates DESTINATIONPATH with patches that can be applied with git am
+  #Usage: gitpatch /some/repo/interesting/thing /destination/patch/path
+
+  DESTINATIONPATH=$2
+  SOURCE=$1 #first arg to script, either file or dir
+
+  pushd $SOURCE
+    git format-patch -o $DESTINATIONPATH $(git log $SOURCE|grep ^commit|tail -1|awk '{print $2}')..HEAD $SOURCE
+  popd
+
+}
+
+convert-cert() {
+
+  if [ -z "$1" ]
+    then
+      openssl pkcs12 -in $1 -out $2
+    else
+      echo "Usage - convert-cert /path/to/my/cert.p12 /pathto/my/cert.pem"
+  fi
+}
+
+onport() {
+    lsof -i :$1
 }

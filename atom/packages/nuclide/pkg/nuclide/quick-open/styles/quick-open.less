@@ -1,0 +1,66 @@
+@import "ui-variables";
+
+.quick-open-file-search-match {
+  color: @text-color-highlight;
+  font-weight: bold;
+}
+
+.quick-open-result-item {
+  cursor: pointer;
+}
+
+.omnisearch-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.omnisearch-tabs {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.omnisearch-results {
+  background: @app-background-color;
+  min-height: 20em;
+  overflow-y: scroll;
+  padding: 10px;
+  position: relative;
+}
+
+.omnisearch-pane {
+  flex-grow: 1;
+  -webkit-mask: linear-gradient(to left, fade(@app-background-color, 0),  @app-background-color 1em) no-repeat;
+}
+
+.omnisearch-preview {
+  align-items: center;
+  background-color: @background-color-highlight;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.omnisearch-tabs {
+  margin-top: 8px;
+}
+
+.omnisearch-tabs > .nuclide-tabs {
+  width: 100%;
+}
+
+.omnisearch-tabs .key-binding {
+  letter-spacing: 0;
+  font-size: 0.9em;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-out;
+}
+
+.omnisearch-tabs .key-binding:hover {
+  opacity: 1;
+}
+
+.omnisearch-symbol-result-filename {
+  color: @text-color-subtle;
+  margin-left: 1em;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "hyperclick",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Hyperclick UI",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "consumedServices": {
+    "hyperclick.provider": {
+      "versions": {
+        "0.0.0": "consumeProvider"
+      }
+    }
+  },
+  "providedServices": {
+    "hyperclick.observeTextEditor": {
+      "versions": {
+        "0.0.0": "observeTextEditor"
+      }
+    }
+  }
+}

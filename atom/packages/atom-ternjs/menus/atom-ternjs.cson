@@ -1,0 +1,37 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  'atom-text-editor[data-grammar="source js"]': [
+    {
+      label: 'Atom Ternjs'
+      submenu: [
+        {label: 'Find definition', command: 'tern:definition'},
+        {label: 'Find references', command: 'tern:references'},
+        {label: 'Documentation', command: 'tern:documentation'},
+        {label: 'Rename', command: 'tern:rename'},
+        {label: 'Configure project', command: 'tern:openConfig'},
+        {label: 'Restart server', command: 'tern:restart'},
+        {label: 'List analyzed files (console)', command: 'tern:listFiles'},
+        {label: 'Fetch all files and reanalyze', command: 'tern:flush'}
+      ]
+    }
+  ]
+'menu': [
+  {
+    label: 'Packages'
+    submenu: [
+      {
+        label: 'Atom Ternjs'
+        submenu: [
+          {label: 'Configure project', command: 'tern:openConfig'},
+          {label: 'Restart server', command: 'tern:restart'},
+          {label: 'Find definition', command: 'tern:definition'},
+          {label: 'Find references', command: 'tern:references'},
+          {label: 'Documentation', command: 'tern:documentation'},
+          {label: 'Rename', command: 'tern:rename'},
+          {label: 'List analyzed files (console)', command: 'tern:listFiles'},
+          {label: 'Fetch all files and reanalyze', command: 'tern:flush'}
+        ]
+      }
+    ]
+  }
+]

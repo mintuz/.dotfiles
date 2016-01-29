@@ -1,0 +1,31 @@
+{
+  "name": "nuclide-home",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Provides a welcome message and other links for first time users.",
+  "nuclide": {
+    "config": {
+      "showHome": {
+        "title": "Show Home Pane",
+        "type": "boolean",
+        "default": true,
+        "description": "Show the home pane (by default shown on first startup)."
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "consumedServices": {
+    "nuclide-home.homeFragments": {
+      "versions": {
+        "0.0.0": "setHomeFragments"
+      }
+    },
+    "nuclide-gadgets": {
+      "versions": {
+        "0.0.0": "consumeGadgetsService"
+      }
+    }
+  }
+}

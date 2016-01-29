@@ -1,0 +1,18 @@
+{
+  "name": "nuclide-clipboard-path",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Copy remote aware paths to the clipboard.",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "activationCommands": {
+    "atom-text-editor:not(.mini)": [
+      "nuclide-clipboard-path:copy-absolute-path",
+      "nuclide-clipboard-path:copy-repository-relative-path",
+      "nuclide-clipboard-path:copy-project-relative-path"
+    ]
+  }
+}

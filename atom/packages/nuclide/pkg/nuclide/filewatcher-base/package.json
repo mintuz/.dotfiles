@@ -1,0 +1,13 @@
+{
+  "name": "nuclide-filewatcher-base",
+  "repository": "https://github.com/facebook/nuclide",
+  "version": "0.0.0",
+  "description": "Watches files and directories on a remote directory using watchman.",
+  "nuclide": {
+    "packageType": "Node",
+    "testRunner": "npm"
+  },
+  "scripts": {
+    "test": "node --harmony ../jasmine/bin/jasmine-node-transpiled spec"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "nuclide-debugger-atom",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Allows debugging of various types of process from within Nuclide",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "providedServices": {
+    "nuclide-debugger.remote": {
+      "versions": {
+        "description": "Remote control for launching debugger.",
+        "0.0.0": "provideRemoteControlService"
+      }
+    }
+  },
+  "consumedServices": {
+    "nuclide-debugger-lldb-client-service": {
+      "versions": {
+        "0.0.0": "consumeNuclideDebugger"
+      }
+    },
+    "nuclide-debugger-hhvm-service": {
+      "versions": {
+        "0.0.0": "consumeNuclideDebugger"
+      }
+    },
+    "nuclide-debugger-node-service": {
+      "versions": {
+        "0.0.0": "consumeNuclideDebugger"
+      }
+    },
+    "tool-bar": {
+      "versions": {
+        "^0.1.0": "consumeToolBar"
+      }
+    }
+  }
+}

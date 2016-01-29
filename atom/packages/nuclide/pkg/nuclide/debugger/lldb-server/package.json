@@ -1,0 +1,11 @@
+{
+  "name": "nuclide-debugger-lldb-server",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/DebuggerRpcServiceImplementation",
+  "version": "0.0.0",
+  "description": "Nuclide lldb debugging server",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  }
+}

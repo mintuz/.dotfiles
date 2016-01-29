@@ -1,0 +1,39 @@
+'.platform-darwin atom-workspace':
+  'cmd-\\': 'nuclide-file-tree:toggle'
+  'cmd-k cmd-b': 'nuclide-file-tree:toggle'
+  'cmd-|': 'nuclide-file-tree:reveal-active-file'
+  'ctrl-0': 'nuclide-file-tree:toggle-focus'
+
+'.platform-win32 atom-workspace, .platform-linux atom-workspace':
+  'ctrl-\\': 'nuclide-file-tree:toggle'
+  'ctrl-k ctrl-b': 'nuclide-file-tree:toggle'
+  'ctrl-|': 'nuclide-file-tree:reveal-active-file'
+  'alt-\\': 'nuclide-file-tree:toggle-focus'
+
+'.nuclide-file-tree':
+  'right': 'nuclide-file-tree:expand-directory'
+  'ctrl-]': 'nuclide-file-tree:expand-directory'
+  'left': 'nuclide-file-tree:collapse-directory'
+  'ctrl-[': 'nuclide-file-tree:collapse-directory'
+  'alt-ctrl-]': 'nuclide-file-tree:recursive-expand-directory'
+  'alt-right': 'nuclide-file-tree:recursive-expand-directory'
+  'alt-ctrl-[': 'nuclide-file-tree:recursive-collapse-directory'
+  'alt-left': 'nuclide-file-tree:recursive-collapse-directory'
+  'ctrl-{': 'nuclide-file-tree:recursive-collapse-all'
+  'enter': 'nuclide-file-tree:open-selected-entry'
+  'delete': 'nuclide-file-tree:remove'
+  'backspace': 'nuclide-file-tree:remove'
+  'home': 'core:move-to-top'
+  'end': 'core:move-to-bottom'
+
+'.platform-darwin .nuclide-file-tree':
+  'cmd-k right': 'nuclide-file-tree:open-selected-entry-right'
+  'cmd-k left': 'nuclide-file-tree:open-selected-entry-left'
+  'cmd-k up': 'nuclide-file-tree:open-selected-entry-up'
+  'cmd-k down': 'nuclide-file-tree:open-selected-entry-down'
+
+'.platform-win32 .nuclide-file-tree, .platform-linux .nuclide-file-tree':
+  'ctrl-k right': 'nuclide-file-tree:open-selected-entry-right'
+  'ctrl-k left': 'nuclide-file-tree:open-selected-entry-left'
+  'ctrl-k up': 'nuclide-file-tree:open-selected-entry-up'
+  'ctrl-k down': 'nuclide-file-tree:open-selected-entry-down'

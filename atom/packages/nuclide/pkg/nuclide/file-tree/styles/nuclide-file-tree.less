@@ -1,0 +1,46 @@
+@import "ui-variables";
+
+.nuclide-file-tree.tree-view:before {
+  /*
+   * Override `fixed` position from `.tree-view:before` so the focus bar is relative to its
+   * container rather than the window. This enables, for example, a tool bar to be left of the tree
+   * view and the focus bar to stay within the tree view.
+   */
+  position: absolute;
+}
+
+.list-tree.has-collapsable-children .list-nested-item > .list-item.loading:before {
+  content: "\f087"; // 'sync' icon, spinning arrows
+}
+
+/*
+ * Styles below taken from Atom's [tree-view][0] to ensure nuclide-file-tree looks exactly the same.
+ *
+ * [0] https://github.com/atom/tree-view
+ */
+.tree-view {
+  flex-grow: 1;
+  flex-shrink: 0;
+  min-width: -webkit-min-content;
+  min-height: -webkit-min-content; // Switched from tree-view's `100%` to fill height of scroller.
+  padding-left: @component-icon-padding;
+  padding-right: @component-padding;
+  position: relative;
+  width: 100%;
+
+  .header {
+    position: relative;
+  }
+
+  .list-tree {
+    position: static;
+  }
+
+  .entry {
+    // This fixes https://github.com/atom/tree-view/issues/110, see that issue for more details
+    &:before {
+      content: '';
+      position: absolute;
+    }
+  }
+}

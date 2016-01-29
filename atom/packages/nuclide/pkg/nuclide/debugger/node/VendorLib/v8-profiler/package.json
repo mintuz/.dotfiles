@@ -1,0 +1,36 @@
+{
+  "name": "v8-profiler",
+  "version": "5.5.0",
+  "description": "node bindings for the v8 profiler",
+  "homepage": "http://github.com/node-inspector/v8-profiler",
+  "author": "Danny Coates <dannycoates@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/node-inspector/v8-profiler.git"
+  },
+  "contributors": [
+    {
+      "name": "Miroslav Bajtoš"
+    },
+    {
+      "name": "3y3",
+      "email": "3y3@bk.ru"
+    }
+  ],
+  "license": "BSD-2-Clause",
+  "binary": {
+    "module_name": "profiler",
+    "module_path": "./build/{module_name}/v{version}/{node_abi}-{platform}-{arch}/",
+    "remote_path": "./{module_name}/v{version}/",
+    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+    "host": "https://node-inspector.s3.amazonaws.com/"
+  },
+  "keywords": [
+    "profiler",
+    "inspector"
+  ],
+  "main": "v8-profiler",
+  "dependencies": {
+    "semver": "~5.1.0"
+  }
+}

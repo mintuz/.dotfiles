@@ -1,0 +1,25 @@
+"*":
+  core:
+    disabledPackages: [
+      "tree-view"
+    ]
+    excludeVcsIgnoredPaths: false
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
+  editor:
+    invisibles: {}
+  "exception-reporting":
+    userId: "7936e235-d21e-bb1f-1b20-9b3bdcd0ec14"
+  "file-watcher":
+    promptWhenFileHasChangedOnDisk: false
+  nuclide:
+    "nuclide-home":
+      showHome: false
+  "save-session":
+    dataSaveFolder: "/Users/bulmea01/.dotfiles/atom/packages/save-session/projects"
+  "tool-bar":
+    position: "Left"
+  welcome:
+    showOnStartup: false

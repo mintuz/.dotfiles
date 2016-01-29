@@ -1,0 +1,26 @@
+{
+  "name": "nuclide-blame-provider-hg",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Makes Hg blame information available to the nuclide-blame feature.",
+  "nuclide": {
+    "config": {
+      "showVerboseBlame": {
+        "title": "Show Complete Username",
+        "type": "boolean",
+        "default": false,
+        "description": "Show complete name returned from \"hg blame\", instead of shortened name."
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "providedServices": {
+    "nuclide-blame-provider": {
+      "versions": {
+        "0.0.0": "provideHgBlameProvider"
+      }
+    }
+  }
+}

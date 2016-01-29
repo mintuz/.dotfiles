@@ -1,0 +1,26 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+/*
+ * Copyright (c) 2015-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the LICENSE file in
+ * the root directory of this source tree.
+ */
+
+exports.hgRepositoryForEditor = hgRepositoryForEditor;
+
+var _require = require('../../hg-git-bridge');
+
+var repositoryForPath = _require.repositoryForPath;
+
+function hgRepositoryForEditor(editor) {
+  var repo = repositoryForPath(editor.getPath() || '');
+  if (!repo || repo.getType() !== 'hg') {
+    return null;
+  }
+  return repo;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbW1vbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztlQWE0QixPQUFPLENBQUMscUJBQXFCLENBQUM7O0lBQW5ELGlCQUFpQixZQUFqQixpQkFBaUI7O0FBRWpCLFNBQVMscUJBQXFCLENBQUMsTUFBa0IsRUFBdUI7QUFDN0UsTUFBTSxJQUFJLEdBQUcsaUJBQWlCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDO0FBQ3ZELE1BQUksQ0FBQyxJQUFJLElBQUksSUFBSSxDQUFDLE9BQU8sRUFBRSxLQUFLLElBQUksRUFBRTtBQUNwQyxXQUFPLElBQUksQ0FBQztHQUNiO0FBQ0QsU0FBUyxJQUFJLENBQTRCO0NBQzFDIiwiZmlsZSI6ImNvbW1vbi5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2UgYmFiZWwnO1xuLyogQGZsb3cgKi9cblxuLypcbiAqIENvcHlyaWdodCAoYykgMjAxNS1wcmVzZW50LCBGYWNlYm9vaywgSW5jLlxuICogQWxsIHJpZ2h0cyByZXNlcnZlZC5cbiAqXG4gKiBUaGlzIHNvdXJjZSBjb2RlIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBsaWNlbnNlIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUgaW5cbiAqIHRoZSByb290IGRpcmVjdG9yeSBvZiB0aGlzIHNvdXJjZSB0cmVlLlxuICovXG5cbmltcG9ydCB0eXBlIHtIZ1JlcG9zaXRvcnlDbGllbnR9IGZyb20gJy4uLy4uL2hnLXJlcG9zaXRvcnktY2xpZW50JztcblxuY29uc3Qge3JlcG9zaXRvcnlGb3JQYXRofSA9IHJlcXVpcmUoJy4uLy4uL2hnLWdpdC1icmlkZ2UnKTtcblxuZXhwb3J0IGZ1bmN0aW9uIGhnUmVwb3NpdG9yeUZvckVkaXRvcihlZGl0b3I6IFRleHRFZGl0b3IpOiA/SGdSZXBvc2l0b3J5Q2xpZW50IHtcbiAgY29uc3QgcmVwbyA9IHJlcG9zaXRvcnlGb3JQYXRoKGVkaXRvci5nZXRQYXRoKCkgfHwgJycpO1xuICBpZiAoIXJlcG8gfHwgcmVwby5nZXRUeXBlKCkgIT09ICdoZycpIHtcbiAgICByZXR1cm4gbnVsbDtcbiAgfVxuICByZXR1cm4gKChyZXBvOiBhbnkpOiBIZ1JlcG9zaXRvcnlDbGllbnQpO1xufVxuIl19

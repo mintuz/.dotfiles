@@ -1,0 +1,44 @@
+{
+  "name": "nuclide-diagnostics-store",
+  "repository": "https://github.com/facebook/nuclide",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Provides an API to consume diagnostics.",
+  "nuclide": {
+    "config": {
+      "consumeLegacyLinters": {
+        "title": "Consume Legacy Linters",
+        "type": "boolean",
+        "default": true
+      },
+      "legacyLintOnTheFly": {
+        "title": "Legacy Linters 'lint-on-the-fly'",
+        "type": "boolean",
+        "default": false,
+        "description": "Used only for legacy linters"
+      }
+    },
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "activationCommands": {},
+  "consumedServices": {
+    "linter": {
+      "versions": {
+        "^1.0.0": "consumeLinterProvider"
+      }
+    },
+    "nuclide-diagnostics-provider": {
+      "versions": {
+        "0.1.0": "consumeDiagnosticProvider"
+      }
+    }
+  },
+  "providedServices": {
+    "nuclide-diagnostics": {
+      "versions": {
+        "0.0.0": "provideDiagnosticUpdates"
+      }
+    }
+  }
+}
