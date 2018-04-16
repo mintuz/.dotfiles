@@ -1,14 +1,47 @@
-dotfiles
-========
+# My setup
 
-Keeping my config consistent across multiple devices.
+Keeping my setup consistent across multiple devices.
 
-My settings assume you have installed zsh and have run my MacProvision script
-My setup works for me but if it doesn't work for you, no hard feelings go ahead and change it :)
+## Apps used
 
-Keeping my work device and personal device development environment consistent.
+### Productivity
+* Things 3
+* Alfred 3
+* Sketch
+* Stand
+* Dropbox / iCloud
+* Bear
+* Giphy Capture
 
-If you think the changes you make would benefit me, send a pull request.
+### Communication
+* iMessage
+* Slack
+* Limechat
+* Airmail
+* Tweetbot
+
+### Development
+* VSCode
+* SnippetLabs
+* Transmit
+* Sequel Pro
+* Chrome (Main development browser)
+* Safari
+* Firefox
+* Docker
+* Xscope
+* VirtualBox
+* Sip
+* nvm
+* rvm
+
+### Utils
+* 1Password
+* Authy
+* BetterTouchTool
+* Caffeine
+* Little Snitch
+* Karabiner Elements
 
 ## License
 ```

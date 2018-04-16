@@ -21,9 +21,6 @@ alias ip2="ipconfig getifaddr en1"
 # Copy my public key to the pasteboard
 alias pubkey="more ~/.ssh/$1.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
 
-# Flush DNS cache
-alias flushdns="dscacheutil -flushcache"
-
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
 alias clearlogs="sudo rm -rfv /private/var/log/asl/*.asl"
@@ -31,3 +28,38 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; clear
 
 # Dev helpers
 alias killnode="killall node"
+
+# Show hidden files
+alias show_hidden="defaults write com.apple.Finder AppleShowAllFiles YES"
+alias hide_hidden="defaults write com.apple.Finder AppleShowAllFiles NO"
+
+git-release-notes() { 
+  git log $1...$2 --oneline | sed -e 's/^/\* /' | tail -n +2 | pbcopy; 
+}
+
+git-del-tag() {
+  git tag -d $1
+  git push origin :refs/tags/$1
+}
+
+git-latest-worked-on() {
+  git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/
+}
+
+git-delete-branches() {
+  git branch -D `git branch | grep -E $1`
+}
+
+gacp() {
+  git add . && git commit -am $1 && git push
+}
+
+convert-cert() {
+  
+  if [ -z "$1" ] 
+    then
+      openssl pkcs12 -in $1 -out $2
+    else
+      echo "Usage - convert-cert /path/to/my/cert.p12 /pathto/my/cert.pem"
+  fi
+}
