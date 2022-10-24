@@ -4,5 +4,7 @@ plugins=(git zsh-autosuggestions)
 
 # Core ZSH
 source $ZSH/oh-my-zsh.sh
-source $HOME/.zsh_profile
 source $HOME/.nvm_setup
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $HOME/.zsh_profile
