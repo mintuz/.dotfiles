@@ -75,5 +75,10 @@ reevaluate-windows:
   mod: mod1
   key: z
 
+# Turn on or off tiling entirely.
+toggle-tiling:
+  mod: mod1
+  key: t
+
 # List of bundle identifiers for applications to either be automatically floating or automatically tiled based on floating-is-blacklist (default []).
 floating: ["com.apple.systempreferences"]
