@@ -15,7 +15,7 @@ relaunch-amethyst:
 
 # Enable focus-follows-mouse
 mouse-follows-focus: false
-focus-follows-mouse: true
+focus-follows-mouse: false
 
 # Manual sort of windows
 mouse-swaps-windows: true
