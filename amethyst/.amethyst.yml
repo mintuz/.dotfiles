@@ -1,0 +1,26 @@
+# Use tall and fullscreen layouts
+layouts:
+  - tall
+  - tall-right
+  - fullscreen
+  - two-pane
+  - bsp
+
+# Modify the amethyst relaunch to use x and not z
+relaunch-amethyst:
+  mod: mod2
+  key: x
+
+# Enable focus-follows-mouse
+mouse-follows-focus: false
+focus-follows-mouse: true
+
+# Manual sort of windows
+mouse-swaps-windows: true
+
+# Add 16px margin between windows
+window-margins: true
+window-margin-size: 16
+
+# Make new Window Main Pane
+new-windows-to-main: true
