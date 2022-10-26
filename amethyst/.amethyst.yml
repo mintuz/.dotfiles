@@ -31,12 +31,6 @@ window-margin-size: 16
 # Key Bindings
 # ------------
 
-mod1:
-  - option
-  - shift
-  - control
-  - command
-
 # Move to the next layout in the list.
 cycle-layout:
   mod: mod1
