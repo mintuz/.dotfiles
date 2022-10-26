@@ -6,6 +6,7 @@ layouts:
   - tall-right
   - fullscreen
   - two-pane
+  - column
   - bsp
 
 # Modify the amethyst relaunch to use x and not z
