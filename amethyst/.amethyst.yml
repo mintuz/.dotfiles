@@ -31,14 +31,15 @@ window-margin-size: 16
 # Key Bindings
 # ------------
 
+mod1:
+  - control
+  - option
+  - shift
+  - command
+
 # Move to the next layout in the list.
 cycle-layout:
   mod: mod1
-  key: "space"
-
-# Move to the previous layout in the list.
-cycle-layout-backward:
-  mod: mod2
   key: "space"
 
 # Shrink the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
