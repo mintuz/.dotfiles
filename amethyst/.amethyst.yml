@@ -32,9 +32,9 @@ window-margin-size: 16
 # ------------
 
 mod1:
-  - control
   - option
   - shift
+  - control
   - command
 
 # Move to the next layout in the list.
