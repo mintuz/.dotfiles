@@ -73,6 +73,26 @@ swap-main:
   mod: mod1
   key: "enter"
 
+throw-space-1:
+  mod: mod1
+  key: "1"
+
+throw-space-2:
+  mod: mod1
+  key: "2"
+
+throw-space-3:
+  mod: mod1
+  key: "3"
+
+throw-space-4:
+  mod: mod1
+  key: "4"
+
+throw-space-5:
+  mod: mod1
+  key: "5"
+
 # Rerun the current layout's algorithm.
 reevaluate-windows:
   mod: mod1
