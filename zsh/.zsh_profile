@@ -20,7 +20,7 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Shortcuts
 
-alias c='code .'
+alias c='cursor .'
 alias lg='lazygit'
 alias ghc='gh pr create --web' # Create PR
 alias ghv='gh pr view --web' # View PR
@@ -32,7 +32,7 @@ alias pn="pnpm"
 
 # Overrides
 
-alias ls="exa -al --icons --git"
-alias ll="exa -al --icons --git"
+alias ls="eza -al --icons --git"
+alias ll="eza -al --icons --git"
 alias cat="bat --theme='ansi'"
 alias python=/opt/homebrew/bin/python3
