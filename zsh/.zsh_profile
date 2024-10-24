@@ -27,7 +27,7 @@ alias ghv='gh pr view --web' # View PR
 alias ghr='gh repo view --web' # View Repo
 alias gb='git checkout $(git branch | fzf)'
 alias gbd='git branch -D $(git branch | fzf -m)'
-alias tree="exa --tree"
+alias tree="eza --tree"
 alias pn="pnpm"
 
 # Overrides
