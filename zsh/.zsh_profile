@@ -2,7 +2,6 @@
 
 eval "$(starship init zsh)"
 eval "$(thefuck --alias f)"
-eval "$(github-copilot-cli alias -- "$0")"
 
 # Make vim the default editor
 export EDITOR="vim"
