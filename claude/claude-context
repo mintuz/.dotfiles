@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# claude-context - Switch between different CLAUDE.md contexts (symlink version)
+
+# Configuration
+CLAUDE_DIR="$HOME"
+CLAUDE_FILE="$CLAUDE_DIR/CLAUDE.md"
+
+# Function to display usage
+usage() {
+    echo "Usage: claude-context [ios|web]"
+    echo "       claude-context --help"
+    echo ""
+    echo "Switches the CLAUDE.md context by creating a symlink to the appropriate file."
+    echo ""
+    echo "Contexts:"
+    echo "  ios    - Link to CLAUDE.ios.md"
+    echo "  web    - Link to CLAUDE.web.md"
+    exit 1
+}
+
+# Check if no arguments provided
+if [ $# -eq 0 ]; then
+    usage
+fi
+
+# Handle help flag
+if [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+    usage
+fi
+
+# Remove existing file/symlink if it exists
+if [ -e "$CLAUDE_FILE" ] || [ -L "$CLAUDE_FILE" ]; then
+    rm "$CLAUDE_FILE"
+fi
+
+# Switch based on context
+case "$1" in
+    ios)
+        SOURCE_FILE="$CLAUDE_DIR/CLAUDE.ios.md"
+        if [ -f "$SOURCE_FILE" ]; then
+            ln -s "$SOURCE_FILE" "$CLAUDE_FILE"
+            echo "✓ Linked to iOS context"
+        else
+            echo "Error: $SOURCE_FILE not found"
+            exit 1
+        fi
+        ;;
+    web)
+        SOURCE_FILE="$CLAUDE_DIR/CLAUDE.web.md"
+        if [ -f "$SOURCE_FILE" ]; then
+            ln -s "$SOURCE_FILE" "$CLAUDE_FILE"
+            echo "✓ Linked to web context"
+        else
+            echo "Error: $SOURCE_FILE not found"
+            exit 1
+        fi
+        ;;
+    *)
+        echo "Error: Unknown context '$1'"
+        usage
+        ;;
+esac

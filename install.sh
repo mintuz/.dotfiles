@@ -1,4 +1,4 @@
 #!/bin/bash
 
 mv ~/.zshrc ~/.zshrc.old
-stow zsh tmux amethyst
+stow zsh tmux amethyst claude
