@@ -1,5 +1,8 @@
 . $(brew --prefix)/etc/profile.d/z.sh
 
+# Add dotfiles claude directory to PATH
+export PATH="$HOME/.dotfiles/claude:$PATH"
+
 eval "$(starship init zsh)"
 eval "$(thefuck --alias f)"
 
