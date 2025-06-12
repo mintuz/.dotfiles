@@ -31,6 +31,7 @@ alias gb='git checkout $(git branch | fzf)'
 alias gbd='git branch -D $(git branch | fzf -m)'
 alias tree="eza --tree"
 alias pn="pnpm"
+alias cgcmsg='git commit -m "$(claude -p "Look at the stashed git changes and create a summarising git commit title. Only respond with the title and no affirmation.")"'
 
 # Overrides
 
