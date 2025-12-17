@@ -6,9 +6,12 @@
 > - **CLAUDE.web.md** (this file): Web-specific core philosophy + quick reference (~150 lines, always loaded)
 > - **Skills**: Detailed patterns loaded on-demand (react, frontend-testing, react-testing, tdd, css, refactoring, web-design)
 
-## Core Philosophy
+## Always Load The Expectations Skill
 
-**TEST-DRIVEN DEVELOPMENT IS NON-NEGOTIABLE.** Every single line of production code must be written in response to a failing test. No exceptions.
+- Skill: "core:expectations"
+- Action: Load this skill every session before making changes.
+
+## Core Philosophy
 
 Web development with React, TypeScript strict mode, behavior-driven testing, and feature-based architecture. All work should be done in small, incremental changes following the Red-Green-Refactor cycle.
 
@@ -46,40 +49,6 @@ Web development with React, TypeScript strict mode, behavior-driven testing, and
 - Composition over props drilling
 - Avoid useEffect unless synchronizing with external systems
 
-**Decision trees:**
-
-Where should this component live?
-```
-Is it used by multiple features?
-├── Yes → src/components/
-└── No → src/features/[feature]/components/
-```
-
-What state solution should I use?
-```
-Is this data from an API?
-├── Yes → React Query
-└── No → Is it URL state (filters, pagination)?
-    ├── Yes → React Router
-    └── No → Is it needed globally?
-        ├── Yes → Context/Zustand
-        └── No → useState/useReducer
-```
-
-Do I need useEffect?
-```
-Why does this code need to run?
-"Because the component was displayed"
-├── Synchronizing with external system? → Yes: useEffect is appropriate
-└── Otherwise → Probably don't need useEffect
-
-"Because the user did something"
-└── Put it in the event handler, not useEffect
-
-"Because I need to compute a value"
-└── Calculate during render (or useMemo if expensive)
-```
-
 For detailed React patterns and architecture, load the `web:react` skill.
 
 ## Testing Strategy
@@ -95,12 +64,6 @@ For detailed React patterns and architecture, load the `web:react` skill.
 - Test through public API only (props → rendered DOM)
 - No testing of component internals (state, methods)
 - MSW for API mocking at network level
-
-**React Testing Library patterns:**
-- `render()` for components
-- `renderHook()` for custom hooks
-- `wrapper` option for context providers
-- `screen` object for all queries (don't destructure from render)
 
 For detailed testing patterns, load:
 - `web:frontend-testing` - DOM Testing Library patterns
@@ -121,22 +84,6 @@ For detailed testing patterns, load:
 - Longhand properties when only setting one value
 - Accessibility first (semantic HTML before ARIA)
 
-**Decision trees:**
-
-Should I use px or rem?
-```
-Should this scale with user font preferences?
-├── Yes → Use rem (font-size, vertical spacing, media queries)
-└── No → Use px (borders, shadows, horizontal padding)
-```
-
-Should component have margin?
-```
-Is this a layout component (grid, stack, container)?
-├── Yes → Margin/gap is appropriate
-└── No → Move spacing to parent or use utility classes
-```
-
 For detailed CSS patterns and architecture, load the `web:css` skill.
 
 ## Development Workflow
@@ -147,31 +94,6 @@ For detailed CSS patterns and architecture, load the `web:css` skill.
 1. **RED**: Write failing test for desired behavior (start with simplest case)
 2. **GREEN**: Write minimum code to make test pass (nothing more)
 3. **REFACTOR**: Assess if refactoring adds value → commit working code FIRST → refactor → commit separately
-
-**Test factories pattern:**
-```typescript
-const getMockUser = (overrides?: Partial<User>): User => ({
-  id: "user-1",
-  name: "Test User",
-  email: "test@example.com",
-  ...overrides,
-});
-
-// Usage in tests
-it("should display user name", () => {
-  const user = getMockUser({ name: "John Doe" });
-  render(<UserProfile user={user} />);
-  expect(screen.getByText("John Doe")).toBeInTheDocument();
-});
-```
-
-**Refactoring priorities:**
-| Priority | Action | Examples |
-|----------|--------|----------|
-| Critical | Fix now | Mutations, knowledge duplication, >3 levels nesting |
-| High | This session | Magic numbers, unclear names, >30 line functions |
-| Nice | Later | Minor naming, single-use helpers |
-| Skip | Don't change | Already clean code |
 
 For detailed TDD workflow and refactoring methodology, load:
 - `web:tdd` - TDD Red-Green-Refactor patterns
