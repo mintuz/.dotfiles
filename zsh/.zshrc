@@ -33,3 +33,5 @@ source $HOME/.zsh_profile
 
 # Work Specific Profile Settings that I don't want on personal machine
 [ -f ~/.zsh_work_profile ] && source ~/.zsh_work_profile
+
+export PATH="$HOME/.local/bin:$PATH"
