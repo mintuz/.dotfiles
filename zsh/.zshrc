@@ -35,3 +35,4 @@ source $HOME/.zsh_profile
 [ -f ~/.zsh_work_profile ] && source ~/.zsh_work_profile
 
 export PATH="$HOME/.local/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"

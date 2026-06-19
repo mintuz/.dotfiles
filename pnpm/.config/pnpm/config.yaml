@@ -1,0 +1,18 @@
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
+
+blockExoticSubdeps: true
+
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 10080
+
+strictDepBuilds: true
+dangerouslyAllowAllBuilds: false
+
+verifyStoreIntegrity: true
+strictStorePkgContentCheck: true
+strictSsl: true
+
+pmOnFail: error
+engineStrict: true

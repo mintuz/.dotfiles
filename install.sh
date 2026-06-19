@@ -1,4 +1,4 @@
 #!/bin/bash
 
 mv ~/.zshrc ~/.zshrc.old
-stow zsh amethyst agents
+stow zsh agents pnpm
