@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decision Trace"
+  short_description: "Trace decisions through the evidence chain"
+  default_prompt: "Use $decision-trace to follow this meeting claim through its evidence chain and current implementation."
