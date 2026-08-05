@@ -13,4 +13,4 @@ fi
 # agents package keeps ~/.agents (including skills/ and .skill-lock.json)
 # in sync on every run.
 # --ignore keeps macOS .DS_Store files from causing stow conflicts.
-stow --restow --ignore='\.DS_Store' zsh agents pnpm
+stow --restow --ignore='\.DS_Store' zsh agents pnpm claude

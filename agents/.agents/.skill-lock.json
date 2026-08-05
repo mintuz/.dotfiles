@@ -642,6 +642,36 @@
       "skillFolderHash": "4a5d1cba96f1ba76c7979af136b7312062d25fee",
       "installedAt": "2026-08-03T07:44:43.259Z",
       "updatedAt": "2026-08-03T07:47:03.599Z"
+    },
+    "pseudocode": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "plugins/core/skills/pseudocode/SKILL.md",
+      "skillFolderHash": "e5ca567576b42d17978de82cd9e3562370f7262b",
+      "pluginName": "core",
+      "installedAt": "2026-08-03T08:37:57.352Z",
+      "updatedAt": "2026-08-03T08:37:57.352Z"
+    },
+    "graph-engineering": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "plugins/core/skills/graph-engineering/SKILL.md",
+      "skillFolderHash": "b1608d5a2f8a46df474a65217e85f7bff96ce7c7",
+      "pluginName": "core",
+      "installedAt": "2026-08-04T14:13:20.744Z",
+      "updatedAt": "2026-08-04T15:27:01.454Z"
+    },
+    "github-monitor": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "plugins/core/skills/github-monitor/SKILL.md",
+      "skillFolderHash": "b48174691774c5c96e6768d16dee109035d55c76",
+      "pluginName": "core",
+      "installedAt": "2026-08-04T15:49:55.295Z",
+      "updatedAt": "2026-08-04T15:49:55.295Z"
     }
   },
   "dismissed": {
@@ -651,7 +681,6 @@
     "amp",
     "antigravity",
     "antigravity-cli",
-    "claude-code",
     "cline",
     "codex",
     "cursor",
@@ -661,6 +690,7 @@
     "kimi-code-cli",
     "opencode",
     "warp",
-    "zed"
+    "zed",
+    "claude-code"
   ]
 }
