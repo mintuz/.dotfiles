@@ -682,6 +682,16 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-08-06T11:51:34.421Z",
       "updatedAt": "2026-08-06T11:51:34.421Z"
+    },
+    "wtf": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/core/skills/wtf/SKILL.md",
+      "skillFolderHash": "101b773b3b73d601b586e2478c394a9d03cf0a4a",
+      "pluginName": "core",
+      "installedAt": "2026-08-06T12:10:46.755Z",
+      "updatedAt": "2026-08-06T12:10:46.755Z"
     }
   },
   "dismissed": {
