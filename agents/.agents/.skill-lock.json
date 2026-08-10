@@ -720,6 +720,15 @@
       "skillFolderHash": "685d18b93e3deb4e796c96ad8af52b8af9a2277f",
       "installedAt": "2026-08-10T13:29:17.093Z",
       "updatedAt": "2026-08-10T13:29:17.093Z"
+    },
+    "define-goal": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/define-goal/SKILL.md",
+      "skillFolderHash": "eac32ae7b2ef0061267e908c316c29ec18f87a33",
+      "installedAt": "2026-08-10T14:35:35.533Z",
+      "updatedAt": "2026-08-10T14:35:35.533Z"
     }
   },
   "dismissed": {
