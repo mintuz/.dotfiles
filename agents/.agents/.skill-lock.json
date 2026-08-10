@@ -692,6 +692,34 @@
       "pluginName": "core",
       "installedAt": "2026-08-06T12:10:46.755Z",
       "updatedAt": "2026-08-06T12:10:46.755Z"
+    },
+    "xstate": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/web/skills/xstate/SKILL.md",
+      "skillFolderHash": "21cc80ee60a3638adcb72141c4c241163090e44e",
+      "pluginName": "web",
+      "installedAt": "2026-08-10T10:56:22.448Z",
+      "updatedAt": "2026-08-10T10:56:22.448Z"
+    },
+    "simplify": {
+      "source": "bholmesdev/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/bholmesdev/skills.git",
+      "skillPath": "skills/simplify/SKILL.md",
+      "skillFolderHash": "2a318b3c0e4ba1d80785efd1fe2b37ea188947ab",
+      "installedAt": "2026-08-10T13:29:17.091Z",
+      "updatedAt": "2026-08-10T13:29:17.091Z"
+    },
+    "taste-review": {
+      "source": "bholmesdev/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/bholmesdev/skills.git",
+      "skillPath": "skills/taste-review/SKILL.md",
+      "skillFolderHash": "685d18b93e3deb4e796c96ad8af52b8af9a2277f",
+      "installedAt": "2026-08-10T13:29:17.093Z",
+      "updatedAt": "2026-08-10T13:29:17.093Z"
     }
   },
   "dismissed": {
