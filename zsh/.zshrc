@@ -36,3 +36,6 @@ source $HOME/.zsh_profile
 
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Added by cua-driver-rs installer — see https://github.com/trycua/cua
+export PATH="/Users/adambulmer/.local/bin:$PATH"

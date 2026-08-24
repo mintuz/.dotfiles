@@ -641,7 +641,7 @@
       "skillPath": "skills/social-fetch/SKILL.md",
       "skillFolderHash": "4a5d1cba96f1ba76c7979af136b7312062d25fee",
       "installedAt": "2026-08-03T07:44:43.259Z",
-      "updatedAt": "2026-08-03T07:47:03.599Z"
+      "updatedAt": "2026-08-16T20:35:42.351Z"
     },
     "pseudocode": {
       "source": "mintuz/skills",
@@ -756,6 +756,15 @@
       "skillFolderHash": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
       "installedAt": "2026-08-13T15:11:35.357Z",
       "updatedAt": "2026-08-13T15:11:35.357Z"
+    },
+    "install-anti-slop": {
+      "source": "dmmulroy/anti-slop",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dmmulroy/anti-slop.git",
+      "skillPath": "skills/install-anti-slop/SKILL.md",
+      "skillFolderHash": "b1512e24318785e3f9028e19a8f7cbec11343088",
+      "installedAt": "2026-08-17T08:02:25.684Z",
+      "updatedAt": "2026-08-17T08:02:25.684Z"
     }
   },
   "dismissed": {
