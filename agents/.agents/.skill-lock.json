@@ -765,6 +765,25 @@
       "skillFolderHash": "b1512e24318785e3f9028e19a8f7cbec11343088",
       "installedAt": "2026-08-17T08:02:25.684Z",
       "updatedAt": "2026-08-17T08:02:25.684Z"
+    },
+    "yagni": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/core/skills/yagni/SKILL.md",
+      "skillFolderHash": "a9c59b52f16bcfa9ca4cdf0192a6f710ce9a6f95",
+      "pluginName": "core",
+      "installedAt": "2026-09-01T09:39:36.477Z",
+      "updatedAt": "2026-09-01T09:39:36.477Z"
+    },
+    "skill-doctor": {
+      "source": "warpdotdev/common-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/warpdotdev/common-skills.git",
+      "skillPath": ".agents/skills/skill-doctor/SKILL.md",
+      "skillFolderHash": "cb24c48dc82ced19c1061453decc4bc0e5328c15",
+      "installedAt": "2026-09-01T10:00:29.155Z",
+      "updatedAt": "2026-09-01T10:00:29.155Z"
     }
   },
   "dismissed": {
