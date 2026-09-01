@@ -794,6 +794,15 @@
       "pluginName": "core",
       "installedAt": "2026-09-01T12:18:04.966Z",
       "updatedAt": "2026-09-01T12:18:04.966Z"
+    },
+    "clarity": {
+      "source": "addyosmani/clarity",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/addyosmani/clarity.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "9e3071196d5d26f26c58f5d7c995890b35a94499",
+      "installedAt": "2026-09-01T15:29:36.248Z",
+      "updatedAt": "2026-09-01T15:29:36.248Z"
     }
   },
   "dismissed": {
