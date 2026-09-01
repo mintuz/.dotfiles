@@ -784,6 +784,16 @@
       "skillFolderHash": "cb24c48dc82ced19c1061453decc4bc0e5328c15",
       "installedAt": "2026-09-01T10:00:29.155Z",
       "updatedAt": "2026-09-01T10:00:29.155Z"
+    },
+    "babysit": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/core/skills/babysit/SKILL.md",
+      "skillFolderHash": "1a361c0e008f3d3d05015b6a36c38821c90da78b",
+      "pluginName": "core",
+      "installedAt": "2026-09-01T12:18:04.966Z",
+      "updatedAt": "2026-09-01T12:18:04.966Z"
     }
   },
   "dismissed": {
