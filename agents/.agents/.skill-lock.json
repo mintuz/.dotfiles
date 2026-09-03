@@ -81,11 +81,11 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/reducer/SKILL.md",
-      "skillFolderHash": "b967187c4c86ce4ae716b55d7bec5b3803eb8fbc",
+      "skillPath": "src/core/skills/reducer/SKILL.md",
+      "skillFolderHash": "2d8527e4fffe653ae763c7766107e52e0aca8b82",
       "pluginName": "core",
       "installedAt": "2026-07-13T14:01:57.965Z",
-      "updatedAt": "2026-08-03T07:47:12.511Z"
+      "updatedAt": "2026-09-03T09:07:03.986Z"
     },
     "explain-diff": {
       "source": "prathamdby/skills",
@@ -101,21 +101,21 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/acceptance-review/SKILL.md",
-      "skillFolderHash": "7ccc63955809280625ebfcd388dee77b759d4a0d",
+      "skillPath": "src/core/skills/acceptance-review/SKILL.md",
+      "skillFolderHash": "32df89d264ef6790d5b5459f6027edf6bf7d84ea",
       "pluginName": "core",
       "installedAt": "2026-07-23T08:05:40.157Z",
-      "updatedAt": "2026-08-03T07:47:12.508Z"
+      "updatedAt": "2026-09-03T09:07:03.983Z"
     },
     "decision-trace": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/product-management/skills/decision-trace/SKILL.md",
-      "skillFolderHash": "a702ccb0b971f2a87eded167a9a5dc4413b5f1f5",
+      "skillPath": "src/product-management/skills/decision-trace/SKILL.md",
+      "skillFolderHash": "8b363f42aeba2f99165a77db2cc3b7f5a71516e1",
       "pluginName": "product-management",
       "installedAt": "2026-07-23T08:06:06.109Z",
-      "updatedAt": "2026-08-03T07:47:12.511Z"
+      "updatedAt": "2026-09-03T09:07:03.989Z"
     },
     "codebase-design": {
       "source": "citypaul/.dotfiles",
@@ -157,11 +157,11 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/gauntlet-loop/SKILL.md",
-      "skillFolderHash": "b248547d5249030330cced3f8d72e337d7b95c5f",
+      "skillPath": "src/core/skills/gauntlet-loop/SKILL.md",
+      "skillFolderHash": "acfe7a74bc58091d9d66d5bc3e341e99435ee7b5",
       "pluginName": "core",
       "installedAt": "2026-07-29T13:15:22.053Z",
-      "updatedAt": "2026-08-03T07:47:12.510Z"
+      "updatedAt": "2026-09-03T09:07:03.984Z"
     },
     "story-splitting": {
       "source": "citypaul/.dotfiles",
@@ -176,31 +176,31 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/css/SKILL.md",
-      "skillFolderHash": "30b01c18a2b11ddc5a2159d3d755b845a1972bd7",
+      "skillPath": "src/web/skills/css/SKILL.md",
+      "skillFolderHash": "55d50018fdfda1fc79b8abff6f4520b79429537c",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:35:48.627Z",
-      "updatedAt": "2026-08-03T07:47:12.513Z"
+      "updatedAt": "2026-09-03T09:07:03.991Z"
     },
     "app-intent-driven-development": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/app/skills/app-intent-driven-development/SKILL.md",
-      "skillFolderHash": "a71df4c2cf3c8168eb56ab08ce9267ed69b052cb",
+      "skillPath": "src/app/skills/app-intent-driven-development/SKILL.md",
+      "skillFolderHash": "171647241c907666365db715b4cf176d8ee2428b",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:39:39.829Z",
-      "updatedAt": "2026-08-03T07:47:12.516Z"
+      "updatedAt": "2026-09-03T09:07:03.976Z"
     },
     "app-store-scraper": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/app/skills/app-store-scraper/SKILL.md",
-      "skillFolderHash": "4ab50b82354749221a4be1db3f2453701b4733c1",
+      "skillPath": "src/app/skills/app-store-scraper/SKILL.md",
+      "skillFolderHash": "f995a7dbb8de2c0381afea581a77005f8fbefae2",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:39:42.127Z",
-      "updatedAt": "2026-08-03T07:47:12.516Z"
+      "updatedAt": "2026-09-03T09:07:03.979Z"
     },
     "chatgpt-app-sdk": {
       "source": "mintuz/skills",
@@ -216,21 +216,21 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/commit-messages/SKILL.md",
-      "skillFolderHash": "e445f9b777fca67733ada8cf7dd268ac977a27c6",
+      "skillPath": "src/core/skills/commit-messages/SKILL.md",
+      "skillFolderHash": "10409b22b52298a04a055db46565fd43c620566e",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:39:46.579Z",
-      "updatedAt": "2026-08-03T07:47:12.509Z"
+      "updatedAt": "2026-09-03T09:07:03.984Z"
     },
     "debug": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/app/skills/debug/SKILL.md",
-      "skillFolderHash": "5ce2b4359d7dd2f950937620ce343c97f3790acf",
+      "skillPath": "src/app/skills/debug/SKILL.md",
+      "skillFolderHash": "0b6951f721cd2d93465a7cd3a33b045780e3e689",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:39:50.555Z",
-      "updatedAt": "2026-08-03T07:47:12.516Z"
+      "updatedAt": "2026-09-03T09:07:03.980Z"
     },
     "expectations": {
       "source": "mintuz/skills",
@@ -246,21 +246,21 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/eyes/SKILL.md",
-      "skillFolderHash": "a821de21bcc0bd25f54f9e77884d65666177ab88",
+      "skillPath": "src/web/skills/eyes/SKILL.md",
+      "skillFolderHash": "a35c66a4eb74818acef72397b1e4f21ea27edd38",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:39:54.867Z",
-      "updatedAt": "2026-08-03T07:47:12.513Z"
+      "updatedAt": "2026-09-03T09:07:03.992Z"
     },
     "frontend-testing": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/frontend-testing/SKILL.md",
-      "skillFolderHash": "31dcb09e251d1f9e4d4f8064cbdb192fe8391523",
+      "skillPath": "src/web/skills/frontend-testing/SKILL.md",
+      "skillFolderHash": "bb4f359d5dbd1a90d6d8c4bd9e19045237763923",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:39:57.131Z",
-      "updatedAt": "2026-08-03T07:47:12.514Z"
+      "updatedAt": "2026-09-03T09:07:03.992Z"
     },
     "gps-method": {
       "source": "mintuz/skills",
@@ -276,119 +276,119 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/learn/SKILL.md",
-      "skillFolderHash": "a3456b17ffa6586fdff5268f252a26452c150f9a",
+      "skillPath": "src/core/skills/learn/SKILL.md",
+      "skillFolderHash": "3f794a6c3e3d827ef9db8ed8fa3d00fcbbe11849",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:40:02.290Z",
-      "updatedAt": "2026-08-03T07:47:12.510Z"
+      "updatedAt": "2026-09-03T09:07:03.985Z"
     },
     "pr": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/pr/SKILL.md",
-      "skillFolderHash": "b7491331b833360e9b1cb29006660c9ef613347b",
+      "skillPath": "src/core/skills/pr/SKILL.md",
+      "skillFolderHash": "212c97cabb119605dbb4713f13e7e19aa50da5c6",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:40:04.893Z",
-      "updatedAt": "2026-08-03T07:47:12.510Z"
+      "updatedAt": "2026-09-03T09:07:03.986Z"
     },
     "react": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/react/SKILL.md",
-      "skillFolderHash": "5e07b3fbd58501c3118eef3f6181a614c9e4c849",
+      "skillPath": "src/web/skills/react/SKILL.md",
+      "skillFolderHash": "c8a8e861a7ef70d8a3b6f826c55ea8de3a7bae0f",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:07.215Z",
-      "updatedAt": "2026-08-03T07:47:12.514Z"
+      "updatedAt": "2026-09-03T09:07:03.992Z"
     },
     "react-testing": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/react-testing/SKILL.md",
-      "skillFolderHash": "d55b8feb705acb2839107328d0906754c3d3d8f9",
+      "skillPath": "src/web/skills/react-testing/SKILL.md",
+      "skillFolderHash": "43700f58ce7781075622f70391f82ce0a7f59a31",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:09.739Z",
-      "updatedAt": "2026-08-03T07:47:12.514Z"
+      "updatedAt": "2026-09-03T09:07:03.993Z"
     },
     "refactoring": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/refactoring/SKILL.md",
-      "skillFolderHash": "ec809c9be2245aac0b91eda145687813e45eacf4",
+      "skillPath": "src/web/skills/refactoring/SKILL.md",
+      "skillFolderHash": "8cf89ba9e23098f4055b8c66be2c676c4b288346",
       "installedAt": "2026-08-03T07:40:12.074Z",
-      "updatedAt": "2026-08-03T07:47:12.515Z"
+      "updatedAt": "2026-09-03T09:07:03.994Z"
     },
     "status-updates": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/product-management/skills/status-updates/SKILL.md",
-      "skillFolderHash": "ad0c0bd695b4af139d36ddd499d00d99539c4091",
+      "skillPath": "src/product-management/skills/status-updates/SKILL.md",
+      "skillFolderHash": "1eba15283838265451ca12079e28528aea87d36e",
       "pluginName": "product-management",
       "installedAt": "2026-08-03T07:40:14.564Z",
-      "updatedAt": "2026-08-03T07:47:12.512Z"
+      "updatedAt": "2026-09-03T09:07:03.990Z"
     },
     "swift-testing": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/app/skills/swift-testing/SKILL.md",
-      "skillFolderHash": "d1177459ff4ffcd53965ccdb9b04f9c8d6eccfca",
+      "skillPath": "src/app/skills/swift-testing/SKILL.md",
+      "skillFolderHash": "358b87c19f3aae58f5488e29a833d511f91624cf",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:40:16.900Z",
-      "updatedAt": "2026-08-03T07:47:12.517Z"
+      "updatedAt": "2026-09-03T09:07:03.981Z"
     },
     "swiftui-architecture": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/app/skills/swiftui-architecture/SKILL.md",
-      "skillFolderHash": "0541d2499e6f0155cffecb9222c2b61dbf18fec7",
+      "skillPath": "src/app/skills/swiftui-architecture/SKILL.md",
+      "skillFolderHash": "70aeadf5586690ae94b89d6b165df2adfbaef621",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:40:19.329Z",
-      "updatedAt": "2026-08-03T07:47:12.517Z"
+      "updatedAt": "2026-09-03T09:07:03.982Z"
     },
     "tailwind": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/tailwind/SKILL.md",
-      "skillFolderHash": "ac4c022e3b22a0dd3e86c5ea93fdd1522dd18a0e",
+      "skillPath": "src/web/skills/tailwind/SKILL.md",
+      "skillFolderHash": "e11d558765ff7c81afecf0a8db74534e45dc2936",
       "installedAt": "2026-08-03T07:40:21.740Z",
-      "updatedAt": "2026-08-03T07:47:12.515Z"
+      "updatedAt": "2026-09-03T09:07:03.995Z"
     },
     "tdd": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/tdd/SKILL.md",
-      "skillFolderHash": "2b8bea1ba2f2ce7f0901e21a7c8cef0a7f7492c9",
+      "skillPath": "src/web/skills/tdd/SKILL.md",
+      "skillFolderHash": "6ce9278b79797e42d5b55cea6073b78db34199da",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:24.225Z",
-      "updatedAt": "2026-08-03T07:47:12.515Z"
+      "updatedAt": "2026-09-03T09:07:03.993Z"
     },
     "web-design": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/web/skills/web-design/SKILL.md",
-      "skillFolderHash": "e545b1e3125132f8414043c9a8c3a7a2dc670d97",
+      "skillPath": "src/web/skills/web-design/SKILL.md",
+      "skillFolderHash": "f32f41d76d35ee4a9674cac2b18a22c2f885b254",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:26.521Z",
-      "updatedAt": "2026-08-03T07:47:12.515Z"
+      "updatedAt": "2026-09-03T09:07:03.994Z"
     },
     "writing": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/writing/SKILL.md",
-      "skillFolderHash": "66dd9201439e08a204cabba9753dc39683b25567",
+      "skillPath": "src/core/skills/writing/SKILL.md",
+      "skillFolderHash": "b9e80ae4cc03a8edab92a13f87b7a26dd6567cd0",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:40:28.928Z",
-      "updatedAt": "2026-08-03T07:47:12.511Z"
+      "updatedAt": "2026-09-03T09:07:03.987Z"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -647,31 +647,31 @@
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/pseudocode/SKILL.md",
-      "skillFolderHash": "e5ca567576b42d17978de82cd9e3562370f7262b",
+      "skillPath": "src/core/skills/pseudocode/SKILL.md",
+      "skillFolderHash": "cf911bb723c35a16b75085b82795a9dadc8ba53a",
       "pluginName": "core",
       "installedAt": "2026-08-03T08:37:57.352Z",
-      "updatedAt": "2026-08-03T08:37:57.352Z"
+      "updatedAt": "2026-09-03T09:07:03.986Z"
     },
     "graph-engineering": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/graph-engineering/SKILL.md",
-      "skillFolderHash": "b1608d5a2f8a46df474a65217e85f7bff96ce7c7",
+      "skillPath": "src/core/skills/graph-engineering/SKILL.md",
+      "skillFolderHash": "8a4fc38202f27acbfdb2f71524f72bb0800a25e2",
       "pluginName": "core",
       "installedAt": "2026-08-04T14:13:20.744Z",
-      "updatedAt": "2026-08-04T15:27:01.454Z"
+      "updatedAt": "2026-09-03T09:07:03.985Z"
     },
     "github-monitor": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "plugins/core/skills/github-monitor/SKILL.md",
-      "skillFolderHash": "b48174691774c5c96e6768d16dee109035d55c76",
+      "skillPath": "src/core/skills/github-monitor/SKILL.md",
+      "skillFolderHash": "83ef5b8a6150296dd16f893d56e7f88aec5bc9ae",
       "pluginName": "core",
       "installedAt": "2026-08-04T15:49:55.295Z",
-      "updatedAt": "2026-08-04T15:49:55.295Z"
+      "updatedAt": "2026-09-03T09:07:03.984Z"
     },
     "wait-what": {
       "source": "mattpocock/skills",
@@ -688,20 +688,20 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/wtf/SKILL.md",
-      "skillFolderHash": "101b773b3b73d601b586e2478c394a9d03cf0a4a",
+      "skillFolderHash": "b8743ad1a6d5881cceec2407fabb69b21316f8c9",
       "pluginName": "core",
       "installedAt": "2026-08-06T12:10:46.755Z",
-      "updatedAt": "2026-08-06T12:10:46.755Z"
+      "updatedAt": "2026-09-03T09:07:03.988Z"
     },
     "xstate": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/web/skills/xstate/SKILL.md",
-      "skillFolderHash": "4b63affb337cb11dc31b392fd50ca6f3694339b2",
+      "skillFolderHash": "94302bc18fcd9f64d905ce515a93505eb38adbfc",
       "pluginName": "web",
       "installedAt": "2026-08-10T10:56:22.448Z",
-      "updatedAt": "2026-08-13T10:12:26.337Z"
+      "updatedAt": "2026-09-03T09:07:03.994Z"
     },
     "simplify": {
       "source": "bholmesdev/skills",
@@ -771,10 +771,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/yagni/SKILL.md",
-      "skillFolderHash": "a9c59b52f16bcfa9ca4cdf0192a6f710ce9a6f95",
+      "skillFolderHash": "538906ab7cb1ecb1f55aab03def438866866eaa5",
       "pluginName": "core",
       "installedAt": "2026-09-01T09:39:36.477Z",
-      "updatedAt": "2026-09-01T09:39:36.477Z"
+      "updatedAt": "2026-09-03T09:07:03.988Z"
     },
     "skill-doctor": {
       "source": "warpdotdev/common-skills",
@@ -790,10 +790,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/babysit/SKILL.md",
-      "skillFolderHash": "1a361c0e008f3d3d05015b6a36c38821c90da78b",
+      "skillFolderHash": "7d4b1a56a8db2f56be669de87ff27e927e96c21b",
       "pluginName": "core",
       "installedAt": "2026-09-01T12:18:04.966Z",
-      "updatedAt": "2026-09-01T12:18:04.966Z"
+      "updatedAt": "2026-09-03T09:07:03.983Z"
     },
     "clarity": {
       "source": "addyosmani/clarity",
@@ -803,6 +803,96 @@
       "skillFolderHash": "9e3071196d5d26f26c58f5d7c995890b35a94499",
       "installedAt": "2026-09-01T15:29:36.248Z",
       "updatedAt": "2026-09-01T15:29:36.248Z"
+    },
+    "app-store-keyword-ops": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/app/skills/app-store-keyword-ops/SKILL.md",
+      "skillFolderHash": "0246deaa9cb29d6ef5bb6b88a37fcdbfa0734c07",
+      "pluginName": "app",
+      "installedAt": "2026-09-03T09:07:03.978Z",
+      "updatedAt": "2026-09-03T09:07:03.978Z"
+    },
+    "asc-screenshots": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/app/skills/asc-screenshots/SKILL.md",
+      "skillFolderHash": "03caaa4480efbf5ea400689318122e434d4ce12a",
+      "pluginName": "app",
+      "installedAt": "2026-09-03T09:07:03.979Z",
+      "updatedAt": "2026-09-03T09:07:03.979Z"
+    },
+    "ios-localize-copy": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/app/skills/ios-localize-copy/SKILL.md",
+      "skillFolderHash": "e38dfb2597847000a38b7d1e1683ab52099aae41",
+      "pluginName": "app",
+      "installedAt": "2026-09-03T09:07:03.980Z",
+      "updatedAt": "2026-09-03T09:07:03.980Z"
+    },
+    "local-ai-models": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/app/skills/local-ai-models/SKILL.md",
+      "skillFolderHash": "6442343fc7a6526a0459914fafa7f111ece23ba5",
+      "pluginName": "app",
+      "installedAt": "2026-09-03T09:07:03.981Z",
+      "updatedAt": "2026-09-03T09:07:03.981Z"
+    },
+    "xcode-dev-loop": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/app/skills/xcode-dev-loop/SKILL.md",
+      "skillFolderHash": "a77d671fa490e804ca8db1d4a4dedd42557f2665",
+      "pluginName": "app",
+      "installedAt": "2026-09-03T09:07:03.982Z",
+      "updatedAt": "2026-09-03T09:07:03.982Z"
+    },
+    "ship-pr": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/core/skills/ship-pr/SKILL.md",
+      "skillFolderHash": "70e70ce5dc0f03f318fe55f5257574bdc9edde0a",
+      "pluginName": "core",
+      "installedAt": "2026-09-03T09:07:03.987Z",
+      "updatedAt": "2026-09-03T09:07:03.987Z"
+    },
+    "meeting-to-action-brief": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/product-management/skills/meeting-to-action-brief/SKILL.md",
+      "skillFolderHash": "e11cc0a969165e09f3065ea50633459f9ca134ab",
+      "pluginName": "product-management",
+      "installedAt": "2026-09-03T09:07:03.989Z",
+      "updatedAt": "2026-09-03T09:07:03.989Z"
+    },
+    "story-pr-orchestrator": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/product-management/skills/story-pr-orchestrator/SKILL.md",
+      "skillFolderHash": "b6e8f4917b7cbeb60c5ca20f96972be4ffb4d822",
+      "pluginName": "product-management",
+      "installedAt": "2026-09-03T09:07:03.990Z",
+      "updatedAt": "2026-09-03T09:07:03.990Z"
+    },
+    "typescript": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/typescript/skills/typescript/SKILL.md",
+      "skillFolderHash": "1ce26fd6b68b5ac3841dccdea6efbe7b1aee608e",
+      "pluginName": "typescript",
+      "installedAt": "2026-09-03T09:07:03.991Z",
+      "updatedAt": "2026-09-03T09:07:03.991Z"
     }
   },
   "dismissed": {
