@@ -385,6 +385,7 @@ def parse_codex_session(path: Path, skill_names, include_subagents: bool):
     seen_calls = {}
     call_args_text = []
     first_ts = last_ts = None
+    item_assistant_turns = 0
 
     for line in raw.splitlines():
         try:
@@ -435,6 +436,7 @@ def parse_codex_session(path: Path, skill_names, include_subagents: bool):
                         continue
                     entries.append(("user", truncate(text, MAX_MSG_CHARS)))
                 elif role == "assistant":
+                    item_assistant_turns += 1
                     entries.append(("assistant", truncate(text, MAX_MSG_CHARS)))
             elif ptype in ("function_call", "custom_tool_call", "local_shell_call"):
                 stats["tool_calls"] += 1
@@ -459,6 +461,9 @@ def parse_codex_session(path: Path, skill_names, include_subagents: bool):
 
     if not meta:
         meta = {"id": path.stem, "cwd": None, "started_at": first_ts}
+    # Newer Codex rollouts log assistant turns only as response_item messages
+    # (event_msg carries item_completed instead of agent_message).
+    stats["assistant_turns"] = max(stats["assistant_turns"], item_assistant_turns)
 
     # A skill counts as used only when a tool call actually touched it (read its
     # SKILL.md or ran something under its directory). The raw session text is

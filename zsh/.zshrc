@@ -39,3 +39,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Added by cua-driver-rs installer — see https://github.com/trycua/cua
 export PATH="/Users/adambulmer/.local/bin:$PATH"
+
+# Start Bonsai with live server output; press Ctrl+C to stop.
+alias bonsai-start='env BONSAI_FAMILY=bonsai2 BONSAI_MODEL=27B BONSAI_CTX=65536 BONSAI_IMAGE_MAX_TOKENS=0 BONSAI_HOST=127.0.0.1 PORT=8080 /bin/sh "$HOME/Applications/Bonsai-demo/scripts/start_llama_server.sh" -np 1 --alias bonsai2 --reasoning-budget 2048 --sleep-idle-seconds 300'
