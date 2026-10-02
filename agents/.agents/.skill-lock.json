@@ -893,6 +893,15 @@
       "pluginName": "typescript",
       "installedAt": "2026-09-03T09:07:03.991Z",
       "updatedAt": "2026-09-03T09:07:03.991Z"
+    },
+    "herdr": {
+      "source": "herdrdev/herdr",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/herdrdev/herdr.git",
+      "skillPath": "skills/herdr/SKILL.md",
+      "skillFolderHash": "6985a5e8418d43171c45c2a9e04b02de7308e1d8",
+      "installedAt": "2026-09-24T10:39:13.029Z",
+      "updatedAt": "2026-09-24T10:39:13.029Z"
     }
   },
   "dismissed": {
@@ -900,14 +909,13 @@
   },
   "lastSelectedAgents": [
     "amp",
-    "antigravity",
-    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
-    "deepagents",
+    "droid",
     "gemini-cli",
     "github-copilot",
+    "kilo",
     "kimi-code-cli",
     "opencode",
     "warp",
