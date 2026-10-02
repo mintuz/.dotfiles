@@ -1,0 +1,13 @@
+modelRoles:
+  default: anthropic/claude-opus-5-5:high
+  advisor: openai-codex/gpt-6-astra:high
+  plan: openai-codex/gpt-6-astra:high
+  smol: openai-codex/gpt-6-luna
+  commit: openai-codex/gpt-6-luna:low
+  image: openai-codex/gpt-image-2
+symbolPreset: nerd
+composer:
+  shape: band
+theme:
+  dark: titanium
+setupVersion: 2
