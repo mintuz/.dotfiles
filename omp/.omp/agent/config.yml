@@ -9,5 +9,15 @@ symbolPreset: nerd
 composer:
   shape: band
 theme:
-  dark: titanium
+  dark: dark-monokai
 setupVersion: 2
+hideThinkingBlock: true
+proseOnlyThinking: false
+personality: pragmatic
+autolearn:
+  enabled: true
+readLineNumbers: true
+plan:
+  enabled: false
+commands:
+  enableClaudeUser: true
