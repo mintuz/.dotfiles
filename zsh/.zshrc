@@ -1,4 +1,4 @@
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="edvardm"
 plugins=(git zsh-autosuggestions)
 
@@ -15,7 +15,7 @@ done
 unset brew_prefix
 
 # Core ZSH
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # Global pnpm packages
 if [ -z "${PNPM_HOME:-}" ]; then
@@ -33,14 +33,11 @@ if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source $HOME/.zsh_profile
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+source "$HOME/.zsh_profile"
 
 # Work Specific Profile Settings that I don't want on personal machine
-[ -f ~/.zsh_work_profile ] && source ~/.zsh_work_profile
-
-# Added by cua-driver-rs installer — see https://github.com/trycua/cua
-export PATH="/Users/adambulmer/.local/bin:$PATH"
+[ -f "$HOME/.zsh_work_profile" ] && source "$HOME/.zsh_work_profile"
 
 # Start Bonsai with live server output; press Ctrl+C to stop.
 alias bonsai-start='env BONSAI_FAMILY=bonsai2 BONSAI_MODEL=27B BONSAI_CTX=65536 BONSAI_IMAGE_MAX_TOKENS=0 BONSAI_HOST=127.0.0.1 PORT=8080 /bin/sh "$HOME/Applications/Bonsai-demo/scripts/start_llama_server.sh" -np 1 --alias bonsai2 --reasoning-budget 2048 --sleep-idle-seconds 300'

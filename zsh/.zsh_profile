@@ -38,6 +38,6 @@ alias cgcmsg='git commit -m "$(claude -p "Look at the stashed git changes and cr
 alias ls="eza -al --icons --git"
 alias ll="eza -al --icons --git"
 alias cat="bat --theme='ansi'"
-if [ -x "${HOMEBREW_PREFIX:-}/bin/python3" ]; then
-  alias python="$HOMEBREW_PREFIX/bin/python3"
+if command -v python3 >/dev/null 2>&1; then
+  alias python=python3
 fi
