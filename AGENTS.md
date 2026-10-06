@@ -4,21 +4,22 @@
 
 This repository stores personal dotfiles as GNU Stow packages. Each top-level package mirrors the path it should create under `$HOME`.
 
-- `zsh/` contains shell startup files such as `.zshrc`, `.zsh_profile`, and `.nvm_setup`.
+- `zsh/` contains shell startup files such as `.zshrc` and `.zsh_profile`. They add a Homebrew-layout prefix (`/opt/homebrew` or `/home/linuxbrew/.linuxbrew`) when present, `PNPM_HOME`, and `mise activate zsh` when `mise` is on `PATH` or in `~/.local/bin`. They do not need the `brew` executable, and optional commands are skipped when missing.
+- `mise/.config/mise/conf.d/dotfiles.toml` makes `.nvmrc` and `.node-version` select Node and installs a missing Node version declared by the current project on shell start or directory change. Global versions are never installed by the shell.
 - `pnpm/.config/pnpm/config.yaml` defines global pnpm security and install policy defaults.
 - `agents/.agents/` contains agent skill bundles, references, eval fixtures, and `.skill-lock.json`.
 - `claude/.claude/CLAUDE.md` contains global Claude Code instructions.
 - `omp/.omp/agent/config.yml` contains global omp (oh-my-pi) settings. Only `config.yml` is managed; omp databases, sessions, and caches stay local.
-- `install.sh` backs up a real `~/.zshrc` or `~/.omp/agent/config.yml` to `.old`, creates `~/.omp/agent`, and runs `stow zsh agents pnpm claude omp`.
+- `install.sh` backs up a real `~/.zshrc` or `~/.omp/agent/config.yml` to `.old`, creates `~/.omp/agent` and `~/.config/mise/conf.d`, and runs `stow zsh agents pnpm claude omp mise`.
 
 Avoid committing machine-local files such as `.DS_Store`, temporary editor files, or secrets.
 
 ## Build, Test, and Development Commands
 
 - `./install.sh` installs the managed packages into `$HOME` using Stow. Run only when you intend to update live dotfile symlinks.
-- `stow --simulate --verbose zsh agents pnpm claude omp` previews symlink changes without modifying `$HOME`.
-- `stow --restow zsh agents pnpm claude omp` refreshes existing symlinks after package changes.
-- `zsh -n zsh/.zshrc zsh/.zsh_profile zsh/.nvm_setup` checks shell files for syntax errors.
+- `stow --simulate --verbose zsh agents pnpm claude omp mise` previews symlink changes without modifying `$HOME`.
+- `stow --restow zsh agents pnpm claude omp mise` refreshes existing symlinks after package changes.
+- `zsh -n zsh/.zshrc zsh/.zsh_profile` checks shell files for syntax errors.
 - `git status --short` confirms the final change set before committing.
 
 ## Coding Style & Naming Conventions

@@ -19,6 +19,10 @@ backup_if_real_file "$HOME/.omp/agent/config.yml"
 # would write its databases, sessions, and caches into the repo.
 mkdir -p "$HOME/.omp/agent"
 
+# Likewise keep ~/.config/mise/conf.d real so stow links only our fragment and
+# mise or machine setup can add their own files beside it.
+mkdir -p "$HOME/.config/mise/conf.d"
+
 # Preserve files installed by another skill manager before Stow links ours.
 if [ -d "$HOME/.agents" ] && [ ! -L "$HOME/.agents" ]; then
   backup=""
@@ -43,4 +47,4 @@ fi
 # agents package keeps ~/.agents (including skills/ and .skill-lock.json)
 # in sync on every run.
 # --ignore keeps macOS .DS_Store files from causing stow conflicts.
-stow --restow --ignore='\.DS_Store' zsh agents pnpm claude omp
+stow --restow --ignore='\.DS_Store' zsh agents pnpm claude omp mise

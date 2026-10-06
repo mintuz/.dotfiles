@@ -1,10 +1,10 @@
-. $(brew --prefix)/etc/profile.d/z.sh
+[ -f "${HOMEBREW_PREFIX:-}/etc/profile.d/z.sh" ] && . "$HOMEBREW_PREFIX/etc/profile.d/z.sh"
 
 # Add dotfiles claude directory to PATH
 export PATH="$HOME/.dotfiles/claude:$PATH"
 
-eval "$(starship init zsh)"
-eval "$(thefuck --alias f)"
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias f)"
 
 # Make vim the default editor
 export EDITOR="vim"
@@ -38,4 +38,6 @@ alias cgcmsg='git commit -m "$(claude -p "Look at the stashed git changes and cr
 alias ls="eza -al --icons --git"
 alias ll="eza -al --icons --git"
 alias cat="bat --theme='ansi'"
-alias python=/opt/homebrew/bin/python3
+if [ -x "${HOMEBREW_PREFIX:-}/bin/python3" ]; then
+  alias python="$HOMEBREW_PREFIX/bin/python3"
+fi

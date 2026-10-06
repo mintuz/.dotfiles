@@ -1,0 +1,14 @@
+# Project .nvmrc and .node-version files select Node, as nvm did.
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
+
+# Install a missing Node version declared by the current project when the
+# shell starts or changes directory. Global defaults are never installed here.
+[hooks.cd]
+shell = "sh -c"
+run = '''
+cd "$MISE_ORIGINAL_CWD" || exit
+if [ -n "$(mise ls --local --missing --no-header node)" ]; then
+  mise install node
+fi
+'''

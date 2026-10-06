@@ -3,7 +3,8 @@ dotfiles
 
 Keeping my config consistent across multiple devices.
 
-My settings assume you have installed zsh and have run my MacProvision script
+My settings work on macOS and Linux with zsh and oh-my-zsh. Node comes from
+[mise](https://mise.jdx.dev); Homebrew-layout packages are used when present.
 My setup works for me but if it doesn't work for you, no hard feelings go ahead and change it :)
 
 Keeping my work device and personal device development environment consistent.

@@ -2,40 +2,42 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="edvardm"
 plugins=(git zsh-autosuggestions)
 
+# Homebrew-layout packages, installed by Homebrew or mise, on Apple Silicon
+# macOS or Linux. Completions must be on fpath before oh-my-zsh runs compinit.
+for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew; do
+  if [ -d "$brew_prefix/bin" ]; then
+    export HOMEBREW_PREFIX="$brew_prefix"
+    export PATH="$brew_prefix/bin:$brew_prefix/sbin:$PATH"
+    fpath=("$brew_prefix/share/zsh/site-functions" $fpath)
+    break
+  fi
+done
+unset brew_prefix
+
 # Core ZSH
 source $ZSH/oh-my-zsh.sh
-source $HOME/.nvm_setup
 
-# Auto load NVM when changing directories
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+# Global pnpm packages
+if [ -z "${PNPM_HOME:-}" ]; then
+  case "$(uname -s)" in
+    Darwin) export PNPM_HOME="$HOME/Library/pnpm" ;;
+    *) export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm" ;;
+  esac
+fi
+export PATH="$PNPM_HOME/bin:$PNPM_HOME:$PATH"
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# Runtimes from mise. ~/.config/mise/conf.d/dotfiles.toml makes project .nvmrc
+# and .node-version files select Node; elsewhere the global version applies.
+export PATH="$HOME/.local/bin:$PATH"
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $HOME/.zsh_profile
 
 # Work Specific Profile Settings that I don't want on personal machine
 [ -f ~/.zsh_work_profile ] && source ~/.zsh_work_profile
-
-export PATH="$HOME/.local/bin:$PATH"
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Added by cua-driver-rs installer — see https://github.com/trycua/cua
 export PATH="/Users/adambulmer/.local/bin:$PATH"

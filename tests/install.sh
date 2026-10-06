@@ -5,7 +5,7 @@ repo="$(cd "$(dirname "$0")/.." && pwd)"
 fixture="$(mktemp -d)"
 trap 'rm -rf "$fixture"' EXIT
 
-mkdir -p "$fixture/.dotfiles"/{zsh,pnpm,claude} \
+mkdir -p "$fixture/.dotfiles"/{zsh,pnpm,claude,mise} \
   "$fixture/.dotfiles/agents/.agents/skills"/{typescript,other} \
   "$fixture/.agents/skills"/{typescript,custom}
 cp "$repo/install.sh" "$fixture/.dotfiles/install.sh"
