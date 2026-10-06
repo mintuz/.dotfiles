@@ -11,6 +11,50 @@ Keeping my work device and personal device development environment consistent.
 
 If you think the changes you make would benefit me, send a pull request.
 
+## Install independently
+
+Install Git, GNU Stow, zsh, Oh My Zsh and its `zsh-autosuggestions` plugin first.
+Install [mise](https://mise.jdx.dev/getting-started.html) and make it available
+on `PATH` or at `~/.local/bin/mise`. This repository does not require the
+machine-provisioning repository.
+
+Before replacing an existing nvm-based shell, install and select a working
+Node runtime:
+
+```sh
+mise use --global node@lts
+mise exec -- node --version
+```
+
+Then clone this repository and run its installer:
+
+```sh
+git clone https://github.com/mintuz/.dotfiles.git "$HOME/.dotfiles"
+cd "$HOME/.dotfiles"
+./install.sh
+```
+
+The installer always links into `$HOME`, even when the checkout is elsewhere.
+It keeps `~/.config/mise/conf.d` as a real directory. Its `dotfiles.toml`
+fragment can therefore coexist with machine-specific fragments and your
+existing mise configuration.
+
+The shell no longer starts nvm or requires the `brew` command. It adds an
+existing Apple Silicon or Linux Homebrew package prefix to `PATH`, then
+activates mise. It resolves Python from the active `PATH`, not a Mac-only
+path. `PNPM_HOME` remains configurable and otherwise uses the platform default.
+
+Project `.nvmrc` and `.node-version` files select Node. The directory hook
+installs a missing project version before use; it does not install a missing
+global default when starting a shell outside a project. Leaving the project
+restores the global selection. Review and trust project mise configuration
+before allowing it to run.
+
+For the coordinated machine-setup migration, run its Node installation step
+before applying these dotfiles. Existing nvm installations are not deleted,
+but these shell files no longer activate them.
+
+
 ## License
 ```
 The MIT License (MIT)
