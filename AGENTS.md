@@ -10,7 +10,7 @@ This repository stores personal dotfiles as GNU Stow packages. Each top-level pa
 - `agents/.agents/` contains agent skill bundles, references, eval fixtures, and `.skill-lock.json`.
 - `claude/.claude/CLAUDE.md` contains global Claude Code instructions.
 - `omp/.omp/agent/config.yml` contains global omp (oh-my-pi) settings. Only `config.yml` is managed; omp databases, sessions, and caches stay local.
-- `install.sh` backs up a real `~/.zshrc` or `~/.omp/agent/config.yml` to `.old`, creates `~/.omp/agent` and `~/.config/mise/conf.d`, and runs `stow zsh agents pnpm claude omp mise`.
+- `install.sh` moves a real `~/.zshrc`, a real `~/.omp/agent/config.yml`, and `~/.agents` files that conflict with this repository into a new `~/.dotfiles-backup.XXXXXX` directory. Each run that backs up files creates its own directory, so a run never overwrites an earlier backup. The installer then creates `~/.omp/agent` and `~/.config/mise/conf.d` and runs `stow --target="$HOME" zsh agents pnpm claude omp mise`.
 
 Tools and `install.sh` can update files in this checkout through Stow links, for example through the folded `~/.agents` link. The owner wants this behaviour. Do not report these writes as defects, and do not add guards against them.
 
@@ -22,6 +22,7 @@ Avoid committing machine-local files such as `.DS_Store`, temporary editor files
 - `stow --simulate --verbose zsh agents pnpm claude omp mise` previews symlink changes without modifying `$HOME`.
 - `stow --restow zsh agents pnpm claude omp mise` refreshes existing symlinks after package changes.
 - `zsh -n zsh/.zshrc zsh/.zsh_profile` checks shell files for syntax errors.
+- `bats tests` runs the installer tests against a temporary home directory. Install bats-core first, for example with `brew install bats-core`.
 - `git status --short` confirms the final change set before committing.
 
 ## Coding Style & Naming Conventions
@@ -32,7 +33,7 @@ Agent skills live under `agents/.agents/skills/<skill-name>/`. Use lowercase keb
 
 ## Testing Guidelines
 
-There is no formal test suite. Validate changes with syntax checks and Stow dry runs before installing. For agent skill changes, inspect related `evals/evals.json` files when present and keep examples or fixtures close to the skill they exercise.
+`tests/install.bats` tests `install.sh` with bats-core. Run `bats tests` after you change `install.sh`. Validate other changes with syntax checks and Stow dry runs before installing. For agent skill changes, inspect related `evals/evals.json` files when present and keep examples or fixtures close to the skill they exercise.
 
 ## Commit & Pull Request Guidelines
 

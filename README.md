@@ -55,6 +55,17 @@ before applying these dotfiles. Existing nvm installations are not deleted,
 but these shell files no longer activate them.
 
 
+## Test the installer
+
+Install [bats-core](https://github.com/bats-core/bats-core), for example with
+`brew install bats-core`. Then run the installer tests from the repository root:
+
+```sh
+bats tests
+```
+
+The tests run `install.sh` against a temporary home directory.
+
 ## License
 ```
 The MIT License (MIT)
