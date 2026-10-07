@@ -3,12 +3,69 @@ dotfiles
 
 Keeping my config consistent across multiple devices.
 
-My settings assume you have installed zsh and have run my MacProvision script
+My settings work on macOS and Linux with zsh and oh-my-zsh. Node comes from
+[mise](https://mise.jdx.dev); Homebrew-layout packages are used when present.
 My setup works for me but if it doesn't work for you, no hard feelings go ahead and change it :)
 
 Keeping my work device and personal device development environment consistent.
 
 If you think the changes you make would benefit me, send a pull request.
+
+## Install independently
+
+Install Git, GNU Stow, zsh, Oh My Zsh and its `zsh-autosuggestions` plugin first.
+Install [mise](https://mise.jdx.dev/getting-started.html) and make it available
+on `PATH` or at `~/.local/bin/mise`. This repository does not require the
+machine-provisioning repository.
+
+Before replacing an existing nvm-based shell, install and select a working
+Node runtime:
+
+```sh
+mise use --global node@lts
+mise exec -- node --version
+```
+
+Then clone this repository and run its installer:
+
+```sh
+git clone https://github.com/mintuz/.dotfiles.git "$HOME/.dotfiles"
+cd "$HOME/.dotfiles"
+./install.sh
+```
+
+The installer always links into `$HOME`, even when the checkout is elsewhere.
+It keeps `~/.config/mise/conf.d` as a real directory. Its `dotfiles.toml`
+fragment can therefore coexist with machine-specific fragments and your
+existing mise configuration.
+
+The shell no longer starts nvm or requires the `brew` command. It adds an
+existing Apple Silicon or Linux Homebrew package prefix to `PATH`, then
+activates mise. It resolves Python from the active `PATH`, not a Mac-only
+path. `PNPM_HOME` remains configurable and otherwise uses the platform default.
+
+Project `.nvmrc` and `.node-version` files select Node. When a project needs a
+Node version that is not installed, mise installs it the first time a Node
+command runs in that project. This needs the global Node from the step above,
+because that installation provides mise's `node` shim. Leaving the project
+restores the global selection. Review and trust project mise configuration
+before allowing it to run.
+
+For the coordinated machine-setup migration, run its Node installation step
+before applying these dotfiles. Existing nvm installations are not deleted,
+but these shell files no longer activate them.
+
+## Test the installer
+
+Install [bats-core](https://github.com/bats-core/bats-core), for example with
+`brew install bats-core`. Then run the installer tests from the repository root:
+
+```sh
+bats tests
+```
+
+The tests run `install.sh` against a temporary home directory.
+
 
 ## License
 ```

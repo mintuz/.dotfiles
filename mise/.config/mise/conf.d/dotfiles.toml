@@ -1,0 +1,4 @@
+# Project .nvmrc and .node-version files select Node, as nvm did. When a
+# project's version is missing, mise's node shim installs it on first use.
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
