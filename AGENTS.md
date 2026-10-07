@@ -5,7 +5,7 @@
 This repository stores personal dotfiles as GNU Stow packages. Each top-level package mirrors the path it should create under `$HOME`.
 
 - `zsh/` contains shell startup files such as `.zshrc` and `.zsh_profile`. They add a Homebrew-layout prefix (`/opt/homebrew` or `/home/linuxbrew/.linuxbrew`) when present, `PNPM_HOME`, and `mise activate zsh` when `mise` is on `PATH` or in `~/.local/bin`. They do not need the `brew` executable, and optional commands are skipped when missing.
-- `mise/.config/mise/conf.d/dotfiles.toml` makes `.nvmrc` and `.node-version` select Node and installs a missing Node version declared by the current project on shell start or directory change. Global versions are never installed by the shell.
+- `mise/.config/mise/conf.d/dotfiles.toml` makes `.nvmrc` and `.node-version` select Node. When a project needs a Node version that is not installed, mise installs it the first time a Node command runs in that project. This needs an existing mise-managed Node, because that installation provides the `node` shim, and mise's default auto-install settings.
 - `pnpm/.config/pnpm/config.yaml` defines global pnpm security and install policy defaults.
 - `agents/.agents/` contains agent skill bundles, references, eval fixtures, and `.skill-lock.json`.
 - `claude/.claude/CLAUDE.md` contains global Claude Code instructions.

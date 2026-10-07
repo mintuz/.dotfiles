@@ -44,16 +44,16 @@ existing Apple Silicon or Linux Homebrew package prefix to `PATH`, then
 activates mise. It resolves Python from the active `PATH`, not a Mac-only
 path. `PNPM_HOME` remains configurable and otherwise uses the platform default.
 
-Project `.nvmrc` and `.node-version` files select Node. The directory hook
-installs a missing project version before use; it does not install a missing
-global default when starting a shell outside a project. Leaving the project
+Project `.nvmrc` and `.node-version` files select Node. When a project needs a
+Node version that is not installed, mise installs it the first time a Node
+command runs in that project. This needs the global Node from the step above,
+because that installation provides mise's `node` shim. Leaving the project
 restores the global selection. Review and trust project mise configuration
 before allowing it to run.
 
 For the coordinated machine-setup migration, run its Node installation step
 before applying these dotfiles. Existing nvm installations are not deleted,
 but these shell files no longer activate them.
-
 
 ## Test the installer
 
@@ -65,6 +65,7 @@ bats tests
 ```
 
 The tests run `install.sh` against a temporary home directory.
+
 
 ## License
 ```
