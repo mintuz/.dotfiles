@@ -12,6 +12,8 @@ This repository stores personal dotfiles as GNU Stow packages. Each top-level pa
 - `omp/.omp/agent/config.yml` contains global omp (oh-my-pi) settings. Only `config.yml` is managed; omp databases, sessions, and caches stay local.
 - `install.sh` backs up a real `~/.zshrc` or `~/.omp/agent/config.yml` to `.old`, creates `~/.omp/agent` and `~/.config/mise/conf.d`, and runs `stow zsh agents pnpm claude omp mise`.
 
+Tools and `install.sh` can update files in this checkout through Stow links, for example through the folded `~/.agents` link. The owner wants this behaviour. Do not report these writes as defects, and do not add guards against them.
+
 Avoid committing machine-local files such as `.DS_Store`, temporary editor files, or secrets.
 
 ## Build, Test, and Development Commands
