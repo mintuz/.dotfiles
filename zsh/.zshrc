@@ -23,8 +23,8 @@ source "$ZSH/oh-my-zsh.sh"
 
 # Global pnpm packages
 if [ -z "${PNPM_HOME:-}" ]; then
-  case "$(uname -s)" in
-    Darwin) export PNPM_HOME="$HOME/Library/pnpm" ;;
+  case "$OSTYPE" in
+    darwin*) export PNPM_HOME="$HOME/Library/pnpm" ;;
     *) export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm" ;;
   esac
 fi
