@@ -1,3 +1,7 @@
+# Keep PATH and fpath free of duplicates when this file is sourced again.
+# PATH needs the flag too: assignments to the string do not use path's flag.
+typeset -U path PATH fpath
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="edvardm"
 plugins=(git zsh-autosuggestions)
