@@ -11,9 +11,8 @@
 
 ### Business Data (Server-Owned)
 
-- MCP server maintains authoritative source of truth
-- Widget sees updated data when tool call completes
-- Reapply local UI state on top of snapshot
+- MCP server owns business data and diagnostics; responses expose only authorized data and opaque correlation IDs
+- Widget sees updated data when the tool call completes; reapply local UI state on top of the snapshot
 
 **When to use:**
 
@@ -38,8 +37,8 @@
 ### UI State (Widget-Scoped)
 
 - Ephemeral UI interactions (selections, expansions, sort orders)
-- Use `window.openai.widgetState` and `setWidgetState()`
-- Or `useWidgetState` hook in React
+- Use `window.openai.widgetState` and `setWidgetState()`, or the `useWidgetState` hook in React
+- Widget state is model-visible; see the widget-state and payload boundary rules in [SKILL.md](../SKILL.md)
 
 **When to use:**
 
@@ -59,13 +58,13 @@ const [uiState, setUiState] = useWidgetState({
 });
 ```
 
-**For detailed hook implementation and patterns:** See [react-integration.md](./react-integration.md)
+Hook implementation and patterns: [react-integration.md](./react-integration.md)
 
 ## Best Practices
 
 ### Don't Auto-Sync UI State
 
-Widgets retain selections and view preferences when server data refreshes - this is intentional design
+Widgets intentionally keep selections and view preferences when server data refreshes.
 
 ```typescript
 // GOOD - UI state persists across data updates
@@ -106,19 +105,26 @@ Widget Event Handler
 
 ### Optimistic Updates
 
-```typescript
-async function handleToggleTask(taskId) {
-  // 1. Update UI state immediately
-  const [uiState, setUiState] = useWidgetState();
-  setUiState({ ...uiState, optimisticUpdate: taskId });
+Call the hook at the top level of the component. The handler closes over it.
 
-  // 2. Call server
-  try {
-    await window.openai.callTool("toggle_task", { taskId });
-  } catch (error) {
-    // 3. Revert on failure
-    setUiState({ ...uiState, optimisticUpdate: null });
+```typescript
+function TaskRow({ taskId }) {
+  const [uiState, setUiState] = useWidgetState({ optimisticUpdate: null });
+
+  async function handleToggleTask() {
+    // 1. Update UI state immediately
+    setUiState((prev) => ({ ...prev, optimisticUpdate: taskId }));
+
+    // 2. Call server
+    try {
+      await window.openai.callTool("toggle_task", { taskId });
+    } catch (error) {
+      // 3. Revert on failure
+      setUiState((prev) => ({ ...prev, optimisticUpdate: null }));
+    }
   }
+
+  return <button onClick={handleToggleTask}>Toggle</button>;
 }
 ```
 

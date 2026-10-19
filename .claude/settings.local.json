@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api *)",
+      "WebFetch(domain:www.skills.sh)",
+      "Bash(python3 -)"
+    ]
+  }
+}

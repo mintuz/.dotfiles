@@ -21,3 +21,5 @@ plan:
   enabled: false
 commands:
   enableClaudeUser: true
+dev:
+  autoqaConsent: denied
