@@ -31,6 +31,18 @@ mkdir -p "$HOME/.omp/agent"
 # mise or machine setup can add their own files beside it.
 mkdir -p "$HOME/.config/mise/conf.d"
 
+# Keep the harness agent folders real so stow links each managed agent file,
+# and agents that a harness or another tool adds stay out of this repo.
+mkdir -p "$HOME/.claude/agents" "$HOME/.omp/agent/agents"
+
+# Back up a real agent file before stow replaces it with our link.
+while IFS= read -r -d '' source; do
+  relative="${source#*/}"
+  if [ -f "$HOME/$relative" ] && [ ! -L "$HOME/$relative" ]; then
+    back_up "$relative"
+  fi
+done < <(git ls-files -z -- claude/.claude/agents omp/.omp/agent/agents)
+
 # Preserve files installed by another skill manager before Stow links ours.
 if [ -d "$HOME/.agents" ] && [ ! -L "$HOME/.agents" ]; then
   while IFS= read -r -d '' source; do
@@ -50,5 +62,7 @@ fi
 # --restow makes this idempotent and picks up newly added files, so the
 # agents package keeps ~/.agents (including skills/ and .skill-lock.json)
 # in sync on every run.
-# --ignore keeps macOS .DS_Store files from causing stow conflicts.
-stow --target="$HOME" --restow --ignore='\.DS_Store' zsh agents pnpm claude omp mise
+# --ignore keeps macOS .DS_Store files and omp's runtime config.yml.lock from
+# causing stow conflicts. omp writes the lock beside the real config.yml,
+# which is in this repo.
+stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude omp mise

@@ -1522,6 +1522,17 @@
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.598Z",
       "updatedAt": "2026-10-19T13:22:06.598Z"
+    },
+    "adam-mode": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "ref": "feat/core-adam-mode",
+      "skillPath": "src/core/skills/adam-mode/SKILL.md",
+      "skillFolderHash": "949f7398833558fcd94be65c109da8a80c0752d1",
+      "pluginName": "core",
+      "installedAt": "2026-10-20T18:52:30.703Z",
+      "updatedAt": "2026-10-20T18:52:30.703Z"
     }
   },
   "dismissed": {

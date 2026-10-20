@@ -7,10 +7,10 @@ This repository stores personal dotfiles as GNU Stow packages. Each top-level pa
 - `zsh/` contains shell startup files such as `.zshrc` and `.zsh_profile`. They add a Homebrew-layout prefix (`/opt/homebrew` or `/home/linuxbrew/.linuxbrew`) when present, `PNPM_HOME`, and `mise activate zsh` when `mise` is on `PATH` or in `~/.local/bin`. They do not need the `brew` executable, and optional commands are skipped when missing.
 - `mise/.config/mise/conf.d/dotfiles.toml` makes `.nvmrc` and `.node-version` select Node. When a project needs a Node version that is not installed, mise installs it the first time a Node command runs in that project. This needs an existing mise-managed Node, because that installation provides the `node` shim, and mise's default auto-install settings.
 - `pnpm/.config/pnpm/config.yaml` defines global pnpm security and install policy defaults.
-- `agents/.agents/` contains agent skill bundles, references, eval fixtures, and `.skill-lock.json`.
-- `claude/.claude/CLAUDE.md` contains global Claude Code instructions.
-- `omp/.omp/agent/config.yml` contains global omp (oh-my-pi) settings. Only `config.yml` is managed; omp databases, sessions, and caches stay local.
-- `install.sh` moves a real `~/.zshrc`, a real `~/.omp/agent/config.yml`, and `~/.agents` files that conflict with this repository into a new `~/.dotfiles-backup.XXXXXX` directory. Each run that backs up files creates its own directory, so a run never overwrites an earlier backup. The installer then creates `~/.omp/agent` and `~/.config/mise/conf.d` and runs `stow --target="$HOME" zsh agents pnpm claude omp mise`.
+- `agents/.agents/` contains agent skill bundles, references, eval fixtures, `.skill-lock.json`, and `agents/`, the single copy of each subagent definition that more than one harness uses.
+- `claude/.claude/CLAUDE.md` contains global Claude Code instructions. `claude/.claude/agents/` holds the Claude Code subagents: relative symlinks to the shared copies in `agents/.agents/agents/`.
+- `omp/.omp/agent/config.yml` contains global omp (oh-my-pi) settings. `omp/.omp/agent/agents/` holds the omp subagents: omp-only files such as `astra.md` and `fable.md`, and relative symlinks to the shared copies. omp databases, sessions, caches and the runtime `config.yml.lock` stay local.
+- `install.sh` moves a real `~/.zshrc`, a real `~/.omp/agent/config.yml`, real agent files that this repository manages, and `~/.agents` files that conflict with this repository into a new `~/.dotfiles-backup.XXXXXX` directory. Each run that backs up files creates its own directory, so a run never overwrites an earlier backup. The installer then creates `~/.omp/agent`, `~/.omp/agent/agents`, `~/.claude/agents` and `~/.config/mise/conf.d` as real directories and runs `stow --target="$HOME" zsh agents pnpm claude omp mise`.
 
 Tools and `install.sh` can update files in this checkout through Stow links, for example through the folded `~/.agents` link. The owner wants this behaviour. Do not report these writes as defects, and do not add guards against them.
 
@@ -30,6 +30,8 @@ Avoid committing machine-local files such as `.DS_Store`, temporary editor files
 Shell files use POSIX-compatible syntax where practical, with zsh-specific features only when needed. Keep indentation at two spaces inside functions and conditionals, preserve existing alias style, and quote variables when paths or user input may contain spaces. Dotfile package paths should match their destination exactly, for example `zsh/.zshrc` maps to `~/.zshrc`.
 
 Agent skills live under `agents/.agents/skills/<skill-name>/`. Use lowercase kebab-case for skill directory names and keep primary instructions in `SKILL.md`.
+
+To share a subagent between Claude Code and omp, put the file in `agents/.agents/agents/<name>.md`, then add a relative symlink to it in `claude/.claude/agents/` and `omp/.omp/agent/agents/`. A subagent with harness-specific frontmatter, such as an omp model selector, goes only in that harness's package. Codex has no subagent folder; skills that need a delegate use its general-purpose agent.
 
 ## Testing Guidelines
 
