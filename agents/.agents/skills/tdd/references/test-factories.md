@@ -1,8 +1,14 @@
 # Test Data Factories
 
-## Factory Functions Over let/beforeEach
+## Fresh Explicit Data, Not Shared Mutable Fixtures
 
-Build test data with factory functions that take optional overrides. Never build that data with `let` declarations or `beforeEach`. Lifecycle hooks such as `beforeEach` and `afterEach` remain correct for resources that need setup and teardown: a server, a database transaction, or a fake timer.
+In JavaScript and TypeScript, build test data with factory functions that take
+optional overrides. Never build that data with `let` declarations or `beforeEach`.
+Keep lifecycle hooks for owned resources such as a server, database transaction
+or fake timer, including their established teardown.
+
+These language-specific keywords are not a cross-language ban: local Swift `let`
+bindings are immutable and valid. Simple local Swift scalar data needs no factory.
 
 ```typescript
 // ✅ GOOD - Factory with overrides
@@ -61,7 +67,7 @@ it("should process payment", () => {
 
 ## Why Factories Are Better
 
-| let/beforeEach | Factory Functions |
+| Shared mutable JavaScript/TypeScript let + beforeEach | Factory Functions |
 | --- | --- |
 | Shared mutable state | Fresh data each test |
 | Hard to trace data origin | Explicit data creation |
