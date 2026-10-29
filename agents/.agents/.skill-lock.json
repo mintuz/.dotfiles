@@ -28,7 +28,7 @@
       "skillFolderHash": "fe5856272adfd653b6f0f2b2af1b671c9cdcce89",
       "pluginName": "core",
       "installedAt": "2026-07-02T09:51:11.323Z",
-      "updatedAt": "2026-10-22T20:11:13.794Z"
+      "updatedAt": "2026-10-28T16:30:29.415Z"
     },
     "ubiquitous-language": {
       "source": "mattpocock/skills",
@@ -85,7 +85,7 @@
       "skillFolderHash": "aefe4dc27ea8ebd9380400a141c239419da34032",
       "pluginName": "core",
       "installedAt": "2026-07-13T14:01:57.965Z",
-      "updatedAt": "2026-10-21T12:29:26.437Z"
+      "updatedAt": "2026-10-28T16:30:29.411Z"
     },
     "explain-diff": {
       "source": "prathamdby/skills",
@@ -105,7 +105,7 @@
       "skillFolderHash": "f222077e5fff91f812acaeb65b9306e76920ab87",
       "pluginName": "core",
       "installedAt": "2026-07-23T08:05:40.157Z",
-      "updatedAt": "2026-10-21T12:29:26.411Z"
+      "updatedAt": "2026-10-28T16:30:29.392Z"
     },
     "decision-trace": {
       "source": "mintuz/skills",
@@ -115,7 +115,7 @@
       "skillFolderHash": "5e2259aa4de02e36805df7c035af2948275f43bf",
       "pluginName": "product-management",
       "installedAt": "2026-07-23T08:06:06.109Z",
-      "updatedAt": "2026-10-21T12:29:26.448Z"
+      "updatedAt": "2026-10-28T16:30:29.419Z"
     },
     "codebase-design": {
       "source": "citypaul/.dotfiles",
@@ -159,8 +159,9 @@
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/gauntlet-loop/SKILL.md",
       "skillFolderHash": "16ea4916fe2500055f49cc2e5b77892e5224b81c",
+      "pluginName": "core",
       "installedAt": "2026-07-29T13:15:22.053Z",
-      "updatedAt": "2026-10-22T20:10:53.474Z"
+      "updatedAt": "2026-10-28T16:30:29.405Z"
     },
     "story-splitting": {
       "source": "citypaul/.dotfiles",
@@ -179,7 +180,7 @@
       "skillFolderHash": "531395635a206f04bbd11e080cdc0dc503b0d21e",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:35:48.627Z",
-      "updatedAt": "2026-10-21T12:29:26.467Z"
+      "updatedAt": "2026-10-28T16:30:29.422Z"
     },
     "app-intent-driven-development": {
       "source": "mintuz/skills",
@@ -189,7 +190,7 @@
       "skillFolderHash": "6d3b5316d6782ae11899c19c80f805eecd79ddb2",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:39:39.829Z",
-      "updatedAt": "2026-10-21T12:29:26.484Z"
+      "updatedAt": "2026-10-28T16:30:29.427Z"
     },
     "app-store-scraper": {
       "source": "mintuz/skills",
@@ -199,17 +200,17 @@
       "skillFolderHash": "2a410776e4daaf75c630a1b790c0f6b5e999ad92",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:39:42.127Z",
-      "updatedAt": "2026-10-21T12:29:26.486Z"
+      "updatedAt": "2026-10-28T16:30:29.428Z"
     },
     "chatgpt-app-sdk": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/web/skills/chatgpt-app-sdk/SKILL.md",
-      "skillFolderHash": "00f877224cbef7b7c085acde69ac0be22157dc5d",
+      "skillFolderHash": "7852d00762298c770ae517570fe69807d4b90fee",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:39:44.434Z",
-      "updatedAt": "2026-10-21T12:29:26.464Z"
+      "updatedAt": "2026-10-28T16:30:29.422Z"
     },
     "commit-messages": {
       "source": "mintuz/skills",
@@ -219,17 +220,17 @@
       "skillFolderHash": "6548c3b2cff825a1a7bd8145056ae3b19156f829",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:39:46.579Z",
-      "updatedAt": "2026-10-21T12:29:26.422Z"
+      "updatedAt": "2026-10-28T16:30:29.401Z"
     },
     "debug": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/app/skills/debug/SKILL.md",
-      "skillFolderHash": "4ded8e3ed004c95235040d977b2f8b124d204c44",
+      "skillFolderHash": "5552ca34c2b3e6e406c65d3c24e8384e94661941",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:39:50.555Z",
-      "updatedAt": "2026-10-21T12:29:26.489Z"
+      "updatedAt": "2026-10-28T16:30:29.429Z"
     },
     "eyes": {
       "source": "mintuz/skills",
@@ -249,7 +250,7 @@
       "skillFolderHash": "471853cb7394875561b5f24f76e8b61def4171fd",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:39:57.131Z",
-      "updatedAt": "2026-10-21T12:29:26.470Z"
+      "updatedAt": "2026-10-28T16:30:29.423Z"
     },
     "gps-method": {
       "source": "mintuz/skills",
@@ -259,7 +260,7 @@
       "skillFolderHash": "aab15386d00bafb61da158477531cb40c13a77a3",
       "pluginName": "life",
       "installedAt": "2026-08-03T07:39:59.384Z",
-      "updatedAt": "2026-10-21T12:29:26.497Z"
+      "updatedAt": "2026-10-28T16:30:29.433Z"
     },
     "pr": {
       "source": "mintuz/skills",
@@ -269,7 +270,7 @@
       "skillFolderHash": "687f45807f51ebbd81fef45ba3ec0c104d79488c",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:40:04.893Z",
-      "updatedAt": "2026-10-21T12:29:26.434Z"
+      "updatedAt": "2026-10-28T16:30:29.409Z"
     },
     "react": {
       "source": "mintuz/skills",
@@ -279,7 +280,7 @@
       "skillFolderHash": "dd61817e9ddc511702a4a864374307e793d84b7d",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:07.215Z",
-      "updatedAt": "2026-10-21T12:29:26.471Z"
+      "updatedAt": "2026-10-28T16:30:29.423Z"
     },
     "react-testing": {
       "source": "mintuz/skills",
@@ -289,16 +290,17 @@
       "skillFolderHash": "06f68e3ae67e0da2a999d6ac1d0f0fd912757004",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:09.739Z",
-      "updatedAt": "2026-10-21T12:29:26.473Z"
+      "updatedAt": "2026-10-28T16:30:29.424Z"
     },
     "refactoring": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/web/skills/refactoring/SKILL.md",
-      "skillFolderHash": "2e9323168a14617b31d401817756cae0a8fdf3eb",
+      "skillFolderHash": "5a03cc1657596cc6fab89ec9e8cb0a5c5490e8ca",
+      "pluginName": "web",
       "installedAt": "2026-08-03T07:40:12.074Z",
-      "updatedAt": "2026-10-21T12:29:26.476Z"
+      "updatedAt": "2026-10-28T16:30:29.424Z"
     },
     "status-updates": {
       "source": "mintuz/skills",
@@ -308,7 +310,7 @@
       "skillFolderHash": "6f15a9ef1dc2f7e03597634b98f09a530352b954",
       "pluginName": "product-management",
       "installedAt": "2026-08-03T07:40:14.564Z",
-      "updatedAt": "2026-10-21T12:29:26.460Z"
+      "updatedAt": "2026-10-28T16:30:29.420Z"
     },
     "swift-testing": {
       "source": "mintuz/skills",
@@ -318,7 +320,7 @@
       "skillFolderHash": "632eff5a536ce5b8e87f93bc9cec4fdb65674b99",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:40:16.900Z",
-      "updatedAt": "2026-10-21T12:29:26.495Z"
+      "updatedAt": "2026-10-28T16:30:29.431Z"
     },
     "swiftui-architecture": {
       "source": "mintuz/skills",
@@ -328,7 +330,7 @@
       "skillFolderHash": "34d3d6d03c2e09fd9bcd6f10b7bcc2de4e1ad962",
       "pluginName": "app",
       "installedAt": "2026-08-03T07:40:19.329Z",
-      "updatedAt": "2026-10-21T12:29:26.495Z"
+      "updatedAt": "2026-10-28T16:30:29.431Z"
     },
     "tailwind": {
       "source": "mintuz/skills",
@@ -336,18 +338,19 @@
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/web/skills/tailwind/SKILL.md",
       "skillFolderHash": "e582507d70436992d2e11971ae46f0766f0a6fa0",
+      "pluginName": "web",
       "installedAt": "2026-08-03T07:40:21.740Z",
-      "updatedAt": "2026-10-21T12:29:26.478Z"
+      "updatedAt": "2026-10-28T16:30:29.425Z"
     },
     "tdd": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
-      "skillPath": "src/web/skills/tdd/SKILL.md",
-      "skillFolderHash": "a431d63e3890df0b66667ab1a635034f5d13fb0f",
-      "pluginName": "web",
+      "skillPath": "src/core/skills/tdd/SKILL.md",
+      "skillFolderHash": "3ad0d18e4137cedbe0d0e91d9cf303ab906dbd14",
+      "pluginName": "core",
       "installedAt": "2026-08-03T07:40:24.225Z",
-      "updatedAt": "2026-10-21T12:29:26.480Z"
+      "updatedAt": "2026-10-28T16:30:29.414Z"
     },
     "web-design": {
       "source": "mintuz/skills",
@@ -357,7 +360,7 @@
       "skillFolderHash": "b8408bcb5e95003bc88d039ced008a25b5e3d6b2",
       "pluginName": "web",
       "installedAt": "2026-08-03T07:40:26.521Z",
-      "updatedAt": "2026-10-21T12:29:26.481Z"
+      "updatedAt": "2026-10-28T16:30:29.426Z"
     },
     "writing": {
       "source": "mintuz/skills",
@@ -367,7 +370,7 @@
       "skillFolderHash": "57eb97d3d36661467b47dd17c3941d9b97ec3f66",
       "pluginName": "core",
       "installedAt": "2026-08-03T07:40:28.928Z",
-      "updatedAt": "2026-10-21T12:29:26.442Z"
+      "updatedAt": "2026-10-28T16:30:29.416Z"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -630,7 +633,7 @@
       "skillFolderHash": "3c7f0a2fc59d5d475a9d276939b87d468983f61f",
       "pluginName": "core",
       "installedAt": "2026-08-03T08:37:57.352Z",
-      "updatedAt": "2026-10-21T12:29:26.435Z"
+      "updatedAt": "2026-10-28T16:30:29.409Z"
     },
     "graph-engineering": {
       "source": "mintuz/skills",
@@ -640,7 +643,7 @@
       "skillFolderHash": "7ff892f9dde27a484d0896b6debdbfb3730b0663",
       "pluginName": "core",
       "installedAt": "2026-08-04T14:13:20.744Z",
-      "updatedAt": "2026-10-21T12:29:26.430Z"
+      "updatedAt": "2026-10-28T16:30:29.406Z"
     },
     "github-monitor": {
       "source": "mintuz/skills",
@@ -650,7 +653,7 @@
       "skillFolderHash": "896b8b0f4419131e5dd17aab81501d3f21830be4",
       "pluginName": "core",
       "installedAt": "2026-08-04T15:49:55.295Z",
-      "updatedAt": "2026-10-21T12:29:26.429Z"
+      "updatedAt": "2026-10-28T16:30:29.406Z"
     },
     "wait-what": {
       "source": "mattpocock/skills",
@@ -670,7 +673,7 @@
       "skillFolderHash": "4c05a7b155f7264acb0eba5b9d4a114feb906dcc",
       "pluginName": "core",
       "installedAt": "2026-08-06T12:10:46.755Z",
-      "updatedAt": "2026-10-21T12:29:26.443Z"
+      "updatedAt": "2026-10-28T16:30:29.417Z"
     },
     "xstate": {
       "source": "mintuz/skills",
@@ -680,7 +683,7 @@
       "skillFolderHash": "f52297aaacb06c264865f5784660aac58179c73f",
       "pluginName": "web",
       "installedAt": "2026-08-10T10:56:22.448Z",
-      "updatedAt": "2026-10-21T12:29:26.482Z"
+      "updatedAt": "2026-10-28T16:30:29.426Z"
     },
     "simplify": {
       "source": "bholmesdev/skills",
@@ -750,9 +753,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/yagni/SKILL.md",
-      "skillFolderHash": "31dd20af1738f0e753b6d8d614ddd94112ea6711",
+      "skillFolderHash": "68466d13db2010d4c5f0f68acc597e007ea7118e",
+      "pluginName": "core",
       "installedAt": "2026-09-01T09:39:36.477Z",
-      "updatedAt": "2026-10-22T20:10:56.903Z"
+      "updatedAt": "2026-10-28T16:30:29.417Z"
     },
     "skill-doctor": {
       "source": "warpdotdev/common-skills",
@@ -771,7 +775,7 @@
       "skillFolderHash": "01ec71dbff42f8b132e25aae83c86ad871a3997b",
       "pluginName": "core",
       "installedAt": "2026-09-01T12:18:04.966Z",
-      "updatedAt": "2026-10-21T12:29:26.415Z"
+      "updatedAt": "2026-10-28T16:30:29.397Z"
     },
     "clarity": {
       "source": "addyosmani/clarity",
@@ -790,7 +794,7 @@
       "skillFolderHash": "5f4c9f2792e7c1163c3b8883bebc0b582ba380df",
       "pluginName": "app",
       "installedAt": "2026-09-03T09:07:03.978Z",
-      "updatedAt": "2026-10-21T12:29:26.485Z"
+      "updatedAt": "2026-10-28T16:30:29.428Z"
     },
     "asc-screenshots": {
       "source": "mintuz/skills",
@@ -800,7 +804,7 @@
       "skillFolderHash": "d58c49306c3916d6d509949f7c9b076613d65ad2",
       "pluginName": "app",
       "installedAt": "2026-09-03T09:07:03.979Z",
-      "updatedAt": "2026-10-21T12:29:26.487Z"
+      "updatedAt": "2026-10-28T16:30:29.429Z"
     },
     "ios-localize-copy": {
       "source": "mintuz/skills",
@@ -810,7 +814,7 @@
       "skillFolderHash": "22c576645f0602809b28002e2b9bc494cf336b48",
       "pluginName": "app",
       "installedAt": "2026-09-03T09:07:03.980Z",
-      "updatedAt": "2026-10-21T12:29:26.491Z"
+      "updatedAt": "2026-10-28T16:30:29.430Z"
     },
     "local-ai-models": {
       "source": "mintuz/skills",
@@ -820,17 +824,17 @@
       "skillFolderHash": "400183b644c83d193892f86d255609ce2428fe3c",
       "pluginName": "app",
       "installedAt": "2026-09-03T09:07:03.981Z",
-      "updatedAt": "2026-10-21T12:29:26.493Z"
+      "updatedAt": "2026-10-28T16:30:29.430Z"
     },
     "xcode-dev-loop": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/app/skills/xcode-dev-loop/SKILL.md",
-      "skillFolderHash": "9745e518c80b0a6a6e3b40a036485a3615f8a18b",
+      "skillFolderHash": "6f7d9a84423e54846161b701250478ddd5554c63",
       "pluginName": "app",
       "installedAt": "2026-09-03T09:07:03.982Z",
-      "updatedAt": "2026-10-21T12:29:26.496Z"
+      "updatedAt": "2026-10-28T16:30:29.432Z"
     },
     "ship-pr": {
       "source": "mintuz/skills",
@@ -840,7 +844,7 @@
       "skillFolderHash": "48cd3af1b5faecf123d335b27adc999e9fca3b99",
       "pluginName": "core",
       "installedAt": "2026-09-03T09:07:03.987Z",
-      "updatedAt": "2026-10-21T12:29:26.439Z"
+      "updatedAt": "2026-10-28T16:30:29.413Z"
     },
     "meeting-to-action-brief": {
       "source": "mintuz/skills",
@@ -850,7 +854,7 @@
       "skillFolderHash": "409356d3705cfcdf602afb04f657691eb2e4ab08",
       "pluginName": "product-management",
       "installedAt": "2026-09-03T09:07:03.989Z",
-      "updatedAt": "2026-10-21T12:29:26.455Z"
+      "updatedAt": "2026-10-28T16:30:29.420Z"
     },
     "story-pr-orchestrator": {
       "source": "mintuz/skills",
@@ -860,17 +864,17 @@
       "skillFolderHash": "eb446268da3b77669cf9accd4566269ebb87b879",
       "pluginName": "product-management",
       "installedAt": "2026-09-03T09:07:03.990Z",
-      "updatedAt": "2026-10-21T12:29:26.462Z"
+      "updatedAt": "2026-10-28T16:30:29.421Z"
     },
     "typescript": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/typescript/skills/typescript/SKILL.md",
-      "skillFolderHash": "5f243cd742c9187c8a403a161cddf93f182d1901",
+      "skillFolderHash": "a88a87c2661296477482134cbb2c3d799d138a14",
       "pluginName": "typescript",
       "installedAt": "2026-09-03T09:07:03.991Z",
-      "updatedAt": "2026-10-21T12:29:26.445Z"
+      "updatedAt": "2026-10-28T16:30:29.417Z"
     },
     "herdr": {
       "source": "herdrdev/herdr",
@@ -889,7 +893,7 @@
       "skillFolderHash": "c6f5056458733c53bfce2c4d38302992cafbe183",
       "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.555Z",
-      "updatedAt": "2026-10-21T12:29:26.417Z"
+      "updatedAt": "2026-10-28T16:30:29.398Z"
     },
     "blast-radius": {
       "source": "mintuz/skills",
@@ -899,7 +903,7 @@
       "skillFolderHash": "44d51a49f1a38b1d164f11b2de1671df7f025c8a",
       "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.555Z",
-      "updatedAt": "2026-10-21T12:29:26.420Z"
+      "updatedAt": "2026-10-28T16:30:29.400Z"
     },
     "correct": {
       "source": "mintuz/skills",
@@ -907,18 +911,19 @@
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/correct/SKILL.md",
       "skillFolderHash": "58ddb380ccbb5c623dcfca0d57a2f6b078ad5aff",
+      "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.556Z",
-      "updatedAt": "2026-10-22T20:10:59.740Z"
+      "updatedAt": "2026-10-28T16:30:29.402Z"
     },
     "create-verification-skill": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/create-verification-skill/SKILL.md",
-      "skillFolderHash": "01fe31518b0e3bce5f62867cb7f4f6171332e671",
+      "skillFolderHash": "92b19bb9d9cf8dd0dd4bc5e37a0c7249b85c83a1",
       "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.556Z",
-      "updatedAt": "2026-10-21T12:29:26.426Z"
+      "updatedAt": "2026-10-28T16:30:29.403Z"
     },
     "how": {
       "source": "mintuz/skills",
@@ -928,7 +933,7 @@
       "skillFolderHash": "f48b453d212a6ece5b448c69bf790ef86693f3d1",
       "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.558Z",
-      "updatedAt": "2026-10-21T12:29:26.432Z"
+      "updatedAt": "2026-10-28T16:30:29.407Z"
     },
     "recall": {
       "source": "mintuz/skills",
@@ -938,7 +943,7 @@
       "skillFolderHash": "1a5614cbf77ac7c5c5d6836d00264fa5f5814e7d",
       "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.560Z",
-      "updatedAt": "2026-10-21T12:29:26.436Z"
+      "updatedAt": "2026-10-28T16:30:29.410Z"
     },
     "why": {
       "source": "mintuz/skills",
@@ -948,7 +953,7 @@
       "skillFolderHash": "936f4dc5ef2938522af66b3d09806a05cb0c4471",
       "pluginName": "core",
       "installedAt": "2026-10-19T13:22:06.561Z",
-      "updatedAt": "2026-10-21T12:29:26.441Z"
+      "updatedAt": "2026-10-28T16:30:29.416Z"
     },
     "mermaid-generator": {
       "source": "mintuz/skills",
@@ -958,17 +963,17 @@
       "skillFolderHash": "6ed9182f948487b2da172eda37789e17d2f58ad3",
       "pluginName": "system-design",
       "installedAt": "2026-10-19T13:22:06.563Z",
-      "updatedAt": "2026-10-21T12:29:26.446Z"
+      "updatedAt": "2026-10-28T16:30:29.419Z"
     },
     "design-handover": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/product-management/skills/design-handover/SKILL.md",
-      "skillFolderHash": "f911f4ce5201ed5c78500f6e2fe36fb975b4acb6",
+      "skillFolderHash": "830869643e2cd7534c838204e5ccf3aab5bcdb33",
       "pluginName": "product-management",
       "installedAt": "2026-10-19T13:22:06.564Z",
-      "updatedAt": "2026-10-21T12:29:26.449Z"
+      "updatedAt": "2026-10-28T16:30:29.420Z"
     },
     "principle-attack-the-premise": {
       "source": "mintuz/skills",
@@ -978,7 +983,7 @@
       "skillFolderHash": "0487e3579685a4c1f63d01ea27ef5a26dce58330",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.573Z",
-      "updatedAt": "2026-10-21T12:29:26.498Z"
+      "updatedAt": "2026-10-28T16:30:29.434Z"
     },
     "principle-build-the-lever": {
       "source": "mintuz/skills",
@@ -988,7 +993,7 @@
       "skillFolderHash": "72fcee597f6ef708a9fd5a87abc3cde9dc6a82ad",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.574Z",
-      "updatedAt": "2026-10-21T12:29:26.499Z"
+      "updatedAt": "2026-10-28T16:30:29.435Z"
     },
     "principle-capture-the-baseline": {
       "source": "mintuz/skills",
@@ -998,7 +1003,7 @@
       "skillFolderHash": "b453f64ae2ef09027c82867b475d729445c037fd",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.574Z",
-      "updatedAt": "2026-10-21T12:29:26.501Z"
+      "updatedAt": "2026-10-28T16:30:29.435Z"
     },
     "principle-clean-up-what-you-started": {
       "source": "mintuz/skills",
@@ -1008,7 +1013,7 @@
       "skillFolderHash": "e6723ef35332d0631e9c1401c1703832f9e3be44",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.574Z",
-      "updatedAt": "2026-10-21T12:29:26.502Z"
+      "updatedAt": "2026-10-28T16:30:29.436Z"
     },
     "principle-define-done": {
       "source": "mintuz/skills",
@@ -1018,7 +1023,7 @@
       "skillFolderHash": "0f618909cad4c9678824fd44442bc062f65416d0",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.575Z",
-      "updatedAt": "2026-10-21T12:29:26.503Z"
+      "updatedAt": "2026-10-28T16:30:29.436Z"
     },
     "principle-derive-from-one-owner": {
       "source": "mintuz/skills",
@@ -1028,7 +1033,7 @@
       "skillFolderHash": "9e971d385b660a6cee54f771a0777ed6c0adfa3e",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.575Z",
-      "updatedAt": "2026-10-21T12:29:26.505Z"
+      "updatedAt": "2026-10-28T16:30:29.437Z"
     },
     "principle-earn-every-element": {
       "source": "mintuz/skills",
@@ -1038,7 +1043,7 @@
       "skillFolderHash": "36b5c697fa0c843fecde9611c842fd9f1212749b",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.576Z",
-      "updatedAt": "2026-10-21T12:29:26.506Z"
+      "updatedAt": "2026-10-28T16:30:29.437Z"
     },
     "principle-encode-lessons-in-structure": {
       "source": "mintuz/skills",
@@ -1048,7 +1053,7 @@
       "skillFolderHash": "8f2e0f408e90a7a005f0196ae6d4b0ae3af847d0",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.576Z",
-      "updatedAt": "2026-10-21T12:29:26.510Z"
+      "updatedAt": "2026-10-28T16:30:29.438Z"
     },
     "principle-exhaust-the-design-space": {
       "source": "mintuz/skills",
@@ -1058,7 +1063,7 @@
       "skillFolderHash": "aef9d0aadc58a3049d473ee1e218cb16462150cf",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.577Z",
-      "updatedAt": "2026-10-21T12:29:26.512Z"
+      "updatedAt": "2026-10-28T16:30:29.438Z"
     },
     "principle-experience-first": {
       "source": "mintuz/skills",
@@ -1068,7 +1073,7 @@
       "skillFolderHash": "02a8cf707d9db58f0cb77d2f536dcfcdfa53ef87",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.577Z",
-      "updatedAt": "2026-10-21T12:29:26.518Z"
+      "updatedAt": "2026-10-28T16:30:29.439Z"
     },
     "principle-explain-the-number": {
       "source": "mintuz/skills",
@@ -1078,7 +1083,7 @@
       "skillFolderHash": "c8fffdd50059042bd802a3e327e97763b889e7ef",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.577Z",
-      "updatedAt": "2026-10-21T12:29:26.522Z"
+      "updatedAt": "2026-10-28T16:30:29.439Z"
     },
     "principle-fix-root-causes": {
       "source": "mintuz/skills",
@@ -1088,7 +1093,7 @@
       "skillFolderHash": "c2f41e5f0a83d5dd41a74fdddb30026c052c8cc0",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.578Z",
-      "updatedAt": "2026-10-21T12:29:26.523Z"
+      "updatedAt": "2026-10-28T16:30:29.440Z"
     },
     "principle-fix-the-bar-first": {
       "source": "mintuz/skills",
@@ -1098,7 +1103,7 @@
       "skillFolderHash": "8c3caa61ebd56b7f0dec77e962cf0df8c7474a9d",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.578Z",
-      "updatedAt": "2026-10-21T12:29:26.524Z"
+      "updatedAt": "2026-10-28T16:30:29.440Z"
     },
     "principle-foundational-thinking": {
       "source": "mintuz/skills",
@@ -1108,7 +1113,7 @@
       "skillFolderHash": "1fb93d643ad30837cda36ecebf5ae16306223069",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.579Z",
-      "updatedAt": "2026-10-21T12:29:26.525Z"
+      "updatedAt": "2026-10-28T16:30:29.441Z"
     },
     "principle-gaps-are-not-passes": {
       "source": "mintuz/skills",
@@ -1118,7 +1123,7 @@
       "skillFolderHash": "4bf685417506cf49d2d3696ba644efe459955c2d",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.579Z",
-      "updatedAt": "2026-10-21T12:29:26.526Z"
+      "updatedAt": "2026-10-28T16:30:29.441Z"
     },
     "principle-guard-the-context-window": {
       "source": "mintuz/skills",
@@ -1128,7 +1133,7 @@
       "skillFolderHash": "07c88265c0ab9abcbace8168fea3148e4d6a1b66",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.579Z",
-      "updatedAt": "2026-10-21T12:29:26.527Z"
+      "updatedAt": "2026-10-28T16:30:29.442Z"
     },
     "principle-hide-representations": {
       "source": "mintuz/skills",
@@ -1138,7 +1143,7 @@
       "skillFolderHash": "7df5c5cecefbe2fb7e4753b35808b6c3b0f43083",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.580Z",
-      "updatedAt": "2026-10-21T12:29:26.528Z"
+      "updatedAt": "2026-10-28T16:30:29.442Z"
     },
     "principle-investigate-read-only": {
       "source": "mintuz/skills",
@@ -1148,7 +1153,7 @@
       "skillFolderHash": "e0a34a94fbd6b588c3b230d94f4ed6120f9659e2",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.580Z",
-      "updatedAt": "2026-10-21T12:29:26.530Z"
+      "updatedAt": "2026-10-28T16:30:29.443Z"
     },
     "principle-judge-with-fresh-eyes": {
       "source": "mintuz/skills",
@@ -1158,7 +1163,7 @@
       "skillFolderHash": "792d16b8bf0562d6bb9fe8fdef13399ecc8fe7b0",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.581Z",
-      "updatedAt": "2026-10-21T12:29:26.531Z"
+      "updatedAt": "2026-10-28T16:30:29.444Z"
     },
     "principle-keep-secrets-out": {
       "source": "mintuz/skills",
@@ -1168,7 +1173,7 @@
       "skillFolderHash": "31c3d4584e52e1b3df56a088949955e3bb05eabb",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.581Z",
-      "updatedAt": "2026-10-21T12:29:26.533Z"
+      "updatedAt": "2026-10-28T16:30:29.444Z"
     },
     "principle-keep-the-core-pure": {
       "source": "mintuz/skills",
@@ -1178,7 +1183,7 @@
       "skillFolderHash": "c8c8931d5a23942952951b9cf2f4a452d9bb7aa2",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.582Z",
-      "updatedAt": "2026-10-21T12:29:26.534Z"
+      "updatedAt": "2026-10-28T16:30:29.445Z"
     },
     "principle-label-the-evidence": {
       "source": "mintuz/skills",
@@ -1188,7 +1193,7 @@
       "skillFolderHash": "7b9657548ff18d932d2694798cb591804c94a16a",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.582Z",
-      "updatedAt": "2026-10-21T12:29:26.536Z"
+      "updatedAt": "2026-10-28T16:30:29.445Z"
     },
     "principle-lead-with-the-answer": {
       "source": "mintuz/skills",
@@ -1198,7 +1203,7 @@
       "skillFolderHash": "4393ce329ec4742ca8d81e10ec7a6ade2f42ea30",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.582Z",
-      "updatedAt": "2026-10-21T12:29:26.537Z"
+      "updatedAt": "2026-10-28T16:30:29.446Z"
     },
     "principle-make-operations-idempotent": {
       "source": "mintuz/skills",
@@ -1208,17 +1213,17 @@
       "skillFolderHash": "5599e9b47b5f60ece3ecf20182a8f24855afcd4c",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.583Z",
-      "updatedAt": "2026-10-21T12:29:26.539Z"
+      "updatedAt": "2026-10-28T16:30:29.447Z"
     },
     "principle-migrate-callers-then-delete-legacy-apis": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/principle/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md",
-      "skillFolderHash": "329899e1ac42f4689580321a235d6946f540353a",
+      "skillFolderHash": "fa9c39d6df79316bbca7261c3f79a62bd29192e6",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.583Z",
-      "updatedAt": "2026-10-21T12:29:26.541Z"
+      "updatedAt": "2026-10-28T16:30:29.447Z"
     },
     "principle-minimize-reader-load": {
       "source": "mintuz/skills",
@@ -1228,7 +1233,7 @@
       "skillFolderHash": "d7adbcec7f6a9707dd231f843fb14fd966b9b074",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.584Z",
-      "updatedAt": "2026-10-21T12:29:26.543Z"
+      "updatedAt": "2026-10-28T16:30:29.448Z"
     },
     "principle-model-the-domain": {
       "source": "mintuz/skills",
@@ -1238,17 +1243,17 @@
       "skillFolderHash": "56781c9836498d84505b2a692e48f71d7505ab13",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.584Z",
-      "updatedAt": "2026-10-21T12:29:26.547Z"
+      "updatedAt": "2026-10-28T16:30:29.449Z"
     },
     "principle-narrow-state-lifetime": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/principle/skills/principle-narrow-state-lifetime/SKILL.md",
-      "skillFolderHash": "c9314f5e1b58fa9935a38ac7650adc1b86108116",
+      "skillFolderHash": "a3147eac5c07a8abcc8d0f7bce9a8c58aa0c1f19",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.585Z",
-      "updatedAt": "2026-10-21T12:29:26.549Z"
+      "updatedAt": "2026-10-28T16:30:29.449Z"
     },
     "principle-never-block-on-the-human": {
       "source": "mintuz/skills",
@@ -1258,7 +1263,7 @@
       "skillFolderHash": "a96ec227c4c736c092cd6c17a78216f37818afb8",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.585Z",
-      "updatedAt": "2026-10-21T12:29:26.550Z"
+      "updatedAt": "2026-10-28T16:30:29.450Z"
     },
     "principle-never-weaken-a-check": {
       "source": "mintuz/skills",
@@ -1268,7 +1273,7 @@
       "skillFolderHash": "1a689f17c60e8b0fe99034cb355100b28d793d86",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.586Z",
-      "updatedAt": "2026-10-21T12:29:26.552Z"
+      "updatedAt": "2026-10-28T16:30:29.450Z"
     },
     "principle-observe-dont-infer": {
       "source": "mintuz/skills",
@@ -1278,7 +1283,7 @@
       "skillFolderHash": "590f05336abd59f24f83984fbc171da60a1357fb",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.586Z",
-      "updatedAt": "2026-10-21T12:29:26.553Z"
+      "updatedAt": "2026-10-28T16:30:29.451Z"
     },
     "principle-outcome-oriented-execution": {
       "source": "mintuz/skills",
@@ -1288,17 +1293,17 @@
       "skillFolderHash": "f7b6146103f0371a2689d23e39f5eeec93921545",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.587Z",
-      "updatedAt": "2026-10-21T12:29:26.555Z"
+      "updatedAt": "2026-10-28T16:30:29.451Z"
     },
     "principle-parse-at-the-boundary": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/principle/skills/principle-parse-at-the-boundary/SKILL.md",
-      "skillFolderHash": "b336ae4da49b1c20d8c7388005a8a241781aa00f",
+      "skillFolderHash": "aece67068db92b969452722e6307faae8ddcb669",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.588Z",
-      "updatedAt": "2026-10-21T12:29:26.557Z"
+      "updatedAt": "2026-10-28T16:30:29.452Z"
     },
     "principle-preserve-meaning": {
       "source": "mintuz/skills",
@@ -1308,7 +1313,7 @@
       "skillFolderHash": "94bedceb9963c955531448e321923a59df5e63a9",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.588Z",
-      "updatedAt": "2026-10-21T12:29:26.563Z"
+      "updatedAt": "2026-10-28T16:30:29.452Z"
     },
     "principle-preserve-unrelated-work": {
       "source": "mintuz/skills",
@@ -1318,7 +1323,7 @@
       "skillFolderHash": "204b2f7081b05cdd68933a602f8ff283dec05b40",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.589Z",
-      "updatedAt": "2026-10-21T12:29:26.564Z"
+      "updatedAt": "2026-10-28T16:30:29.453Z"
     },
     "principle-price-each-option": {
       "source": "mintuz/skills",
@@ -1328,7 +1333,7 @@
       "skillFolderHash": "7ec6e9c5d3194ca67a464b0448000ab790ac3dab",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.589Z",
-      "updatedAt": "2026-10-21T12:29:26.565Z"
+      "updatedAt": "2026-10-28T16:30:29.454Z"
     },
     "principle-prove-it-works": {
       "source": "mintuz/skills",
@@ -1338,7 +1343,7 @@
       "skillFolderHash": "6eabe6818911daf8e92c5059e6eba28dc0cc9e2a",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.590Z",
-      "updatedAt": "2026-10-21T12:29:26.566Z"
+      "updatedAt": "2026-10-28T16:30:29.454Z"
     },
     "principle-rank-sources-by-authority": {
       "source": "mintuz/skills",
@@ -1348,7 +1353,7 @@
       "skillFolderHash": "895ddb6c7a6d544d4a762d83f151fbed4adb2879",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.590Z",
-      "updatedAt": "2026-10-21T12:29:26.567Z"
+      "updatedAt": "2026-10-28T16:30:29.455Z"
     },
     "principle-redesign-from-first-principles": {
       "source": "mintuz/skills",
@@ -1358,7 +1363,7 @@
       "skillFolderHash": "483c9698a35f9742172f7207753dd09757b1b5d9",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.591Z",
-      "updatedAt": "2026-10-21T12:29:26.570Z"
+      "updatedAt": "2026-10-28T16:30:29.455Z"
     },
     "principle-refresh-before-resuming": {
       "source": "mintuz/skills",
@@ -1368,7 +1373,7 @@
       "skillFolderHash": "2eed952bf2007aef74e10a614f23a1c8b6964368",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.591Z",
-      "updatedAt": "2026-10-21T12:29:26.572Z"
+      "updatedAt": "2026-10-28T16:30:29.456Z"
     },
     "principle-report-every-transition": {
       "source": "mintuz/skills",
@@ -1378,17 +1383,17 @@
       "skillFolderHash": "82c0434057d0c9f78a34dc55cf84feb0d870c62b",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.592Z",
-      "updatedAt": "2026-10-21T12:29:26.572Z"
+      "updatedAt": "2026-10-28T16:30:29.456Z"
     },
     "principle-reuse-before-building": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/principle/skills/principle-reuse-before-building/SKILL.md",
-      "skillFolderHash": "a6fe4cc6d0b324e922180f704a1f7840e8cfe314",
+      "skillFolderHash": "651c53c4f285ee65fff9b8f24d199afddeb180ac",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.592Z",
-      "updatedAt": "2026-10-21T12:29:26.573Z"
+      "updatedAt": "2026-10-28T16:30:29.457Z"
     },
     "principle-scale-verification": {
       "source": "mintuz/skills",
@@ -1398,7 +1403,7 @@
       "skillFolderHash": "726aaeebec29609539b61a05ce6ecc0c2368b638",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.592Z",
-      "updatedAt": "2026-10-21T12:29:26.575Z"
+      "updatedAt": "2026-10-28T16:30:29.457Z"
     },
     "principle-separate-before-serializing-shared-state": {
       "source": "mintuz/skills",
@@ -1408,7 +1413,7 @@
       "skillFolderHash": "5784727671d2c4fa13c849e629899f312d3eb6cc",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.593Z",
-      "updatedAt": "2026-10-21T12:29:26.578Z"
+      "updatedAt": "2026-10-28T16:30:29.461Z"
     },
     "principle-sequence-verifiable-units": {
       "source": "mintuz/skills",
@@ -1418,7 +1423,7 @@
       "skillFolderHash": "1b0f0796dec6e84b3835c93f14c7e7a1b4752e0e",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.593Z",
-      "updatedAt": "2026-10-21T12:29:26.581Z"
+      "updatedAt": "2026-10-28T16:30:29.461Z"
     },
     "principle-state-the-claim-first": {
       "source": "mintuz/skills",
@@ -1428,7 +1433,7 @@
       "skillFolderHash": "29d106ce7cac103ec76793706931644f21d083b5",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.594Z",
-      "updatedAt": "2026-10-21T12:29:26.582Z"
+      "updatedAt": "2026-10-28T16:30:29.462Z"
     },
     "principle-state-the-scope": {
       "source": "mintuz/skills",
@@ -1438,7 +1443,7 @@
       "skillFolderHash": "24ed97193193e61c17522014e7a531f78c6c09a0",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.594Z",
-      "updatedAt": "2026-10-21T12:29:26.583Z"
+      "updatedAt": "2026-10-28T16:30:29.462Z"
     },
     "principle-stay-in-scope": {
       "source": "mintuz/skills",
@@ -1448,7 +1453,7 @@
       "skillFolderHash": "d525c64d1f6cef6dcd1a34044cb4750deeb8c9fc",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.595Z",
-      "updatedAt": "2026-10-21T12:29:26.584Z"
+      "updatedAt": "2026-10-28T16:30:29.463Z"
     },
     "principle-subtract-before-you-add": {
       "source": "mintuz/skills",
@@ -1458,7 +1463,7 @@
       "skillFolderHash": "e174ba6e554f7c699800a4493fc963ba8a45666a",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.596Z",
-      "updatedAt": "2026-10-21T12:29:26.586Z"
+      "updatedAt": "2026-10-28T16:30:29.463Z"
     },
     "principle-test-behavior-not-implementation": {
       "source": "mintuz/skills",
@@ -1468,7 +1473,7 @@
       "skillFolderHash": "9e6f36826becfc4996bf7089d7dcc00ce7bd941d",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.596Z",
-      "updatedAt": "2026-10-21T12:29:26.587Z"
+      "updatedAt": "2026-10-28T16:30:29.464Z"
     },
     "principle-treat-messages-as-data": {
       "source": "mintuz/skills",
@@ -1478,7 +1483,7 @@
       "skillFolderHash": "2c5b97b455d1c78ec40b55956fb7f974b8c02778",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.597Z",
-      "updatedAt": "2026-10-21T12:29:26.588Z"
+      "updatedAt": "2026-10-28T16:30:29.464Z"
     },
     "principle-type-system-discipline": {
       "source": "mintuz/skills",
@@ -1488,7 +1493,7 @@
       "skillFolderHash": "2ba4be51ab01689e70088d885a8108f87d7606e5",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.597Z",
-      "updatedAt": "2026-10-21T12:29:26.593Z"
+      "updatedAt": "2026-10-28T16:30:29.465Z"
     },
     "principle-update-the-base-deliberately": {
       "source": "mintuz/skills",
@@ -1498,7 +1503,7 @@
       "skillFolderHash": "48626e546d73752a0629c63cd28c521a053fac04",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.597Z",
-      "updatedAt": "2026-10-21T12:29:26.594Z"
+      "updatedAt": "2026-10-28T16:30:29.465Z"
     },
     "principle-write-cold-handovers": {
       "source": "mintuz/skills",
@@ -1508,16 +1513,17 @@
       "skillFolderHash": "b1ee859ff2bf794624d5bfa6f5b240b4e9c0a5cd",
       "pluginName": "principle",
       "installedAt": "2026-10-19T13:22:06.598Z",
-      "updatedAt": "2026-10-21T12:29:26.595Z"
+      "updatedAt": "2026-10-28T16:30:29.466Z"
     },
     "adam-mode": {
       "source": "mintuz/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mintuz/skills.git",
       "skillPath": "src/core/skills/adam-mode/SKILL.md",
-      "skillFolderHash": "657fceb335b3b87aa92d04b8b1d8d37f07873199",
+      "skillFolderHash": "04c3e1f6fb1b904fe93f7f1cfb3bb5bc0a8059f1",
+      "pluginName": "core",
       "installedAt": "2026-10-21T12:29:26.414Z",
-      "updatedAt": "2026-10-22T20:11:04.111Z"
+      "updatedAt": "2026-10-28T16:30:29.394Z"
     },
     "architect": {
       "source": "mintuz/skills",
@@ -1527,7 +1533,7 @@
       "skillFolderHash": "313960f4900e84ea1e8d73667dfc400f44cc7b12",
       "pluginName": "core",
       "installedAt": "2026-10-22T20:11:13.776Z",
-      "updatedAt": "2026-10-22T20:11:13.776Z"
+      "updatedAt": "2026-10-28T16:30:29.395Z"
     },
     "arena": {
       "source": "mintuz/skills",
@@ -1537,7 +1543,7 @@
       "skillFolderHash": "30cf6ba74211fe7185a9481c5d77455e2493cca3",
       "pluginName": "core",
       "installedAt": "2026-10-22T20:11:13.781Z",
-      "updatedAt": "2026-10-22T20:11:13.781Z"
+      "updatedAt": "2026-10-28T16:30:29.396Z"
     },
     "creative-seed": {
       "source": "mintuz/skills",
@@ -1547,7 +1553,7 @@
       "skillFolderHash": "65d59c23ac9cdc5e37145d25d53bc55d6904ef71",
       "pluginName": "core",
       "installedAt": "2026-10-22T20:11:13.784Z",
-      "updatedAt": "2026-10-22T20:11:13.784Z"
+      "updatedAt": "2026-10-28T16:30:29.404Z"
     },
     "in-your-own-words": {
       "source": "mintuz/skills",
@@ -1557,7 +1563,7 @@
       "skillFolderHash": "a52d11d8717ab6bf9e5fcbe2d6dc0d63c8ff12ac",
       "pluginName": "core",
       "installedAt": "2026-10-22T20:11:13.786Z",
-      "updatedAt": "2026-10-22T20:11:13.786Z"
+      "updatedAt": "2026-10-28T16:30:29.408Z"
     },
     "record-lesson": {
       "source": "mintuz/skills",
@@ -1567,7 +1573,7 @@
       "skillFolderHash": "d9dab5eb03e1a1ebdd7f307433de75ba029ed654",
       "pluginName": "core",
       "installedAt": "2026-10-22T20:11:13.789Z",
-      "updatedAt": "2026-10-22T20:11:13.789Z"
+      "updatedAt": "2026-10-28T16:30:29.411Z"
     },
     "sharpen": {
       "source": "mintuz/skills",
@@ -1577,7 +1583,47 @@
       "skillFolderHash": "fc058340949713ded0e78a947fe1d5b6424aaad9",
       "pluginName": "core",
       "installedAt": "2026-10-22T20:11:13.791Z",
-      "updatedAt": "2026-10-22T20:11:13.791Z"
+      "updatedAt": "2026-10-28T16:30:29.412Z"
+    },
+    "maintain-verification-skill": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/core/skills/maintain-verification-skill/SKILL.md",
+      "skillFolderHash": "56b864c871c1dbb053b0dfbb6c65349929bb23d1",
+      "pluginName": "core",
+      "installedAt": "2026-10-28T16:30:29.408Z",
+      "updatedAt": "2026-10-28T16:30:29.408Z"
+    },
+    "visual-feedback": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/core/skills/visual-feedback/SKILL.md",
+      "skillFolderHash": "a15496ce1f2bf75678d7ea0de0f32628f2127ced",
+      "pluginName": "core",
+      "installedAt": "2026-10-28T16:30:29.415Z",
+      "updatedAt": "2026-10-28T16:30:29.415Z"
+    },
+    "browser-testing": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/web/skills/browser-testing/SKILL.md",
+      "skillFolderHash": "87b6459ea23b10862266b15f9ff94640c48d95de",
+      "pluginName": "web",
+      "installedAt": "2026-10-28T16:30:29.421Z",
+      "updatedAt": "2026-10-28T16:30:29.421Z"
+    },
+    "xcuitest": {
+      "source": "mintuz/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mintuz/skills.git",
+      "skillPath": "src/app/skills/xcuitest/SKILL.md",
+      "skillFolderHash": "8cd6c4d238b040065ad81a6e7f3d6a38dba00493",
+      "pluginName": "app",
+      "installedAt": "2026-10-28T16:30:29.432Z",
+      "updatedAt": "2026-10-28T16:30:29.432Z"
     }
   },
   "dismissed": {

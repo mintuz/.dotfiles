@@ -48,6 +48,10 @@ expect(orderProcessor._internalState.validated).toBe(true);
 
 ### Factory with Schema Validation
 
+The factory examples below use JavaScript/TypeScript fixture rules: use factories,
+not `let`/`beforeEach` data builders. Keep legitimate owned-resource hooks.
+Simple local immutable Swift values need no factory.
+
 ```typescript
 const getMockUser = (overrides?: Partial<User>): User => {
   return UserSchema.parse({

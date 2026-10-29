@@ -40,7 +40,7 @@ const calculateDiscount = (order: Order): number => {
 
 | Issue | Problem | Fix |
 | --- | --- | --- |
-| Using `let`/`beforeEach` | Shared mutable state | Use factory functions |
+| JavaScript/TypeScript fixture data built with `let`/`beforeEach` | Shared mutable state | Use factory functions; keep owned-resource hooks. Simple local immutable Swift values need no factory |
 | Testing private methods | Coupling to implementation | Test through public API |
 | `any` types in tests | Type safety disabled | Use proper types |
 | Missing edge case tests | Incomplete coverage | Add boundary tests |
@@ -100,7 +100,7 @@ expect(orderProcessor.privateValidate).toHaveBeenCalled();
 | Issue | Problem | Fix |
 | --- | --- | --- |
 | Large test files | Hard to navigate | Organize by behavior |
-| Test duplication | Maintenance burden | Extract shared factories |
+| Test duplication | Maintenance burden | Extract shared factories for repeated data construction; simple local immutable Swift values need no factory |
 | Magic values in tests | Unclear intent | Use named constants or clear values |
 
 ### Descriptive Test Names

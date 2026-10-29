@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: WHEN working in TDD Red-Green-Refactor; NOT ad-hoc coding; write tests first, add minimal code to green, then assess refactoring.
+description: WHEN using framework-neutral TDD Red-Green-Refactor in any project; NOT for merely classifying runtime evidence or replacing the project's test framework; proves failing-before and passing-after tests, then assesses refactoring.
 ---
 
 # TDD Best Practices
@@ -11,7 +11,16 @@ description: WHEN working in TDD Red-Green-Refactor; NOT ad-hoc coding; write te
 
 This is non-negotiable: production code that adds or changes behaviour without a failing test demanding it is not TDD. Refactoring is the one exception: it changes structure while every test stays green, so it demands no new failing test.
 
-Only a test run is evidence. A compiling build, a rendering page, a type check, or a manual inspection does not prove behaviour. Code without a test run behind it is ad-hoc coding, however well it works. At every transition, report what you ran, the result, and why it counts (`principle-prove-it-works`).
+Only an actual failing-before and passing-after behaviour test proves a RED/GREEN cycle. A build, typecheck or static page render does not replace it. Direct interaction with an identified running artifact and its observed effects is valid bounded runtime evidence, but does not retroactively prove TDD. Keep that evidence; if a fix preceded its test, reverse only your own fix, preserve unrelated work, and run the discriminating regression against pre-fix code before reapplying the minimal implementation. Report the command, result and what it proves at each transition (`principle-prove-it-works`).
+
+Use the project's existing runner and test framework across web, iOS, CLI,
+library and service projects. Retain existing XCTest suites, including `measure`
+performance tests; TDD does not require migration to Swift Testing. Framework
+authoring belongs to the matching skill or the suite's established conventions.
+
+Treat coverage as a by-product of the required behaviour cases, not a separate
+coverage-only task. Use a coverage report to discover missing business cases;
+never add implementation-detail assertions merely to satisfy a percentage.
 
 ## The Sacred Cycle: Red → Green → Refactor
 
@@ -34,7 +43,7 @@ Never duplicate an existing test.
 - Test ONE thing at a time. Write the next test only after the current one is green. Record the behaviours still to come as a list or as empty placeholders, never as further written tests.
 - Test business behaviour, not implementation (`principle-test-behavior-not-implementation`).
 - Name tests to document intent.
-- Use factory functions for test data.
+- Use fresh, explicit test data: factories in JavaScript/TypeScript; simple local immutable Swift values need no factory. Keep owned-resource lifecycle hooks.
 
 ### 2. GREEN - Minimal Implementation
 
@@ -51,6 +60,7 @@ Write the **minimum** code to make the current test pass. Nothing more.
 After every GREEN, assess whether refactoring would add value: once per behaviour, not once after a batch. If the code is already clean, move on. The `refactoring` skill owns the full procedure; these rules apply in every cycle:
 
 - Secure a reversible GREEN baseline first. Commit the green code when you are allowed to commit; when the user forbids a commit, keep the green state recoverable another way. Never refactor code you cannot restore (`principle-capture-the-baseline`).
+- Assess the changed, covered code before expanding to untested areas. Name the cleanup justified by the available code. If no worthwhile cleanup is justified, say so and leave that code unchanged. Never invent a cleanup to complete the cycle.
 - Refactor only code that green tests already cover. For untested code, first write a characterisation test that records the output the code actually produces today and passes against unchanged production code. Without it, leave the code alone, whether or not it looks trivial.
 - Keep external APIs unchanged and all tests passing.
 - Keep the refactor separate from the behaviour change: a separate commit, or a separate reviewable step when you cannot commit.
@@ -81,9 +91,9 @@ Does this code add or change behavior?
 ```
 Does the test verify a business outcome?
 ├── Yes → Does it use the public API only?
-│   ├── Yes → Does it use factory functions?
-│   │   ├── Yes → Good test ✓
-│   │   └── No → Refactor to use factories
+│   ├── Yes → Is its test data fresh and explicit?
+│   │   ├── Yes (JS/TS factories; simple local immutable Swift values also qualify) → Good test ✓
+│   │   └── No → Use factories in JS/TS; remove shared mutable fixtures
 │   └── No → Rewrite to avoid internals
 └── No → Rewrite to focus on behavior
 ```
@@ -106,7 +116,7 @@ Does this code make the current failing test pass?
 - [ ] Implementation is minimal
 - [ ] Refactoring assessment completed
 - [ ] All tests pass
-- [ ] Factory functions used (no `let`/`beforeEach`)
+- [ ] Test data is fresh and explicit. JavaScript/TypeScript fixture data uses factories, not `let` declarations or `beforeEach` builders. Local immutable Swift `let` bindings are valid. Keep legitimate resource lifecycle hooks.
 - [ ] Test names describe business behaviour
 - [ ] Edge cases covered
 - [ ] Test organisation reflects business features
