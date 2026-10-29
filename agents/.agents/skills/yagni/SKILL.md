@@ -68,7 +68,7 @@ Test code longer or more complex than the implementation signals overengineering
 
 ## Documentation
 
-At the end of every significant change, ask: **"What do I wish I'd known at the start?"** Correct CLAUDE.md and AGENTS.md when your change makes them wrong. `core:learn` owns the procedure for deciding whether to record an answer and how (`principle-encode-lessons-in-structure`). Whenever you write or propose a rule:
+At the end of every significant change, ask: **"What do I wish I'd known at the start?"** Correct CLAUDE.md and AGENTS.md when your change makes them wrong. `core:record-lesson` owns the procedure for deciding whether to record an answer and how (`principle-encode-lessons-in-structure`). Whenever you write or propose a rule:
 
 - Write the reusable rule, not the incident that revealed it: the action and the condition that makes it necessary. For a fixed fault, write it so a reader can detect the fault and follow the approved repair.
 - Amend the rule that already owns the subject; otherwise add one imperative sentence or bullet in the section that owns it, in that file's voice. Add a heading or code example only when a reader cannot apply the rule without it.
@@ -98,4 +98,4 @@ Confirm every item before reporting the task done:
 ## Relationship to Other Skills
 
 - `core:reducer` removes mechanism from an existing system; this skill keeps mechanism out of new work. When a task only removes mechanism from working code and adds no behaviour, say `core:reducer` owns it and write no removal plan of your own. State only the limits that still hold: name the module or modules the change stays inside, say the rest stay untouched, and keep behaviour identical. Re-run the existing tests afterwards as the regression check, not as proof of equivalence. Add no test for the removal itself. Name any affected behaviour the existing tests do not cover, because that gap must close before the removal is safe.
-- `web:tdd` drives the Red-Green-Refactor cycle in detail; this skill sets the scope limits inside that cycle.
+- `core:tdd` drives the Red-Green-Refactor cycle in detail; this skill sets the scope limits inside that cycle.
