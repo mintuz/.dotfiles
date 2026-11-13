@@ -1,6 +1,0 @@
-interface:
-  display_name: "WTF"
-  short_description: "Re-explain the previous response clearly"
-  default_prompt: "Use $wtf to re-explain the previous response clearly."
-policy:
-  allow_implicit_invocation: false
