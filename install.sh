@@ -20,7 +20,7 @@ back_up() {
 
 # Back up a real file before stow replaces it with a symlink
 # (skip if it's already a stow-managed symlink so re-runs stay clean).
-for relative in .zshrc .omp/agent/config.yml; do
+for relative in .zshrc .omp/agent/config.yml .config/rex/init.lua; do
   if [ -f "$HOME/$relative" ] && [ ! -L "$HOME/$relative" ]; then
     back_up "$relative"
   fi
@@ -34,6 +34,11 @@ mkdir -p "$HOME/.omp/agent"
 # Likewise keep ~/.config/mise/conf.d real so stow links only our fragment and
 # mise or machine setup can add their own files beside it.
 mkdir -p "$HOME/.config/mise/conf.d"
+
+# Keep ~/.config/rex real too. If stow folded it into a link to this repo, the
+# backup step of the next run would see the repo's own init.lua as a real file
+# and move it out of the repo.
+mkdir -p "$HOME/.config/rex"
 
 # Keep the harness agent folders real so stow links each managed agent file,
 # and agents that a harness or another tool adds stay out of this repo.
@@ -71,7 +76,7 @@ fi
 # --ignore keeps macOS .DS_Store files and omp's runtime config.yml.lock from
 # causing stow conflicts. omp writes the lock beside the real config.yml,
 # which is in this repo.
-stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude workclaude omp mise
+stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude workclaude omp mise rex
 
 # Set up RTK in each Claude Code profile. rtk writes RTK.md and its hook into
 # the profile's local directory, so neither reaches this repo. The shared
