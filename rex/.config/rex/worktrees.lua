@@ -1,10 +1,11 @@
--- Worktrees: start a Rex session in a project's checkout or worktree, and
--- remove a worktree. Modelled on https://github.com/almonk/rex-projects.
+-- Worktrees: start a Rex session or open a tab in a project's checkout or
+-- worktree, and remove a worktree. Modelled on https://github.com/almonk/rex-projects.
 --
 -- The pickers need rex.ui (control API revision 17). On an older server, or
 -- from a script, give the answers as arguments:
 --
 --     rex do worktree_session project="$HOME/.dotfiles" branch=my-branch
+--     rex do worktree_tab project="$HOME/.dotfiles" branch=my-branch
 --     rex do worktree_remove project="$HOME/.dotfiles" branch=my-branch
 
 local home = os.getenv("HOME")
@@ -134,54 +135,70 @@ local function add_worktree(project, branch)
   return { path = dir, branch = branch }
 end
 
+-- choose_tree returns the project's folder and the checkout to work in. It
+-- makes the worktree when the branch has none. It returns nil when the person
+-- cancels.
+local function choose_tree(args, title)
+  local project = choose_project(args, title)
+  if project == nil then return end
+  local trees = list_worktrees(project)
+  local branch, tree = args.branch, nil
+  if branch == nil then
+    local items = tree_items(trees)
+    items[1].icon = "folder"
+    items[#items + 1] = { id = NEW, title = "New worktree…", icon = "plus" }
+    local choice = ask("pick", {
+      title = basename(project), placeholder = "Choose where to work", items = items,
+    })
+    if choice == nil then return end
+    if choice == NEW then
+      branch = ask("input", {
+        title = "New worktree in " .. basename(project),
+        placeholder = "Branch name",
+        confirm = "Create worktree",
+      })
+      if branch == nil then return end
+    else
+      tree = find(trees, "path", choice)
+    end
+  end
+  if tree == nil then
+    branch = branch:match("^%s*(.-)%s*$")
+    if branch == "" then return end
+    -- A branch that already has a worktree opens that worktree.
+    tree = find(trees, "branch", branch) or add_worktree(project, branch)
+  end
+  return project, tree
+end
+
+local function label(project, tree)
+  return basename(project) .. " · " .. (tree.branch or basename(tree.path))
+end
+
+local function shell(tree)
+  return rex.layout.block{
+    flavor = "com.superlogical.terminal.shell",
+    options = { cwd = tree.path },
+  }
+end
+
+local action_args = { project = "string?", branch = "string?" }
+
+-- A window in the API is a tab in the app.
+
 rex.action{
   name = "worktree_session",
   title = "New Session in Worktree…",
   description = "Choose a project, then a checkout or a new worktree, and start a session there",
   category = "Worktrees",
   keywords = "project branch repository checkout folder",
-  args = { project = "string?", branch = "string?" },
+  args = action_args,
   run = function(ctx, args)
-    local project = choose_project(args, "New session")
-    if project == nil then return end
-    local trees = list_worktrees(project)
-    local branch, tree = args.branch, nil
-    if branch == nil then
-      local items = tree_items(trees)
-      items[1].icon = "folder"
-      items[#items + 1] = { id = NEW, title = "New worktree…", icon = "plus" }
-      local choice = ask("pick", {
-        title = basename(project), placeholder = "Choose where to work", items = items,
-      })
-      if choice == nil then return end
-      if choice == NEW then
-        branch = ask("input", {
-          title = "New worktree in " .. basename(project),
-          placeholder = "Branch name",
-          confirm = "Create worktree",
-        })
-        if branch == nil then return end
-      else
-        tree = find(trees, "path", choice)
-      end
-    end
-    if tree == nil then
-      branch = branch:match("^%s*(.-)%s*$")
-      if branch == "" then return end
-      -- A branch that already has a worktree opens that worktree.
-      tree = find(trees, "branch", branch) or add_worktree(project, branch)
-    end
-
-    -- A window in the API is a tab in the app.
+    local project, tree = choose_tree(args, "New session")
+    if tree == nil then return end
     local session, err = rex.call("session.create", {
-      label = basename(project) .. " · " .. (tree.branch or basename(tree.path)),
-      initial_windows = { {
-        window_label = "shell",
-        layout = rex.layout.block{
-          flavor = "com.superlogical.terminal.shell",
-          options = { cwd = tree.path },
-        },
-      } },
+      label = label(project, tree),
+      initial_windows = { { window_label = "shell", layout = shell(tree) } },
     })
     if session == nil then fail(err) end
     -- Creating a session does not show it. Ask the app to switch to it. With
@@ -192,12 +209,34 @@ rex.action{
 }
 
 rex.action{
+  name = "worktree_tab",
+  title = "New Tab in Worktree…",
+  description = "Choose a project, then a checkout or a new worktree, and open a tab there in the current session",
+  category = "Worktrees",
+  keywords = "project branch repository checkout folder window",
+  args = action_args,
+  run = function(ctx, args)
+    if ctx.session_id == nil then fail("no current session to open a tab in") end
+    local project, tree = choose_tree(args, "New tab")
+    if tree == nil then return end
+    -- The new tab becomes the active tab of the session.
+    local window, err = rex.call("session.new_window", {
+      session_id = ctx.session_id,
+      window_label = label(project, tree),
+      layout = shell(tree),
+    })
+    if window == nil then fail(err) end
+    return tree.path
+  end,
+}
+
+rex.action{
   name = "worktree_remove",
   title = "Remove Worktree…",
   description = "Choose a project and one of its worktrees, and remove the worktree. Its branch stays.",
   category = "Worktrees",
   keywords = "project branch repository delete",
-  args = { project = "string?", branch = "string?" },
+  args = action_args,
   run = function(ctx, args)
     local project = choose_project(args, "Remove worktree")
     if project == nil then return end
@@ -226,3 +265,4 @@ rex.action{
 }
 
 rex.bind("alt+cmd+n", "worktree_session")
+rex.bind("alt+cmd+t", "worktree_tab")
