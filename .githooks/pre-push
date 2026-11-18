@@ -1,0 +1,27 @@
+#!/bin/sh
+# Stop a push when gitleaks finds a possible secret in the commits it sends.
+# Git passes one line per ref on stdin: <local ref> <local sha> <remote ref> <remote sha>.
+set -eu
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-push: gitleaks is not installed. Install it with 'brew install gitleaks'." >&2
+  exit 1
+fi
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  # An all-zero sha means "no commit": a deleted ref sends nothing to scan.
+  case "$local_sha" in *[!0]*) ;; *) continue ;; esac
+
+  # Scan only the new commits. When the remote ref is new (all-zero sha), or
+  # its commit is not here, scan the commits that no remote branch already has.
+  if git cat-file -e "$remote_sha^{commit}" 2>/dev/null; then
+    range="$remote_sha..$local_sha"
+  else
+    range="$local_sha --not --remotes"
+  fi
+
+  if ! gitleaks git --no-banner --redact --log-opts="$range" .; then
+    echo "pre-push: gitleaks found possible secrets in $local_ref. Remove them from the commits, then push again." >&2
+    exit 1
+  fi
+done

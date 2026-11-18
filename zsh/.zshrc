@@ -43,5 +43,8 @@ source "$HOME/.zsh_profile"
 # Work Specific Profile Settings that I don't want on personal machine
 [ -f "$HOME/.zsh_work_profile" ] && source "$HOME/.zsh_work_profile"
 
+# Claude Code with the work profile in ~/.workclaude; plain `claude` stays personal.
+alias workclaude='CLAUDE_CONFIG_DIR="$HOME/.workclaude" claude'
+
 # Start Bonsai with live server output; press Ctrl+C to stop.
 alias bonsai-start='env BONSAI_FAMILY=bonsai2 BONSAI_MODEL=27B BONSAI_CTX=65536 BONSAI_IMAGE_MAX_TOKENS=0 BONSAI_HOST=127.0.0.1 PORT=8080 /bin/sh "$HOME/Applications/Bonsai-demo/scripts/start_llama_server.sh" -np 1 --alias bonsai2 --reasoning-budget 2048 --sleep-idle-seconds 300'

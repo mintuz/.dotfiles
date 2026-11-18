@@ -1,0 +1,1 @@
+../../../agents/.agents/agents/adam-agent.md

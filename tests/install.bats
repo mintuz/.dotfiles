@@ -6,6 +6,7 @@ setup() {
   checkout="$BATS_TEST_TMPDIR/checkout"
   mkdir -p "$home" "$checkout"/{zsh,pnpm} \
     "$checkout/claude/.claude/agents" \
+    "$checkout/workclaude/.workclaude/agents" \
     "$checkout/omp/.omp/agent/agents" \
     "$checkout/mise/.config/mise/conf.d" \
     "$checkout/agents/.agents/skills"/{typescript,other} \
@@ -18,14 +19,19 @@ setup() {
   printf 'managed\n' > "$checkout/agents/.agents/skills/other/SKILL.md"
   printf 'shared agent\n' > "$checkout/agents/.agents/agents/shared.md"
   ln -s ../../../agents/.agents/agents/shared.md "$checkout/claude/.claude/agents/shared.md"
+  ln -s ../../../agents/.agents/agents/shared.md "$checkout/workclaude/.workclaude/agents/shared.md"
   ln -s ../../../../agents/.agents/agents/shared.md "$checkout/omp/.omp/agent/agents/shared.md"
   printf 'omp agent\n' > "$checkout/omp/.omp/agent/agents/omp-only.md"
+  # Fake rtk records which profile each run targets.
+  mkdir -p "$BATS_TEST_TMPDIR/bin"
+  printf '#!/bin/sh\necho "$CLAUDE_CONFIG_DIR $*" >> "%s"\n' "$BATS_TEST_TMPDIR/rtk.log" > "$BATS_TEST_TMPDIR/bin/rtk"
+  chmod +x "$BATS_TEST_TMPDIR/bin/rtk"
   git -C "$checkout" init -q
-  git -C "$checkout" add agents claude omp
+  git -C "$checkout" add agents claude workclaude omp
 }
 
 run_install() {
-  HOME="$home" "$checkout/install.sh"
+  HOME="$home" PATH="$BATS_TEST_TMPDIR/bin:$PATH" "$checkout/install.sh"
 }
 
 backups() {
@@ -42,6 +48,7 @@ backups() {
   [ ! -L "$home/.config/mise/conf.d" ]
   [ ! -e "$BATS_TEST_TMPDIR/.zshrc" ]
   [ ! -e "$BATS_TEST_TMPDIR/.config" ]
+  [ "$(git -C "$checkout" config core.hooksPath)" = .githooks ]
 }
 
 @test "backs up conflicting agent files and keeps unmanaged ones" {
@@ -80,10 +87,11 @@ backups() {
   [ ! -e "$checkout/mise/.config/mise/conf.d/dev-machine.toml" ]
 }
 
-@test "links one shared agent into Claude Code and omp" {
+@test "links one shared agent into both Claude Code profiles and omp" {
   run_install
 
   [ "$(cat "$home/.claude/agents/shared.md")" = 'shared agent' ]
+  [ "$(cat "$home/.workclaude/agents/shared.md")" = 'shared agent' ]
   [ "$(cat "$home/.omp/agent/agents/shared.md")" = 'shared agent' ]
   [ "$(cat "$home/.omp/agent/agents/omp-only.md")" = 'omp agent' ]
   [ ! -e "$home/.claude/agents/omp-only.md" ]
@@ -94,8 +102,12 @@ backups() {
   run_install
   printf 'local\n' > "$home/.claude/agents/local.md"
   printf 'local\n' > "$home/.omp/agent/agents/local.md"
+  printf 'secret\n' > "$home/.workclaude/.credentials.json"
 
   [ ! -L "$home/.claude/agents" ]
+  [ ! -L "$home/.workclaude" ]
+  [ ! -L "$home/.workclaude/agents" ]
+  [ ! -e "$checkout/workclaude/.workclaude/.credentials.json" ]
   [ ! -L "$home/.omp/agent/agents" ]
   [ ! -e "$checkout/claude/.claude/agents/local.md" ]
   [ ! -e "$checkout/omp/.omp/agent/agents/local.md" ]
@@ -127,4 +139,11 @@ backups() {
   [ -f "$home/.omp/agent/config.yml.lock" ]
   [ ! -L "$home/.omp/agent/config.yml.lock" ]
   [ -L "$home/.omp/agent/config.yml" ]
+}
+
+@test "sets up RTK in the personal and work Claude Code profiles" {
+  run_install
+
+  [ "$(cat "$BATS_TEST_TMPDIR/rtk.log")" = "$home/.claude init --global --auto-patch
+$home/.workclaude init --global --auto-patch" ]
 }

@@ -3,6 +3,10 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+# Use the tracked hooks in .githooks for this repo only. The pre-push hook
+# runs gitleaks, so a push with a secret in it stops before it leaves here.
+git config core.hooksPath .githooks
+
 # Move $HOME/<path> into this run's backup directory. mktemp gives each run a
 # new directory, so a later run never overwrites an earlier backup.
 backup=""
@@ -33,7 +37,9 @@ mkdir -p "$HOME/.config/mise/conf.d"
 
 # Keep the harness agent folders real so stow links each managed agent file,
 # and agents that a harness or another tool adds stay out of this repo.
-mkdir -p "$HOME/.claude/agents" "$HOME/.omp/agent/agents"
+# ~/.workclaude must be real too: Claude Code writes the work profile's
+# login, history and settings there, and none of it may land in this repo.
+mkdir -p "$HOME/.claude/agents" "$HOME/.workclaude/agents" "$HOME/.omp/agent/agents"
 
 # Back up a real agent file before stow replaces it with our link.
 while IFS= read -r -d '' source; do
@@ -41,7 +47,7 @@ while IFS= read -r -d '' source; do
   if [ -f "$HOME/$relative" ] && [ ! -L "$HOME/$relative" ]; then
     back_up "$relative"
   fi
-done < <(git ls-files -z -- claude/.claude/agents omp/.omp/agent/agents)
+done < <(git ls-files -z -- claude/.claude/agents workclaude/.workclaude/agents omp/.omp/agent/agents)
 
 # Preserve files installed by another skill manager before Stow links ours.
 if [ -d "$HOME/.agents" ] && [ ! -L "$HOME/.agents" ]; then
@@ -65,4 +71,13 @@ fi
 # --ignore keeps macOS .DS_Store files and omp's runtime config.yml.lock from
 # causing stow conflicts. omp writes the lock beside the real config.yml,
 # which is in this repo.
-stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude omp mise
+stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude workclaude omp mise
+
+# Set up RTK in each Claude Code profile. rtk writes RTK.md and its hook into
+# the profile's local directory, so neither reaches this repo. The shared
+# CLAUDE.md already imports @RTK.md.
+if command -v rtk >/dev/null 2>&1; then
+  for profile in .claude .workclaude; do
+    CLAUDE_CONFIG_DIR="$HOME/$profile" rtk init --global --auto-patch
+  done
+fi
