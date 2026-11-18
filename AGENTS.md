@@ -11,6 +11,7 @@ This repository stores personal dotfiles as GNU Stow packages. Each top-level pa
 - `claude/.claude/CLAUDE.md` contains global Claude Code instructions. `claude/.claude/agents/` holds the Claude Code subagents: relative symlinks to the shared copies in `agents/.agents/agents/`. `~/.claude` is the personal Claude Code profile, which `claude` uses.
 - `workclaude/.workclaude/` is the work Claude Code profile. The `workclaude` alias in `zsh/.zshrc` runs `claude` with `CLAUDE_CONFIG_DIR=~/.workclaude`. The package contains only relative symlinks to the shared `CLAUDE.md` and subagents. Each profile keeps its own login, `settings.json`, plugins, MCP servers and history in its local directory. Do not add these files to this repository.
 - `omp/.omp/agent/config.yml` contains global omp (oh-my-pi) settings. `omp/.omp/agent/agents/` holds the omp subagents: omp-only files such as `astra.md` and `fable.md`, and relative symlinks to the shared copies. omp databases, sessions, caches and the runtime `config.yml.lock` stay local.
+- `.githooks/pre-push` runs `gitleaks` on the commits that a push sends, and stops the push when it finds a possible secret. When `gitleaks` is not installed, the hook stops every push. `install.sh` sets `core.hooksPath` to `.githooks` for this repository only.
 - `install.sh` moves a real `~/.zshrc`, a real `~/.omp/agent/config.yml`, real agent files that this repository manages, and `~/.agents` files that conflict with this repository into a new `~/.dotfiles-backup.XXXXXX` directory. Each run that backs up files creates its own directory, so a run never overwrites an earlier backup. The installer then creates `~/.omp/agent`, `~/.omp/agent/agents`, `~/.claude/agents`, `~/.workclaude/agents` and `~/.config/mise/conf.d` as real directories and runs `stow --target="$HOME" zsh agents pnpm claude workclaude omp mise`. When `rtk` is on `PATH`, the installer then runs `rtk init --global --auto-patch` once for `~/.claude` and once for `~/.workclaude`. RTK writes `RTK.md` and its hook into each local profile directory. The shared `CLAUDE.md` imports `@RTK.md`.
 
 Tools and `install.sh` can update files in this checkout through Stow links, for example through the folded `~/.agents` link. The owner wants this behaviour. Do not report these writes as defects, and do not add guards against them.
@@ -23,7 +24,8 @@ Avoid committing machine-local files such as `.DS_Store`, temporary editor files
 - `stow --simulate --verbose zsh agents pnpm claude workclaude omp mise` previews symlink changes without modifying `$HOME`.
 - `stow --restow zsh agents pnpm claude workclaude omp mise` refreshes existing symlinks after package changes.
 - `zsh -n zsh/.zshrc zsh/.zsh_profile` checks shell files for syntax errors.
-- `bats tests` runs the installer tests against a temporary home directory. Install bats-core first, for example with `brew install bats-core`.
+- `bats tests` runs the installer tests against a temporary home directory, and the pre-push hook tests against a temporary remote. Install bats-core first, for example with `brew install bats-core`.
+- `gitleaks git --no-banner --redact .` scans the full history. Install gitleaks first, for example with `brew install gitleaks`. Old history contains false positives, such as placeholder keys in skill references and files from a removed `atom/` folder.
 - `git status --short` confirms the final change set before committing.
 
 ## Coding Style & Naming Conventions

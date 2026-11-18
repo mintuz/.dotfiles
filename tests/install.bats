@@ -48,6 +48,7 @@ backups() {
   [ ! -L "$home/.config/mise/conf.d" ]
   [ ! -e "$BATS_TEST_TMPDIR/.zshrc" ]
   [ ! -e "$BATS_TEST_TMPDIR/.config" ]
+  [ "$(git -C "$checkout" config core.hooksPath)" = .githooks ]
 }
 
 @test "backs up conflicting agent files and keeps unmanaged ones" {

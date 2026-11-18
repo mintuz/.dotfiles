@@ -3,6 +3,10 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+# Use the tracked hooks in .githooks for this repo only. The pre-push hook
+# runs gitleaks, so a push with a secret in it stops before it leaves here.
+git config core.hooksPath .githooks
+
 # Move $HOME/<path> into this run's backup directory. mktemp gives each run a
 # new directory, so a later run never overwrites an earlier backup.
 backup=""
