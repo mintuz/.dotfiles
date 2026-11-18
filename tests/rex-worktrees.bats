@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 # Runs the worktree actions of rex/.config/rex/worktrees.lua with `rex do`,
-# against a temporary home directory. The prompts and the session calls are
+# against a temporary home directory. The prompts and the server calls are
 # replaced, so the test changes nothing in the running Rex server.
 
 setup() {
@@ -16,7 +16,7 @@ setup() {
 # list of the answers that the prompts give, in order.
 run_action() {
   REX_SESSION='' REX_BLOCK='' run rex do --json - <<EOF
-local actions, answers, sessions = {}, $2, {}
+local actions, answers, calls = {}, $2, {}
 rex.action = function(action) actions[action.name] = action.run end
 rex.bind = function() end
 local function answer(opts)
@@ -26,13 +26,14 @@ local function answer(opts)
   return row and opts.items[tonumber(row)].id or reply
 end
 rex.ui = { pick = answer, input = answer }
+-- Records the arguments of session.create and session.new_window.
 rex.call = function(_, args)
-  sessions[#sessions + 1] = args
+  calls[#calls + 1] = args
   return { session_id = "s" }
 end
 rex.client = { queue = function() end }
 dofile("$BATS_TEST_DIRNAME/../rex/.config/rex/worktrees.lua")
-return { result = actions.$1({}, {}), sessions = sessions }
+return { result = actions.$1({ session_id = "current" }, {}), calls = calls }
 EOF
 }
 
@@ -50,6 +51,13 @@ EOF
   run_action worktree_session '{ "@2", "@2" }'
   [ "$status" -eq 0 ]
   [[ "$output" == *'"label": "demo · feat/x"'* ]]
+
+  # A tab opens in the session that the action ran in.
+  run_action worktree_tab '{ "@2", "@2" }'
+  [ "$status" -eq 0 ]
+  [[ "$output" == *'"session_id": "current"'* ]]
+  [[ "$output" == *'"window_label": "demo · feat/x"'* ]]
+  [[ "$output" == *'"cwd": "'"$worktree"'"'* ]]
 
   # A worktree with an untracked file stays.
   touch "$worktree/untracked"
