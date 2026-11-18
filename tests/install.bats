@@ -9,12 +9,14 @@ setup() {
     "$checkout/workclaude/.workclaude/agents" \
     "$checkout/omp/.omp/agent/agents" \
     "$checkout/mise/.config/mise/conf.d" \
+    "$checkout/rex/.config/rex" \
     "$checkout/agents/.agents/skills"/{typescript,other} \
     "$checkout/agents/.agents/agents"
   cp "$BATS_TEST_DIRNAME/../install.sh" "$checkout/install.sh"
   printf 'managed\n' > "$checkout/zsh/.zshrc"
   printf 'managed\n' > "$checkout/omp/.omp/agent/config.yml"
   printf 'managed\n' > "$checkout/mise/.config/mise/conf.d/dotfiles.toml"
+  printf 'managed\n' > "$checkout/rex/.config/rex/init.lua"
   printf 'managed\n' > "$checkout/agents/.agents/skills/typescript/SKILL.md"
   printf 'managed\n' > "$checkout/agents/.agents/skills/other/SKILL.md"
   printf 'shared agent\n' > "$checkout/agents/.agents/agents/shared.md"
@@ -74,6 +76,16 @@ backups() {
   [ "$(backups | wc -l)" -eq 2 ]
   [ "$(backups | while read -r dir; do cat "$dir/.zshrc"; done | sort)" = $'first\nsecond' ]
   [ -L "$home/.zshrc" ]
+}
+
+@test "backs up a real Rex config and links the managed one" {
+  mkdir -p "$home/.config/rex"
+  printf 'original\n' > "$home/.config/rex/init.lua"
+
+  run_install
+
+  [ "$(cat "$(backups)/.config/rex/init.lua")" = original ]
+  [ "$(cat "$home/.config/rex/init.lua")" = managed ]
 }
 
 @test "rerun keeps machine-specific mise config and makes no new backup" {
