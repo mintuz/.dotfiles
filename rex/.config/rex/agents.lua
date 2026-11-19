@@ -8,22 +8,15 @@
 --
 --     rex do restore_agents
 
-local T = "com.superlogical.terminal"
-local home = os.getenv("HOME")
-local state = (os.getenv("XDG_STATE_HOME") or home .. "/.local/state") .. "/rex-agents"
+local h = require("helpers")
+local short = h.short
+local state = (os.getenv("XDG_STATE_HOME") or h.home .. "/.local/state") .. "/rex-agents"
 local shells = { sh = true, bash = true, zsh = true, fish = true }
 -- The picker row that restores every pane. A pane's id is its block ID, so
 -- the two cannot clash.
 local ALL = "all"
 
-local function fail(message)
-  error("agents: " .. tostring(message), 0)
-end
-
-local function short(path)
-  if path:sub(1, #home + 1) == home .. "/" then return "~" .. path:sub(#home + 1) end
-  return path
-end
+local fail = h.failer("agents")
 
 -- quote makes value one word for a POSIX shell.
 local function quote(value)
@@ -52,7 +45,7 @@ end
 -- is a shell, and only login is above it. A shell that runs inside another
 -- program, for example in an editor, is not idle.
 local function idle(record)
-  local r = rex.block.call(T, "process", { session_id = record.session, block_id = record.block })
+  local r = rex.block.call(h.TERMINAL, "process", { session_id = record.session, block_id = record.block })
   if r == nil or r.foreground == nil then return false end
   if not shells[(tostring(r.foreground.name):gsub("^%-", ""))] then return false end
   for _, ancestor in ipairs(r.ancestors or {}) do
@@ -83,7 +76,7 @@ local function restore(record)
   local words = {}
   for _, word in ipairs(record.argv) do words[#words + 1] = quote(word) end
   local line = "cd -- " .. quote(record.cwd) .. " && " .. table.concat(words, " ") .. "\r"
-  local _, err = rex.block.call(T, "write", { session_id = record.session, block_id = record.block, data = line })
+  local _, err = rex.block.call(h.TERMINAL, "write", { session_id = record.session, block_id = record.block, data = line })
   if err then fail(err) end
 end
 

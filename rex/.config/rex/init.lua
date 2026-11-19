@@ -3,4 +3,5 @@
 
 require("worktrees")
 require("open-in")
+require("lazygit-panel")
 require("agents")

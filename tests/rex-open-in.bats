@@ -23,6 +23,7 @@ rex.exec = function(argv, opts)
   opened = argv
   return { ok = true }
 end
+package.path = "$BATS_TEST_DIRNAME/../rex/.config/rex/?.lua;" .. package.path
 dofile("$BATS_TEST_DIRNAME/../rex/.config/rex/open-in.lua")
 return { result = action({}, {}), opened = opened }
 EOF2

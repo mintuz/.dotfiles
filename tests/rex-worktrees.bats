@@ -32,6 +32,7 @@ rex.call = function(_, args)
   return { session_id = "s" }
 end
 rex.client = { queue = function() end }
+package.path = "$BATS_TEST_DIRNAME/../rex/.config/rex/?.lua;" .. package.path
 dofile("$BATS_TEST_DIRNAME/../rex/.config/rex/worktrees.lua")
 return { result = actions.$1({ session_id = "current" }, {}), calls = calls }
 EOF

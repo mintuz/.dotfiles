@@ -33,6 +33,7 @@ rex.ui = { pick = function(opts)
   for _, item in ipairs(opts.items) do rows[#rows + 1] = item.id end
   return $1, "cancelled"
 end }
+package.path = "$BATS_TEST_DIRNAME/../rex/.config/rex/?.lua;" .. package.path
 dofile("$BATS_TEST_DIRNAME/../rex/.config/rex/agents.lua")
 return { result = action({}, {}), rows = rows, written = written }
 EOF2

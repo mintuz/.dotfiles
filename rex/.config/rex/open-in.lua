@@ -3,24 +3,20 @@
 --
 --     rex do open_in_cursor
 
-local function fail(message)
-  error("open-in: " .. tostring(message), 0)
-end
+local h = require("helpers")
+local fail = h.failer("open-in")
 
--- pane_dir returns the folder of the focused pane. The terminal reports it as
--- a URL, file://<host>/<path>, with %XX escapes.
+-- pane_dir returns the folder of the focused pane.
 local function pane_dir()
-  local r, err = rex.block.call("com.superlogical.terminal", "pwd")
-  if r == nil then fail(err) end
-  local dir = r.pwd and r.pwd:match("^file://[^/]*(/.*)$")
-  if dir == nil then fail("the focused pane has not reported its folder") end
-  return (dir:gsub("%%(%x%x)", function(hex) return string.char(tonumber(hex, 16)) end))
+  local dir, err = h.pane_dir()
+  if dir == nil then fail(err) end
+  return dir
 end
 
 -- project_dir returns the top folder of the repository that holds dir, or dir.
 local function project_dir(dir)
-  local r = rex.exec({ "git", "-C", dir, "rev-parse", "--show-toplevel" })
-  if r ~= nil and r.ok then return (r.stdout:gsub("%s+$", "")) end
+  local top = h.git(dir, "rev-parse", "--show-toplevel")
+  if top ~= nil then return (top:gsub("%s+$", "")) end
   return dir
 end
 
