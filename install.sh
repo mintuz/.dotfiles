@@ -89,14 +89,15 @@ if command -v rtk >/dev/null 2>&1; then
   done
 fi
 
-# Set up peon-ping in each Claude Code profile and select the J.A.R.V.I.S.
-# pack. The Homebrew setup writes its hooks, skills and config.json into the
-# profile's local directory and its packs into ~/.openpeon, so none of them
-# reaches this repo. A failure, such as no network, does not stop the install.
+# Set up peon-ping in each Claude Code profile, select the J.A.R.V.I.S.
+# pack and turn off its desktop pop-ups. The sounds still play. The Homebrew
+# setup writes its hooks, skills and config.json into the profile's local
+# directory and its packs into ~/.openpeon, so none of them reaches this repo. A failure, such as no network, does not stop the install.
 if command -v peon-ping-setup >/dev/null 2>&1; then
   for profile in .claude .workclaude; do
     (export CLAUDE_CONFIG_DIR="$HOME/$profile"
-      peon-ping-setup --packs=jarvis-mk2 && peon packs use jarvis-mk2) ||
+      peon-ping-setup --packs=jarvis-mk2 && peon packs use jarvis-mk2 &&
+      peon notifications off) ||
       echo "peon-ping setup failed for ~/$profile"
   done
 fi
