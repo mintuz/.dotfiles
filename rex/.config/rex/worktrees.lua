@@ -8,7 +8,8 @@
 --     rex do worktree_tab project="$HOME/.dotfiles" branch=my-branch
 --     rex do worktree_remove project="$HOME/.dotfiles" branch=my-branch
 
-local home = os.getenv("HOME")
+local h = require("helpers")
+local home, short, git = h.home, h.short, h.git
 
 -- Folders whose repositories are listed as projects.
 local roots = { home .. "/Workspace" }
@@ -21,27 +22,10 @@ local worktrees_dir = home .. "/.rex/worktrees"
 -- absolute path, so the two cannot clash.
 local NEW = "new"
 
-local function fail(message)
-  error("worktrees: " .. tostring(message), 0)
-end
+local fail = h.failer("worktrees")
 
 local function basename(path)
   return path:match("([^/]+)/*$") or path
-end
-
--- short writes the home folder at the start of path as ~.
-local function short(path)
-  if path:sub(1, #home + 1) == home .. "/" then return "~" .. path:sub(#home + 1) end
-  return path
-end
-
--- git runs git in dir and returns what it printed, or nil and git's message.
--- Arguments go as a list, never through a shell, so no quoting is needed.
-local function git(dir, ...)
-  local r, err = rex.exec({ "git", "-C", dir, ... })
-  if r == nil then return nil, err end
-  if not r.ok then return nil, r.stderr end
-  return r.stdout
 end
 
 -- ask shows a rex.ui prompt ("pick" or "input"). It returns the answer, or nil
@@ -175,13 +159,6 @@ local function label(project, tree)
   return basename(project) .. " · " .. (tree.branch or basename(tree.path))
 end
 
-local function shell(tree)
-  return rex.layout.block{
-    flavor = "com.superlogical.terminal.shell",
-    options = { cwd = tree.path },
-  }
-end
-
 local action_args = { project = "string?", branch = "string?" }
 
 -- A window in the API is a tab in the app.
@@ -198,7 +175,7 @@ rex.action{
     if tree == nil then return end
     local session, err = rex.call("session.create", {
       label = label(project, tree),
-      initial_windows = { { window_label = "shell", layout = shell(tree) } },
+      initial_windows = { { window_label = "shell", layout = h.shell(tree.path) } },
     })
     if session == nil then fail(err) end
     -- Creating a session does not show it. Ask the app to switch to it. With
@@ -223,7 +200,7 @@ rex.action{
     local window, err = rex.call("session.new_window", {
       session_id = ctx.session_id,
       window_label = label(project, tree),
-      layout = shell(tree),
+      layout = h.shell(tree.path),
     })
     if window == nil then fail(err) end
     return tree.path
