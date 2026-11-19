@@ -3,3 +3,4 @@
 
 require("worktrees")
 require("open-in")
+require("agents")
