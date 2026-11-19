@@ -24,4 +24,4 @@ rex.action{
   end,
 }
 
-rex.bind("ctrl+cmd+g", "lazygit_float")
+rex.bind("alt+cmd+g", "lazygit_float")
