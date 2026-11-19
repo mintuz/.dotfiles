@@ -44,7 +44,9 @@ mkdir -p "$HOME/.config/rex"
 # and agents that a harness or another tool adds stay out of this repo.
 # ~/.workclaude must be real too: Claude Code writes the work profile's
 # login, history and settings there, and none of it may land in this repo.
-mkdir -p "$HOME/.claude/agents" "$HOME/.workclaude/agents" "$HOME/.omp/agent/agents"
+# ~/.omp/agent/extensions stays real for the same reason as the agent folders.
+mkdir -p "$HOME/.claude/agents" "$HOME/.workclaude/agents" "$HOME/.omp/agent/agents" \
+  "$HOME/.omp/agent/extensions"
 
 # Back up a real agent file before stow replaces it with our link.
 while IFS= read -r -d '' source; do
@@ -85,4 +87,28 @@ if command -v rtk >/dev/null 2>&1; then
   for profile in .claude .workclaude; do
     CLAUDE_CONFIG_DIR="$HOME/$profile" rtk init --global --auto-patch
   done
+fi
+
+# Add a Stop hook that copies the agent's terminal title to its Rex tab. The
+# hook goes into each local profile file, so none of them reaches this repo.
+# omp runs the same script from omp/.omp/agent/extensions/rex-tab-title.ts.
+# A file that already has the hook stays unchanged.
+tab_title_hook="$HOME/.config/rex/agent-tab-title.sh"
+add_tab_title_hook() {
+  [ -f "$1" ] || printf '{}\n' > "$1"
+  if ! jq -e --arg cmd "$tab_title_hook" 'any(.hooks.Stop[]?.hooks[]?; .command == $cmd)' "$1" >/dev/null; then
+    updated="$(jq --arg cmd "$tab_title_hook" \
+      '.hooks.Stop += [{hooks: [{type: "command", command: $cmd, timeout: 5}]}]' "$1")"
+    # Write in place to keep the file's permissions.
+    printf '%s\n' "$updated" > "$1"
+  fi
+}
+if command -v jq >/dev/null 2>&1; then
+  add_tab_title_hook "$HOME/.claude/settings.json"
+  add_tab_title_hook "$HOME/.workclaude/settings.json"
+  if [ -d "$HOME/.codex" ]; then
+    add_tab_title_hook "$HOME/.codex/hooks.json"
+  fi
+else
+  echo "jq is not installed, so the Rex tab title hook was not added"
 fi
