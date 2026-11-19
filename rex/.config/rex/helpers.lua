@@ -3,6 +3,8 @@
 local M = {}
 
 M.home = os.getenv("HOME")
+-- The rex command. The Rex server's PATH does not hold it.
+M.REX = M.home .. "/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex"
 -- The block type of a terminal, and the flavor of a shell pane.
 M.TERMINAL = "com.superlogical.terminal"
 M.SHELL = "com.superlogical.terminal.shell"
@@ -29,14 +31,35 @@ function M.git(dir, ...)
   return r.stdout
 end
 
--- pane_dir returns the folder of the focused pane, or nil and a message. The
--- terminal reports it as a URL, file://<host>/<path>, with %XX escapes.
-function M.pane_dir()
-  local r, err = rex.block.call(M.TERMINAL, "pwd")
+-- url_path returns the path of a terminal's folder URL, file://<host>/<path>
+-- with %XX escapes, or nil.
+function M.url_path(url)
+  local dir = url and url:match("^file://[^/]*(/.*)$")
+  return dir and (dir:gsub("%%(%x%x)", function(hex) return string.char(tonumber(hex, 16)) end))
+end
+
+-- pane_dir returns the folder of a pane, or nil and a message. target is
+-- { block_id = ..., session_id = ... }; without it, the pane is the focused one.
+function M.pane_dir(target)
+  local r, err = rex.block.call(M.TERMINAL, "pwd", target)
   if r == nil then return nil, err end
-  local dir = r.pwd and r.pwd:match("^file://[^/]*(/.*)$")
+  local dir = M.url_path(r.pwd)
   if dir == nil then return nil, "the focused pane has not reported its folder" end
-  return (dir:gsub("%%(%x%x)", function(hex) return string.char(tonumber(hex, 16)) end))
+  return dir
+end
+
+-- New worktrees go in <worktrees_dir>/<project>/<branch>.
+M.worktrees_dir = M.home .. "/.rex/worktrees"
+-- worktree-watch.lua does not ask about a tab whose id is a file in this
+-- folder, because the action that closed the tab already asked.
+M.closed_dir = M.home .. "/.local/state/rex-worktrees"
+
+-- worktree_of returns the worktree in worktrees_dir that holds dir, or nil.
+function M.worktree_of(dir)
+  local prefix = M.worktrees_dir .. "/"
+  if dir == nil or dir:sub(1, #prefix) ~= prefix then return nil end
+  local tree = (dir:sub(#prefix + 1) .. "/"):match("^([^/]+/[^/]+)/")
+  return tree and prefix .. tree
 end
 
 -- shell returns the layout of a shell pane that starts in cwd. When command

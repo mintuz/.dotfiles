@@ -15,8 +15,7 @@ local home, short, git = h.home, h.short, h.git
 local roots = { home .. "/Workspace" }
 -- Projects that are in none of the roots.
 local projects = { home .. "/.dotfiles" }
--- New worktrees go in <worktrees_dir>/<project>/<branch>.
-local worktrees_dir = home .. "/.rex/worktrees"
+local worktrees_dir = h.worktrees_dir
 
 -- The id of the picker row that is not a folder. A folder's id is its
 -- absolute path, so the two cannot clash.
@@ -159,6 +158,26 @@ local function label(project, tree)
   return basename(project) .. " · " .. (tree.branch or basename(tree.path))
 end
 
+-- remove_choice asks what to do with tree. It returns "remove", "keep", or
+-- nil when the person cancels.
+local function remove_choice(tree, title, remove_title, keep_title)
+  return ask("pick", {
+    title = title,
+    placeholder = "Remove the worktree? Its branch stays.",
+    items = {
+      { id = "remove", title = remove_title, subtitle = short(tree), icon = "trash" },
+      { id = "keep", title = keep_title, icon = "xmark" },
+    },
+  })
+end
+
+local function remove_tree(tree)
+  -- Without --force, git refuses a worktree that has changed or untracked
+  -- files, so this loses no work.
+  local out, err = git(tree, "worktree", "remove", tree)
+  if out == nil then fail(err) end
+end
+
 local action_args = { project = "string?", branch = "string?" }
 
 -- A window in the API is a tab in the app.
@@ -233,13 +252,65 @@ rex.action{
       if choice == nil then return end
       tree = find(trees, "path", choice)
     end
-    -- Without --force, git refuses a worktree that has changed or untracked
-    -- files, so this loses no work.
-    local out, err = git(project, "worktree", "remove", tree.path)
-    if out == nil then fail(err) end
+    remove_tree(tree.path)
     return tree.path
+  end,
+}
+
+rex.action{
+  name = "worktree_close_tab",
+  title = "Close Tab…",
+  description = "Close the current tab. When the focused pane is in a worktree, first ask whether to remove the worktree",
+  category = "Worktrees",
+  keywords = "close tab window remove delete worktree",
+  run = function(ctx, args)
+    if ctx.session_id == nil then fail("no current session to close a tab in") end
+    local view, err = rex.call("session.view", { session_id = ctx.session_id })
+    if view == nil then fail(err) end
+    local window_id = view.active_window_id
+    for _, window in ipairs(view.windows) do
+      for _, layer in ipairs(window.layers) do
+        for _, block in ipairs(layer.blocks) do
+          if block.block_id == ctx.block_id then window_id = window.window_id end
+        end
+      end
+    end
+    local tree = h.worktree_of(h.pane_dir())
+    if tree then
+      local choice = remove_choice(tree, "Close tab", "Close tab and remove worktree", "Close tab, keep worktree")
+      if choice == nil then return end
+      -- The tab stays open when git refuses to remove the worktree.
+      if choice == "remove" then remove_tree(tree) end
+      -- Tell worktree-watch.lua that it need not ask about this tab.
+      rex.exec({ "mkdir", "-p", h.closed_dir })
+      local file = io.open(h.closed_dir .. "/" .. window_id, "w")
+      if file then file:close() end
+    end
+    local _, close_err = rex.call("session.close_window", { session_id = ctx.session_id, window_id = window_id })
+    if close_err then fail(close_err) end
+    return tree
+  end,
+}
+
+-- worktree-watch.lua runs this action after the last tab with a pane in a
+-- worktree closes.
+rex.action{
+  name = "worktree_closed",
+  title = "Remove Worktree of Closed Tab…",
+  description = "Ask whether to remove a worktree that no open tab is in",
+  category = "Worktrees",
+  keywords = "close tab remove delete worktree",
+  args = { path = "string" },
+  run = function(ctx, args)
+    -- Nothing to ask when the worktree is gone already.
+    if git(args.path, "rev-parse", "--git-dir") == nil then return end
+    if remove_choice(args.path, "Tab closed", "Remove worktree", "Keep worktree") ~= "remove" then return end
+    remove_tree(args.path)
+    return args.path
   end,
 }
 
 rex.bind("alt+cmd+n", "worktree_session")
 rex.bind("alt+cmd+t", "worktree_tab")
+-- Replaces Rex's Close Tab shortcut.
+rex.bind("alt+cmd+w", "worktree_close_tab")
