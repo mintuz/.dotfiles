@@ -159,3 +159,24 @@ backups() {
   [ "$(cat "$BATS_TEST_TMPDIR/rtk.log")" = "$home/.claude init --global --auto-patch
 $home/.workclaude init --global --auto-patch" ]
 }
+
+@test "adds the Rex tab title hook once and keeps other settings" {
+  mkdir -p "$home/.claude" "$home/.codex"
+  printf '{"model": "opus", "hooks": {"Stop": [{"hooks": [{"type": "command", "command": "other"}]}]}}\n' > "$home/.claude/settings.json"
+  hook="$home/.config/rex/agent-tab-title.sh"
+
+  run_install
+  run_install
+
+  for file in .claude/settings.json .workclaude/settings.json .codex/hooks.json; do
+    [ "$(jq --arg cmd "$hook" '[.hooks.Stop[].hooks[] | select(.command == $cmd)] | length' "$home/$file")" -eq 1 ]
+  done
+  [ "$(jq -r '.model' "$home/.claude/settings.json")" = opus ]
+  [ "$(jq -r '.hooks.Stop[0].hooks[0].command' "$home/.claude/settings.json")" = other ]
+}
+
+@test "adds no Codex hook file when Codex is not set up" {
+  run_install
+
+  [ ! -e "$home/.codex" ]
+}
