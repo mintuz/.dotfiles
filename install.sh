@@ -89,26 +89,33 @@ if command -v rtk >/dev/null 2>&1; then
   done
 fi
 
-# Add a Stop hook that copies the agent's terminal title to its Rex tab. The
-# hook goes into each local profile file, so none of them reaches this repo.
-# omp runs the same script from omp/.omp/agent/extensions/rex-tab-title.ts.
-# A file that already has the hook stays unchanged.
-tab_title_hook="$HOME/.config/rex/agent-tab-title.sh"
-add_tab_title_hook() {
+# Add the Rex hooks to each local profile file, so none of them reaches this
+# repo. The Stop hook copies the agent's terminal title to its Rex tab. The
+# session hooks record each agent pane for the Rex action Restore Agents….
+# Codex has no SessionEnd hook. omp runs the same scripts from
+# omp/.omp/agent/extensions/rex-tab-title.ts.
+# A file that already has a hook keeps it unchanged.
+rex_dir="$HOME/.config/rex"
+# add_hook FILE EVENT COMMAND
+add_hook() {
   [ -f "$1" ] || printf '{}\n' > "$1"
-  if ! jq -e --arg cmd "$tab_title_hook" 'any(.hooks.Stop[]?.hooks[]?; .command == $cmd)' "$1" >/dev/null; then
-    updated="$(jq --arg cmd "$tab_title_hook" \
-      '.hooks.Stop += [{hooks: [{type: "command", command: $cmd, timeout: 5}]}]' "$1")"
+  if ! jq -e --arg event "$2" --arg cmd "$3" 'any(.hooks[$event][]?.hooks[]?; .command == $cmd)' "$1" >/dev/null; then
+    updated="$(jq --arg event "$2" --arg cmd "$3" \
+      '.hooks[$event] += [{hooks: [{type: "command", command: $cmd, timeout: 5}]}]' "$1")"
     # Write in place to keep the file's permissions.
     printf '%s\n' "$updated" > "$1"
   fi
 }
 if command -v jq >/dev/null 2>&1; then
-  add_tab_title_hook "$HOME/.claude/settings.json"
-  add_tab_title_hook "$HOME/.workclaude/settings.json"
+  for settings in "$HOME/.claude/settings.json" "$HOME/.workclaude/settings.json"; do
+    add_hook "$settings" Stop "$rex_dir/agent-tab-title.sh"
+    add_hook "$settings" SessionStart "$rex_dir/agent-session.sh claude"
+    add_hook "$settings" SessionEnd "$rex_dir/agent-session.sh claude"
+  done
   if [ -d "$HOME/.codex" ]; then
-    add_tab_title_hook "$HOME/.codex/hooks.json"
+    add_hook "$HOME/.codex/hooks.json" Stop "$rex_dir/agent-tab-title.sh"
+    add_hook "$HOME/.codex/hooks.json" SessionStart "$rex_dir/agent-session.sh codex"
   fi
 else
-  echo "jq is not installed, so the Rex tab title hook was not added"
+  echo "jq is not installed, so the Rex hooks were not added"
 fi

@@ -175,6 +175,22 @@ $home/.workclaude init --global --auto-patch" ]
   [ "$(jq -r '.hooks.Stop[0].hooks[0].command' "$home/.claude/settings.json")" = other ]
 }
 
+@test "adds the Rex session hooks once" {
+  mkdir -p "$home/.codex"
+  session="$home/.config/rex/agent-session.sh"
+
+  run_install
+  run_install
+
+  count() { jq --arg event "$2" --arg cmd "$3" '[.hooks[$event][]?.hooks[] | select(.command == $cmd)] | length' "$home/$1"; }
+  for file in .claude/settings.json .workclaude/settings.json; do
+    [ "$(count "$file" SessionStart "$session claude")" -eq 1 ]
+    [ "$(count "$file" SessionEnd "$session claude")" -eq 1 ]
+  done
+  [ "$(count .codex/hooks.json SessionStart "$session codex")" -eq 1 ]
+  [ "$(count .codex/hooks.json SessionEnd "$session codex")" -eq 0 ]
+}
+
 @test "adds no Codex hook file when Codex is not set up" {
   run_install
 
