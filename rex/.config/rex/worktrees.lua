@@ -7,6 +7,7 @@
 --     rex do worktree_session project="$HOME/.dotfiles" branch=my-branch
 --     rex do worktree_tab project="$HOME/.dotfiles" branch=my-branch
 --     rex do worktree_remove project="$HOME/.dotfiles" branch=my-branch
+--     rex do worktree_prune project="$HOME/.dotfiles" all=true
 
 local h = require("helpers")
 local home, short, git = h.home, h.short, h.git
@@ -17,14 +18,28 @@ local roots = { home .. "/Workspace" }
 local projects = { home .. "/.dotfiles" }
 local worktrees_dir = h.worktrees_dir
 
--- The id of the picker row that is not a folder. A folder's id is its
--- absolute path, so the two cannot clash.
-local NEW = "new"
+-- The ids of the picker rows that are not folders. A folder's id is its
+-- absolute path, so they cannot clash.
+local NEW, ALL = "new", "all"
 
 local fail = h.failer("worktrees")
 
 local function basename(path)
   return path:match("([^/]+)/*$") or path
+end
+
+-- Lua 5.1 does not seed math.random itself.
+math.randomseed(os.time())
+
+-- random_branch returns "<project>-<6 random letters or digits>", such as
+-- dotfiles-k3x9qa. A leading dot of the project's folder is left out.
+local function random_branch(project)
+  local chars, out = "abcdefghijklmnopqrstuvwxyz0123456789", {}
+  for i = 1, 6 do
+    local n = math.random(#chars)
+    out[i] = chars:sub(n, n)
+  end
+  return basename(project):gsub("^%.", "") .. "-" .. table.concat(out)
 end
 
 -- ask shows a rex.ui prompt ("pick" or "input"). It returns the answer, or nil
@@ -129,15 +144,18 @@ local function choose_tree(args, title)
   if branch == nil then
     local items = tree_items(trees)
     items[1].icon = "folder"
-    items[#items + 1] = { id = NEW, title = "New worktree…", icon = "plus" }
+    -- First, so that Return chooses it.
+    table.insert(items, 1, { id = NEW, title = "New worktree…", icon = "plus" })
     local choice = ask("pick", {
       title = basename(project), placeholder = "Choose where to work", items = items,
     })
     if choice == nil then return end
     if choice == NEW then
+      -- Return keeps the random name. Edit the text to use another one.
       branch = ask("input", {
         title = "New worktree in " .. basename(project),
         placeholder = "Branch name",
+        value = random_branch(project),
         confirm = "Create worktree",
       })
       if branch == nil then return end
@@ -163,7 +181,7 @@ end
 local function remove_choice(tree, title, remove_title, keep_title)
   return ask("pick", {
     title = title,
-    placeholder = "Remove the worktree? Its branch stays.",
+    placeholder = "Remove the worktree? Its branch stays unless it is merged.",
     items = {
       { id = "remove", title = remove_title, subtitle = short(tree), icon = "trash" },
       { id = "keep", title = keep_title, icon = "xmark" },
@@ -171,11 +189,45 @@ local function remove_choice(tree, title, remove_title, keep_title)
   })
 end
 
-local function remove_tree(tree)
+-- try_remove removes the worktree at tree, and then its branch when the
+-- branch is merged. It returns nil and git's message when git refuses.
+local function try_remove(tree)
+  local branch = git(tree, "symbolic-ref", "--short", "-q", "HEAD")
+  local common = git(tree, "rev-parse", "--path-format=absolute", "--git-common-dir")
   -- Without --force, git refuses a worktree that has changed or untracked
   -- files, so this loses no work.
   local out, err = git(tree, "worktree", "remove", tree)
-  if out == nil then fail(err) end
+  if out == nil then return nil, err end
+  -- -d refuses a branch that is not merged into HEAD of the main checkout,
+  -- so this loses no commits. A random name made by New worktree… is
+  -- otherwise left behind.
+  if branch and common then
+    git(common:match("[^\n]+"), "branch", "-d", branch:match("%S+"))
+  end
+  return true
+end
+
+-- remove_many removes each worktree in paths that git allows, and returns
+-- the removed ones. It then fails with git's message for each of the others.
+local function remove_many(paths)
+  local removed, refused = {}, {}
+  for _, path in ipairs(paths) do
+    local ok, err = try_remove(path)
+    if ok then
+      removed[#removed + 1] = path
+    else
+      refused[#refused + 1] = short(path) .. ": " .. tostring(err):match("[^\n]*")
+    end
+  end
+  if #refused > 0 then
+    fail("removed " .. #removed .. ", kept " .. #refused .. "\n" .. table.concat(refused, "\n"))
+  end
+  return removed
+end
+
+local function remove_tree(tree)
+  local ok, err = try_remove(tree)
+  if not ok then fail(err) end
 end
 
 local action_args = { project = "string?", branch = "string?" }
@@ -239,21 +291,78 @@ rex.action{
     local trees = list_worktrees(project)
     -- Git cannot remove the main checkout.
     table.remove(trees, 1)
-    local tree
     if args.branch then
-      tree = find(trees, "branch", args.branch)
+      local tree = find(trees, "branch", args.branch)
       if tree == nil then fail("no worktree for branch " .. args.branch) end
-    else
-      local choice = ask("pick", {
-        title = "Remove worktree of " .. basename(project),
-        placeholder = "Choose a worktree to remove (its branch stays)",
-        items = tree_items(trees),
-      })
-      if choice == nil then return end
-      tree = find(trees, "path", choice)
+      remove_tree(tree.path)
+      return tree.path
     end
-    remove_tree(tree.path)
-    return tree.path
+    if #trees == 0 then fail(basename(project) .. " has no worktrees") end
+    local items = tree_items(trees)
+    for _, item in ipairs(items) do
+      -- git refuses to remove these, so show them before the person ticks them.
+      local status = git(item.id, "status", "--porcelain")
+      if status == nil or status ~= "" then item.detail = "changed" end
+    end
+    table.insert(items, 1, { id = ALL, title = "All worktrees", icon = "star" })
+    local chosen = ask("pick", {
+      title = "Remove worktrees of " .. basename(project),
+      placeholder = "Tick worktrees to remove (merged branches go too)",
+      items = items,
+      multiple = true,
+      confirm = "Remove",
+    })
+    if chosen == nil then return end
+    if chosen[1] == ALL then
+      chosen = {}
+      for _, tree in ipairs(trees) do chosen[#chosen + 1] = tree.path end
+    end
+    return remove_many(chosen)
+  end,
+}
+
+rex.action{
+  name = "worktree_prune",
+  title = "Remove Merged Worktrees…",
+  description = "Choose a project, and remove its worktrees whose branches are merged and that have no changed files",
+  category = "Worktrees",
+  keywords = "project branch repository delete prune clean merged",
+  args = { project = "string?", all = "boolean?" },
+  run = function(ctx, args)
+    local project = choose_project(args, "Remove merged worktrees")
+    if project == nil then return end
+    -- Branches merged into HEAD of the main checkout: the ones that
+    -- `git branch -d` deletes.
+    local out, err = git(project, "branch", "--merged", "HEAD", "--format=%(refname:short)")
+    if out == nil then fail(err) end
+    local merged = {}
+    for branch in out:gmatch("[^\n]+") do merged[branch] = true end
+    local trees = list_worktrees(project)
+    table.remove(trees, 1)
+    local candidates = {}
+    for _, tree in ipairs(trees) do
+      if tree.branch and merged[tree.branch] and git(tree.path, "status", "--porcelain") == "" then
+        candidates[#candidates + 1] = tree
+      end
+    end
+    if #candidates == 0 then fail(basename(project) .. " has no merged worktrees without changes") end
+    local chosen = {}
+    if args.all then
+      for _, tree in ipairs(candidates) do chosen[#chosen + 1] = tree.path end
+    else
+      local items = tree_items(candidates)
+      -- All start ticked. Untick the ones to keep.
+      for _, item in ipairs(items) do item.selected = true end
+      chosen = ask("pick", {
+        title = "Remove merged worktrees of " .. basename(project),
+        placeholder = "Untick worktrees to keep",
+        items = items,
+        multiple = true,
+        confirm = "Remove",
+      })
+      if chosen == nil then return end
+    end
+    return remove_many(chosen)
   end,
 }
 
