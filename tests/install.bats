@@ -28,6 +28,11 @@ setup() {
   mkdir -p "$BATS_TEST_TMPDIR/bin"
   printf '#!/bin/sh\necho "$CLAUDE_CONFIG_DIR $*" >> "%s"\n' "$BATS_TEST_TMPDIR/rtk.log" > "$BATS_TEST_TMPDIR/bin/rtk"
   chmod +x "$BATS_TEST_TMPDIR/bin/rtk"
+  # Fake peon-ping commands record the same way.
+  for cmd in peon-ping-setup peon; do
+    printf '#!/bin/sh\necho "$CLAUDE_CONFIG_DIR %s $*" >> "%s"\n' "$cmd" "$BATS_TEST_TMPDIR/peon.log" > "$BATS_TEST_TMPDIR/bin/$cmd"
+    chmod +x "$BATS_TEST_TMPDIR/bin/$cmd"
+  done
   git -C "$checkout" init -q
   git -C "$checkout" add agents claude workclaude omp
 }
@@ -158,6 +163,25 @@ backups() {
 
   [ "$(cat "$BATS_TEST_TMPDIR/rtk.log")" = "$home/.claude init --global --auto-patch
 $home/.workclaude init --global --auto-patch" ]
+}
+
+@test "sets up peon-ping with the J.A.R.V.I.S. pack in both Claude Code profiles" {
+  run_install
+
+  [ "$(cat "$BATS_TEST_TMPDIR/peon.log")" = "$home/.claude peon-ping-setup --packs=jarvis-mk2
+$home/.claude peon packs use jarvis-mk2
+$home/.workclaude peon-ping-setup --packs=jarvis-mk2
+$home/.workclaude peon packs use jarvis-mk2" ]
+}
+
+@test "continues the install when peon-ping setup fails" {
+  printf '#!/bin/sh\nexit 1\n' > "$BATS_TEST_TMPDIR/bin/peon-ping-setup"
+
+  run run_install
+
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"peon-ping setup failed for ~/.claude"* ]]
+  [ ! -e "$BATS_TEST_TMPDIR/peon.log" ]
 }
 
 @test "adds the Rex tab title hook once and keeps other settings" {
