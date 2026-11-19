@@ -165,13 +165,15 @@ backups() {
 $home/.workclaude init --global --auto-patch" ]
 }
 
-@test "sets up peon-ping with the J.A.R.V.I.S. pack in both Claude Code profiles" {
+@test "sets up peon-ping with the J.A.R.V.I.S. pack and no pop-ups in both Claude Code profiles" {
   run_install
 
   [ "$(cat "$BATS_TEST_TMPDIR/peon.log")" = "$home/.claude peon-ping-setup --packs=jarvis-mk2
 $home/.claude peon packs use jarvis-mk2
+$home/.claude peon notifications off
 $home/.workclaude peon-ping-setup --packs=jarvis-mk2
-$home/.workclaude peon packs use jarvis-mk2" ]
+$home/.workclaude peon packs use jarvis-mk2
+$home/.workclaude peon notifications off" ]
 }
 
 @test "continues the install when peon-ping setup fails" {
