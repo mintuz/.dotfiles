@@ -85,7 +85,7 @@ rex.action{
   title = "Restore Agents…",
   description = "Resume the agent conversations of panes that a Rex server restart left as shells",
   category = "Agents",
-  keywords = "resume revive recover restart claude codex omp",
+  keywords = "resume revive recover restart claude codex omp agy antigravity",
   run = function(ctx, args)
     local records = waiting()
     if #records == 0 then return "no agent panes to restore" end

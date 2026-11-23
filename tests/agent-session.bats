@@ -29,13 +29,19 @@ start='{"hook_event_name":"SessionStart","session_id":"id1","cwd":"/work/my app"
   [ "$(jq -c .argv "$record")" = '["env","CLAUDE_CONFIG_DIR=/home/me/.workclaude","claude","--resume","id1"]' ]
 }
 
-@test "records the resume commands of Codex and omp" {
+@test "records the resume commands of Codex, omp and Antigravity" {
   unset CODEX_HOME
   run_hook codex "$start"
   [ "$(jq -c .argv "$record")" = '["codex","resume","id1"]' ]
 
   run_hook omp "$start"
   [ "$(jq -c .argv "$record")" = '["omp","--resume=id1"]' ]
+
+  run_hook agy '{"hookEventName":"SessionStart","conversationId":"conv-1","cwd":"/work/my app"}'
+  [ "$(jq -c . "$record")" = '{"agent":"agy","session":"session:s1","block":"block:b1","cwd":"/work/my app","argv":["agy","--conversation","conv-1"]}' ]
+
+  run_hook agy '{"hookEventName":"SessionStart","conversationId":"conv-2","workspacePaths":["/work/fallback"]}'
+  [ "$(jq -c . "$record")" = '{"agent":"agy","session":"session:s1","block":"block:b1","cwd":"/work/fallback","argv":["agy","--conversation","conv-2"]}' ]
 }
 
 @test "removes the record only when the person ends the session" {
