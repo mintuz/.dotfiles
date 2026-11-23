@@ -20,7 +20,9 @@ back_up() {
 
 # Back up a real file before stow replaces it with a symlink
 # (skip if it's already a stow-managed symlink so re-runs stay clean).
-for relative in .zshrc .omp/agent/config.yml .config/rex/init.lua; do
+for relative in .zshrc .omp/agent/config.yml .config/rex/init.lua \
+  .gemini/config/hooks.json .gemini/config/peon-hook.sh \
+  .gemini/config/skills.json .gemini/config/AGENTS.md; do
   if [ -f "$HOME/$relative" ] && [ ! -L "$HOME/$relative" ]; then
     back_up "$relative"
   fi
@@ -39,6 +41,11 @@ mkdir -p "$HOME/.config/mise/conf.d"
 # backup step of the next run would see the repo's own init.lua as a real file
 # and move it out of the repo.
 mkdir -p "$HOME/.config/rex"
+
+# Keep ~/.gemini/config real so stow links only our managed Antigravity hook
+# files, and Antigravity's settings, MCP config and installed plugins stay out
+# of this repo.
+mkdir -p "$HOME/.gemini/config"
 
 # Keep the harness agent folders real so stow links each managed agent file,
 # and agents that a harness or another tool adds stay out of this repo.
@@ -78,15 +85,17 @@ fi
 # --ignore keeps macOS .DS_Store files and omp's runtime config.yml.lock from
 # causing stow conflicts. omp writes the lock beside the real config.yml,
 # which is in this repo.
-stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude workclaude omp mise rex
+stow --target="$HOME" --restow --ignore='\.DS_Store' --ignore='config\.yml\.lock' zsh agents pnpm claude workclaude omp mise rex antigravity
 
-# Set up RTK in each Claude Code profile. rtk writes RTK.md and its hook into
-# the profile's local directory, so neither reaches this repo. The shared
-# CLAUDE.md already imports @RTK.md.
+# Set up RTK in each Claude Code profile and in Antigravity. rtk writes RTK.md
+# and its hook into each local Claude profile directory, and its Antigravity
+# plugin into ~/.gemini/config/plugins/rtk, so none of it reaches this repo.
+# The shared CLAUDE.md already imports @RTK.md.
 if command -v rtk >/dev/null 2>&1; then
   for profile in .claude .workclaude; do
     CLAUDE_CONFIG_DIR="$HOME/$profile" rtk init --global --auto-patch
   done
+  rtk init --global --agent antigravity --auto-patch
 fi
 
 # Set up peon-ping in each Claude Code profile, select the J.A.R.V.I.S.
@@ -129,6 +138,113 @@ if command -v jq >/dev/null 2>&1; then
     add_hook "$HOME/.codex/hooks.json" Stop "$rex_dir/agent-tab-title.sh"
     add_hook "$HOME/.codex/hooks.json" SessionStart "$rex_dir/agent-session.sh codex"
   fi
+
+  # Merge managed Antigravity MCP servers into ~/.gemini/config/mcp_config.json
+  # while keeping any extra local or work servers intact. Always register the
+  # portable remote HTTP servers; register talat and 2do only when their local
+  # binaries exist on this machine.
+  mcp_file="$HOME/.gemini/config/mcp_config.json"
+  [ -f "$mcp_file" ] || printf '{}\n' > "$mcp_file"
+  talat_bin="${TALAT_MCP_BIN:-/Applications/talat.app/Contents/MacOS/talat_mcp}"
+  twodo_bin="${TWODO_MCP_BIN:-$HOME/Library/Application Support/Claude/Claude Extensions/local.mcpb.beehive-innovations.2do/dist/TwoDoMCPBridge}"
+  has_talat=false
+  [ -x "$talat_bin" ] && has_talat=true
+  has_twodo=false
+  [ -x "$twodo_bin" ] && has_twodo=true
+  talat_py="import json, signal, subprocess, sys
+proc = None
+def cleanup(sig, _):
+    if proc and proc.poll() is None:
+        proc.terminate()
+    sys.exit(0)
+signal.signal(signal.SIGTERM, cleanup)
+signal.signal(signal.SIGINT, cleanup)
+while True:
+    line = sys.stdin.buffer.readline()
+    if not line:
+        break
+    if proc is None:
+        try:
+            msg = json.loads(line)
+        except Exception:
+            msg = {}
+        if isinstance(msg, dict) and msg.get('method') == 'server/discover':
+            resp = {'jsonrpc': '2.0', 'id': msg.get('id'), 'error': {'code': -32601, 'message': 'Method not found'}}
+            sys.stdout.buffer.write((json.dumps(resp) + chr(10)).encode())
+            sys.stdout.buffer.flush()
+            continue
+        proc = subprocess.Popen(['$talat_bin'], stdin=subprocess.PIPE)
+    try:
+        proc.stdin.write(line)
+        proc.stdin.flush()
+    except BrokenPipeError:
+        break
+if proc:
+    proc.stdin.close()
+    sys.exit(proc.wait())"
+  updated_mcp="$(jq \
+    --argjson has_talat "$has_talat" \
+    --arg talat_py "$talat_py" \
+    --argjson has_twodo "$has_twodo" \
+    --arg twodo_bin "$twodo_bin" \
+    '
+      .mcpServers = (
+        (.mcpServers // {}) + {
+          notion: {url: "https://mcp.notion.com/mcp"},
+          mobbin: {url: "https://api.mobbin.com/mcp"},
+          revenuecat: {url: "https://mcp.revenuecat.ai/mcp"},
+          tally: {url: "https://api.tally.so/mcp"}
+        }
+        + (if $has_talat then {talat: {command: "/usr/bin/python3", args: ["-c", $talat_py]}} else {} end)
+        + (if $has_twodo then {"2do": {command: $twodo_bin}} else {} end)
+      )
+    ' "$mcp_file")"
+  printf '%s\n' "$updated_mcp" > "$mcp_file"
 else
-  echo "jq is not installed, so the Rex hooks were not added"
+  echo "jq is not installed, so the Rex hooks and Antigravity MCP config were not updated"
+fi
+
+# Sync Antigravity plugins from mintuz/skills when agy is on PATH. Prefer a
+# fresh shallow clone and fall back to Claude Code's local marketplace cache
+# when offline. A failure, such as no network on a new machine, does not stop
+# the install.
+if command -v agy >/dev/null 2>&1; then
+  sync_antigravity_plugins() {
+    local repo="${MINTUZ_SKILLS_REPO:-https://github.com/mintuz/skills.git}"
+    local cache="$HOME/.claude/plugins/marketplaces/mintuz-skills"
+    local tmp_dir=""
+    local src_dir=""
+
+    tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/mintuz-skills.XXXXXX")" || return 1
+    if git clone --quiet --depth 1 "$repo" "$tmp_dir" 2>/dev/null; then
+      src_dir="$tmp_dir"
+    elif [ -d "$cache" ]; then
+      src_dir="$cache"
+    else
+      rm -rf "$tmp_dir"
+      return 1
+    fi
+
+    local status=0
+    local sources=""
+    if command -v jq >/dev/null 2>&1 && [ -f "$src_dir/.claude-plugin/marketplace.json" ]; then
+      sources="$(jq -r '.plugins[].source // empty' "$src_dir/.claude-plugin/marketplace.json")"
+    fi
+    if [ -n "$sources" ]; then
+      while IFS= read -r rel; do
+        [ -n "$rel" ] || continue
+        agy plugin install "$src_dir/$rel" || status=1
+      done <<EOF
+$sources
+EOF
+    else
+      for plugin_dir in "$src_dir"/src/*; do
+        [ -d "$plugin_dir" ] || continue
+        agy plugin install "$plugin_dir" || status=1
+      done
+    fi
+    rm -rf "$tmp_dir"
+    return "$status"
+  }
+  sync_antigravity_plugins || echo "Antigravity plugin sync from mintuz/skills failed"
 fi

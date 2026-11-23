@@ -10,6 +10,7 @@ setup() {
     "$checkout/omp/.omp/agent/agents" \
     "$checkout/mise/.config/mise/conf.d" \
     "$checkout/rex/.config/rex" \
+    "$checkout/antigravity/.gemini/config" \
     "$checkout/agents/.agents/skills"/{typescript,other} \
     "$checkout/agents/.agents/agents"
   cp "$BATS_TEST_DIRNAME/../install.sh" "$checkout/install.sh"
@@ -17,6 +18,10 @@ setup() {
   printf 'managed\n' > "$checkout/omp/.omp/agent/config.yml"
   printf 'managed\n' > "$checkout/mise/.config/mise/conf.d/dotfiles.toml"
   printf 'managed\n' > "$checkout/rex/.config/rex/init.lua"
+  printf '{}\n' > "$checkout/antigravity/.gemini/config/hooks.json"
+  printf '#!/bin/sh\n' > "$checkout/antigravity/.gemini/config/peon-hook.sh"
+  printf '{"entries":[{"path":"~/.agents/skills"}]}\n' > "$checkout/antigravity/.gemini/config/skills.json"
+  printf 'managed rules\n' > "$checkout/antigravity/.gemini/config/AGENTS.md"
   printf 'managed\n' > "$checkout/agents/.agents/skills/typescript/SKILL.md"
   printf 'managed\n' > "$checkout/agents/.agents/skills/other/SKILL.md"
   printf 'shared agent\n' > "$checkout/agents/.agents/agents/shared.md"
@@ -33,12 +38,34 @@ setup() {
     printf '#!/bin/sh\necho "$CLAUDE_CONFIG_DIR %s $*" >> "%s"\n' "$cmd" "$BATS_TEST_TMPDIR/peon.log" > "$BATS_TEST_TMPDIR/bin/$cmd"
     chmod +x "$BATS_TEST_TMPDIR/bin/$cmd"
   done
+  # Fake agy records installed plugin names (from the last path segment).
+  cat > "$BATS_TEST_TMPDIR/bin/agy" <<EOF
+#!/bin/sh
+echo "\$1 \$2 \$(basename "\$3")" >> "$BATS_TEST_TMPDIR/agy.log"
+EOF
+  chmod +x "$BATS_TEST_TMPDIR/bin/agy"
+  # Local git repo mirroring mintuz/skills so tests need no network.
+  skills_repo="$BATS_TEST_TMPDIR/mintuz-skills"
+  mkdir -p "$skills_repo/.claude-plugin" "$skills_repo/src/core" "$skills_repo/src/app"
+  printf '{"name":"mintuz-skills","plugins":[{"name":"core","source":"./src/core"},{"name":"app","source":"./src/app"}]}\n' \
+    > "$skills_repo/.claude-plugin/marketplace.json"
+  printf '{"name":"core"}\n' > "$skills_repo/src/core/plugin.json"
+  printf '{"name":"app"}\n' > "$skills_repo/src/app/plugin.json"
+  git -C "$skills_repo" init -q
+  git -C "$skills_repo" config user.email test@example.com
+  git -C "$skills_repo" config user.name Test
+  git -C "$skills_repo" add .
+  git -C "$skills_repo" commit -q -m init
   git -C "$checkout" init -q
   git -C "$checkout" add agents claude workclaude omp
 }
 
 run_install() {
-  HOME="$home" PATH="$BATS_TEST_TMPDIR/bin:$PATH" "$checkout/install.sh"
+  HOME="$home" PATH="$BATS_TEST_TMPDIR/bin:$PATH" \
+    MINTUZ_SKILLS_REPO="${MINTUZ_SKILLS_REPO:-$skills_repo}" \
+    TALAT_MCP_BIN="${TALAT_MCP_BIN:-$BATS_TEST_TMPDIR/no-talat}" \
+    TWODO_MCP_BIN="${TWODO_MCP_BIN:-$BATS_TEST_TMPDIR/no-twodo}" \
+    "$checkout/install.sh"
 }
 
 backups() {
@@ -158,11 +185,89 @@ backups() {
   [ -L "$home/.omp/agent/config.yml" ]
 }
 
-@test "sets up RTK in the personal and work Claude Code profiles" {
+@test "sets up RTK in the personal and work Claude Code profiles and Antigravity" {
   run_install
 
   [ "$(cat "$BATS_TEST_TMPDIR/rtk.log")" = "$home/.claude init --global --auto-patch
-$home/.workclaude init --global --auto-patch" ]
+$home/.workclaude init --global --auto-patch
+ init --global --agent antigravity --auto-patch" ]
+}
+
+@test "keeps ~/.gemini/config real, backs up real Antigravity files, and links managed ones" {
+  mkdir -p "$home/.gemini/config"
+  printf '{"local": true}\n' > "$home/.gemini/config/hooks.json"
+  printf '{"entries": []}\n' > "$home/.gemini/config/skills.json"
+  printf 'old rules\n' > "$home/.gemini/config/AGENTS.md"
+  printf '{"mcpServers": {"work": {"url": "https://work.example/mcp"}}}\n' > "$home/.gemini/config/mcp_config.json"
+
+  run_install
+
+  [ ! -L "$home/.gemini" ]
+  [ ! -L "$home/.gemini/config" ]
+  [ -L "$home/.gemini/config/hooks.json" ]
+  [ -L "$home/.gemini/config/peon-hook.sh" ]
+  [ -L "$home/.gemini/config/skills.json" ]
+  [ -L "$home/.gemini/config/AGENTS.md" ]
+  [ ! -L "$home/.gemini/config/mcp_config.json" ]
+  [ "$(cat "$(backups)/.gemini/config/hooks.json")" = '{"local": true}' ]
+  [ "$(cat "$(backups)/.gemini/config/skills.json")" = '{"entries": []}' ]
+  [ "$(cat "$(backups)/.gemini/config/AGENTS.md")" = 'old rules' ]
+  [ ! -e "$checkout/antigravity/.gemini/config/mcp_config.json" ]
+}
+
+@test "merges Antigravity MCP servers conditionally and keeps local ones" {
+  mkdir -p "$home/.gemini/config"
+  printf '{"mcpServers": {"work": {"url": "https://work.example/mcp"}}}\n' > "$home/.gemini/config/mcp_config.json"
+
+  run_install
+
+  mcp="$home/.gemini/config/mcp_config.json"
+  [ "$(jq -r '.mcpServers.work.url' "$mcp")" = 'https://work.example/mcp' ]
+  [ "$(jq -r '.mcpServers.notion.url' "$mcp")" = 'https://mcp.notion.com/mcp' ]
+  [ "$(jq -r '.mcpServers.mobbin.url' "$mcp")" = 'https://api.mobbin.com/mcp' ]
+  [ "$(jq -r '.mcpServers.revenuecat.url' "$mcp")" = 'https://mcp.revenuecat.ai/mcp' ]
+  [ "$(jq -r '.mcpServers.tally.url' "$mcp")" = 'https://api.tally.so/mcp' ]
+  [ "$(jq -e '.mcpServers | has("talat") | not' "$mcp")" = true ]
+  [ "$(jq -e '.mcpServers | has("2do") | not' "$mcp")" = true ]
+
+  # When talat and 2do binaries exist, both are registered with their resolved paths.
+  talat="$BATS_TEST_TMPDIR/talat_mcp"
+  twodo="$home/Library/Application Support/Claude/Claude Extensions/local.mcpb.beehive-innovations.2do/dist/TwoDoMCPBridge"
+  mkdir -p "$(dirname "$twodo")"
+  printf '#!/bin/sh\n' > "$talat"
+  printf '#!/bin/sh\n' > "$twodo"
+  chmod +x "$talat" "$twodo"
+
+  TALAT_MCP_BIN="$talat" TWODO_MCP_BIN="$twodo" run_install
+
+  [ "$(jq -r '.mcpServers.talat.command' "$mcp")" = '/usr/bin/python3' ]
+  [[ "$(jq -r '.mcpServers.talat.args[1]' "$mcp")" == *"$talat"* ]]
+  [ "$(jq -r '.mcpServers["2do"].command' "$mcp")" = "$twodo" ]
+  [ "$(jq -r '.mcpServers.work.url' "$mcp")" = 'https://work.example/mcp' ]
+}
+
+@test "syncs Antigravity plugins from mintuz/skills and falls back cleanly when offline" {
+  run_install
+
+  [ "$(cat "$BATS_TEST_TMPDIR/agy.log")" = "plugin install core
+plugin install app" ]
+
+  # Offline with local Claude marketplace cache falls back to the cache.
+  rm -f "$BATS_TEST_TMPDIR/agy.log"
+  mkdir -p "$home/.claude/plugins/marketplaces"
+  cp -R "$skills_repo" "$home/.claude/plugins/marketplaces/mintuz-skills"
+  MINTUZ_SKILLS_REPO="$BATS_TEST_TMPDIR/missing-repo" run_install
+
+  [ "$(cat "$BATS_TEST_TMPDIR/agy.log")" = "plugin install core
+plugin install app" ]
+
+  # Offline with no local cache prints a message and continues cleanly.
+  rm -rf "$BATS_TEST_TMPDIR/agy.log" "$home/.claude/plugins/marketplaces/mintuz-skills"
+  MINTUZ_SKILLS_REPO="$BATS_TEST_TMPDIR/missing-repo" run run_install
+
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"Antigravity plugin sync from mintuz/skills failed"* ]]
+  [ ! -e "$BATS_TEST_TMPDIR/agy.log" ]
 }
 
 @test "sets up peon-ping with the J.A.R.V.I.S. pack and no pop-ups in both Claude Code profiles" {

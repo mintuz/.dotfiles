@@ -1,0 +1,46 @@
+{
+  "peon-ping": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "./peon-hook.sh",
+        "timeout": 10
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./peon-hook.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "./peon-hook.sh",
+        "timeout": 10
+      }
+    ]
+  },
+  "rex": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "[ -x \"$HOME/.config/rex/agent-session.sh\" ] && \"$HOME/.config/rex/agent-session.sh\" agy >/dev/null 2>&1; printf '{}\\n'",
+        "timeout": 5
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "[ -x \"$HOME/.config/rex/agent-tab-title.sh\" ] && \"$HOME/.config/rex/agent-tab-title.sh\" >/dev/null 2>&1; printf '{}\\n'",
+        "timeout": 5
+      }
+    ]
+  }
+}

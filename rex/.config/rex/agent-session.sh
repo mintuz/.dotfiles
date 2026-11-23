@@ -4,11 +4,12 @@
 # a restart, so the record, ~/.local/state/rex-agents/<block>.json, finds its
 # pane again.
 #
-#     agent-session.sh claude|codex|omp < hook-input.json
+#     agent-session.sh claude|codex|omp|agy < hook-input.json
 #
-# The session hooks of Claude Code and Codex run the script, and
+# The session hooks of Claude Code, Codex and Antigravity run the script, and
 # omp/.omp/agent/extensions/rex-tab-title.ts runs it for omp. The input is the
-# hook's JSON: session_id, cwd, hook_event_name and, for SessionEnd, reason.
+# hook's JSON: session_id (or conversationId), cwd (or workspacePaths[0]),
+# hook_event_name (or hookEventName) and, for SessionEnd, reason.
 # Outside Rex, the script does nothing. It always exits 0, so a failure never
 # stops the agent.
 
@@ -21,7 +22,7 @@ dir="${XDG_STATE_HOME:-$HOME/.local/state}/rex-agents"
 record="$dir/$REX_BLOCK.json"
 input=$(cat)
 
-if [ "$(printf '%s' "$input" | jq -r '.hook_event_name // empty')" = SessionEnd ]; then
+if [ "$(printf '%s' "$input" | jq -r '.hook_event_name // .hookEventName // empty')" = SessionEnd ]; then
   # A Rex server restart also ends the agent, with reason "other". Keep the
   # record then, and remove it only when the person ends the session.
   case "$(printf '%s' "$input" | jq -r '.reason // empty')" in
@@ -36,6 +37,7 @@ case "$1" in
   claude) resume='["claude", "--resume", $id]' profile_var=CLAUDE_CONFIG_DIR ;;
   codex) resume='["codex", "resume", $id]' profile_var=CODEX_HOME ;;
   omp) resume='["omp", "--resume=" + $id]' profile_var= ;;
+  agy) resume='["agy", "--conversation", $id]' profile_var= ;;
   *) exit 0 ;;
 esac
 profile=
@@ -49,8 +51,8 @@ temporary=$(mktemp "$dir/.record.XXXXXX") || exit 0
 # Write a temporary file, then rename it, so a reader never sees half a record.
 if printf '%s' "$input" | jq -e \
   --arg agent "$1" --arg session "$REX_SESSION" --arg block "$REX_BLOCK" --arg profile "$profile" \
-  "(.session_id // empty) as \$id | select(\$id != \"\" and (.cwd // \"\") != \"\") |
-   {agent: \$agent, session: \$session, block: \$block, cwd: .cwd,
+  "(.session_id // .conversationId // empty) as \$id | (.cwd // .workspacePaths[0] // \"\") as \$cwd | select(\$id != \"\" and \$cwd != \"\") |
+   {agent: \$agent, session: \$session, block: \$block, cwd: \$cwd,
     argv: ((if \$profile == \"\" then [] else [\"env\", \$profile] end) + $resume)}" \
   > "$temporary" 2>/dev/null; then
   mv -f "$temporary" "$record"
